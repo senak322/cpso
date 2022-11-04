@@ -1,0 +1,24 @@
+.form__container {
+    width: 50%;
+    background-color: azure;
+    height: 50%;
+    border-radius: 5%;
+    display: flex;
+    justify-content: center;
+}
+
+.form__wrapper {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form {
+    width: 100%;
+}
+
+.form__title {
+    padding-bottom: 40px;
+}

@@ -1,0 +1,9 @@
+.main {
+    height: 74vh;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
