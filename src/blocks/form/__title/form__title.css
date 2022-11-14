@@ -1,0 +1,10 @@
+.form__title {
+    padding-bottom: 20px;
+}
+
+
+@media screen and (max-width: 586px){
+    .form__title {
+        padding-bottom: 7px;
+    }
+}

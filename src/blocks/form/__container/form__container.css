@@ -1,0 +1,6 @@
+.form__container {
+    background-color: azure;
+    border-radius: 5%;
+    display: flex;
+    justify-content: center;
+}
