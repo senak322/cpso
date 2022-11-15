@@ -63,9 +63,12 @@ function FormContainer(props) {
               />
             </Col>
           </Form.Group>
+          <div className="form__container_submit">
           <Button type="submit" className="mt-3">
             Войти
           </Button>
+          <a href="https://hssc-exam.ru/login/forgot_password.php" target="_block" className="form__link">Забыли логин или пароль?</a>
+          </div>
         </Form>
       </div>
     </div>

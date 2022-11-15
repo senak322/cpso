@@ -5,12 +5,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./components/Header.js";
 import "./App.css";
 import book from "./images/book.jpg";
+import books from "./images/books.jpg";
 import Footer from "./components/Footer.js";
 import FormContainer from "./components/FormContainer.js";
 import Home from "./components/Home.js";
 import ProtectedRoute from "./components/ProtectedRoute.js";
 import { login } from "./utils/auth.js";
 import InfoTooltip from './components/InfoTooltip.js';
+
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -44,7 +46,7 @@ function App() {
   return (
     <>
       <Header />
-      <main className="main" style={{ backgroundImage: `url(${book})` }}>
+      <main className="main" style={{ backgroundImage: `url(${books})` }}>
         <Switch>
           <ProtectedRoute exact path="/" component={Home} loggedIn={loggedIn} />
           <Route path="/login">

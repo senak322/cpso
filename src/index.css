@@ -2,9 +2,16 @@
 @import url(./vendor/inter/inter.css);
 @import url(./blocks/form/form.css);
 @import url(./blocks/form/__container/form__container.css);
+@import url(./blocks/form/__container/_submit/form__container_submit.css);
 @import url(./blocks/form/__wrapper/form__wrapper.css);
 @import url(./blocks/form/__title/form__title.css);
+@import url(./blocks/form/__link/form__link.css);
 @import url(./blocks/footer/footer.css);
+@import url(./blocks/footer/__container/footer__container.css);
+@import url(./blocks/footer/__nav/footer__nav.css);
+@import url(./blocks/footer/__nav/_link/footer__nav_link.css);
+@import url(./blocks/footer/__link/footer__link.css);
+@import url(./blocks/footer/__img/footer__img.css);
 @import url(./blocks/popup/popup.css);
 @import url(./blocks/popup/__close/popup__close.css);
 @import url(./blocks/popup/_type/popup_type_info.css);

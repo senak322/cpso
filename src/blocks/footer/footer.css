@@ -2,4 +2,14 @@
     height: 20vh;
     width: 100%;
     background-position: center;
+    color: #455a64;
+    background-color: #eef5f9;
+    background-repeat: repeat-x;
+    background-position: center bottom;
 }
+
+@media screen and (max-width: 767px) {
+    .footer {
+        height: 19vh;
+    }
+  }

@@ -1,0 +1,13 @@
+.footer__nav {
+    list-style-type: none;
+}
+
+.footer__nav:last-of-type {
+    margin-top: 40px;
+}
+
+@media screen and (max-width: 767px) {
+    .footer__nav:last-of-type {
+        margin-top: 4px;
+    }
+  }
