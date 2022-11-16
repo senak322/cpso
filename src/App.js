@@ -18,6 +18,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
   const [isAuthOk, setIsAuthOk] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [userInfo, setUserInfo] = useState({})
   const history = useHistory();
 
@@ -54,6 +55,7 @@ function App() {
   }
 
   function handleLogin(email, password) {
+    setIsLoading(true)
     login(email, password)
       .then((res) => {
         if (res.token) {
@@ -64,7 +66,10 @@ function App() {
       .catch((err) => {
         console.log(err);
         handleAuth(false);
-      });
+      })
+      .finally(()=>{
+        setIsLoading(false)
+      })
   }
 
   useEffect(() => {
@@ -82,12 +87,12 @@ function App() {
     }
   }, [isOpen]);
 
-  useEffect(() => {
-    tokenCheck();
-    if (loggedIn) {
-      console.log(loggedIn);
-    }
-  }, [loggedIn]);
+  // useEffect(() => {
+  //   tokenCheck();
+  //   if (loggedIn) {
+  //     console.log(loggedIn);
+  //   }
+  // }, [loggedIn]);
 
   return (
     <>
@@ -96,7 +101,7 @@ function App() {
         <Switch>
           <ProtectedRoute exact path="/" component={Home} loggedIn={loggedIn} />
           <Route path="/login">
-            <FormContainer handleLogin={handleLogin} />
+            <FormContainer handleLogin={handleLogin} isLoading={isLoading} />
             <InfoTooltip
             isOpen={isInfoPopupOpen}
             isOk={isAuthOk}

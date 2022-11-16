@@ -11,6 +11,7 @@ function getResponseData(res) {
 export const login = (email, password) => {
   return fetch(`${BASE_URL}/login.php`, {
     method: "POST",
+    mode: 'no-cors',
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -33,7 +34,7 @@ export const login = (email, password) => {
 
 export const getContent = (token) => {
     return fetch(`${BASE_URL}/validate_token.php`, {
-      method: "GET",
+      method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
