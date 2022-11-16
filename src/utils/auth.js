@@ -1,4 +1,4 @@
-export const BASE_URL = "https://auth.nomoreparties.co";
+export const BASE_URL = "https://hssc-exam.ru/cabinet/api";
 
 function getResponseData(res) {
   if (!res.ok) {
@@ -9,7 +9,7 @@ function getResponseData(res) {
 
 
 export const login = (email, password) => {
-  return fetch(`${BASE_URL}/signin`, {
+  return fetch(`${BASE_URL}/login.php`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -32,7 +32,7 @@ export const login = (email, password) => {
 };
 
 export const getContent = (token) => {
-    return fetch(`${BASE_URL}/users/me`, {
+    return fetch(`${BASE_URL}/validate_token.php`, {
       method: "GET",
       headers: {
         Accept: "application/json",

@@ -1,16 +1,16 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./components/Header.js";
 import "./App.css";
-import book from "./images/book.jpg";
+
 import books from "./images/books.jpg";
 import Footer from "./components/Footer.js";
 import FormContainer from "./components/FormContainer.js";
 import Home from "./components/Home.js";
 import ProtectedRoute from "./components/ProtectedRoute.js";
-import { login } from "./utils/auth.js";
+import { login, getContent } from "./utils/auth.js";
 import InfoTooltip from './components/InfoTooltip.js';
 
 
@@ -18,7 +18,10 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
   const [isAuthOk, setIsAuthOk] = useState(false);
+  const [userInfo, setUserInfo] = useState({})
   const history = useHistory();
+
+  const isOpen = isInfoPopupOpen;
 
   function closeAllPopups() {
     setIsInfoPopupOpen(false);
@@ -27,6 +30,27 @@ function App() {
   function handleAuth(bool) {
     setIsInfoPopupOpen(!isInfoPopupOpen);
     setIsAuthOk(bool);
+  }
+
+  function tokenCheck() {
+    const token = localStorage.getItem("token");
+    if (token) {
+      getContent(token)
+        .then((res) => {
+          if (res) {
+            setLoggedIn(true);
+            history.push("/");
+            setUserInfo({
+              id: res.data.id,
+              name: res.data.name,
+              email: res.data.email
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
 
   function handleLogin(email, password) {
@@ -42,6 +66,28 @@ function App() {
         handleAuth(false);
       });
   }
+
+  useEffect(() => {
+    function closeByEscape(e) {
+      if (e.key === "Escape") {
+        closeAllPopups();
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener("keydown", closeByEscape);
+      return () => {
+        document.removeEventListener("keydown", closeByEscape);
+      };
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    tokenCheck();
+    if (loggedIn) {
+      console.log(loggedIn);
+    }
+  }, [loggedIn]);
 
   return (
     <>
