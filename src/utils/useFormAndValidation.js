@@ -8,7 +8,6 @@ function useFormAndValidation(obj) {
   const handleChange = (event) => {
     const { value, name } = event.target;
     setValues({ ...values, [name]: value });
-    handleBlur(event)
   };
 
   const handleBlur = (event) => {
@@ -17,9 +16,7 @@ function useFormAndValidation(obj) {
     setIsValid(event.target.closest("form").checkValidity());
   };
 
-  const resetValidation = () => {
-
-  }
+ 
 
   return { values, handleChange, setValues, errors, setErrors, isValid, setIsValid, handleBlur };
 }
