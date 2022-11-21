@@ -1,6 +1,6 @@
 import React from "react";
-import world from '../images/world1.png';
-import quest from '../images/quest.png';
+// import world from '../images/world1.png';
+// import quest from '../images/quest.png';
 
 function Footer() {
   return (
@@ -15,12 +15,12 @@ function Footer() {
         <ul className="footer__nav">
           <h2>Оставайтесь на связи</h2>
           <li>
-            <a href="https://hss.center/" target="_blank" className="footer__link"><img className="footer__img" src={world} alt="ссылка на сайт"></img>
+            <a href="https://hss.center/" target="_blank" className="footer__link"><img className="footer__img" src={process.env.PUBLIC_URL + '/world1.png'} alt="ссылка на сайт"></img>
               Сайт ЦПСО
             </a>
           </li>
           <li className="footer__nav_link">
-            <a href="https://hss.center/faq" target="_blank" className="footer__link"><img className="footer__img" src={quest} alt="ссылка на faq"></img>
+            <a href="https://hss.center/faq" target="_blank" className="footer__link"><img className="footer__img" src={process.env.PUBLIC_URL + '/quest.png'} alt="ссылка на faq"></img>
               Часто задаваемые вопросы (FAQ)
             </a>
           </li>

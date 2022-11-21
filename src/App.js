@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./components/Header.js";
 import "./App.css";
 
-import books from "./images/books.jpg";
+// import books from "./images/books.jpg";
 import Footer from "./components/Footer.js";
 import FormContainer from "./components/FormContainer.js";
 import Home from "./components/Home.js";
@@ -23,6 +23,7 @@ function App() {
   const history = useHistory();
 
   const isOpen = isInfoPopupOpen;
+  const books = process.env.PUBLIC_URL + '/books.jpg'
 
   function closeAllPopups() {
     setIsInfoPopupOpen(false);
@@ -99,8 +100,8 @@ function App() {
       <Header />
       <main className="main" style={{ backgroundImage: `url(${books})` }}>
         <Switch>
-          <ProtectedRoute exact path="/" component={Home} loggedIn={loggedIn} />
-          <Route path="/login">
+          <ProtectedRoute path="/home" component={Home} loggedIn={loggedIn} />
+          <Route path="/signin">
             <FormContainer handleLogin={handleLogin} isLoading={isLoading} />
             <InfoTooltip
             isOpen={isInfoPopupOpen}
@@ -111,7 +112,7 @@ function App() {
           </Route>
           
           <Route path="*">
-            {loggedIn ? <Redirect to="/" /> : <Redirect to="/login" />}
+            {loggedIn ? <Redirect to="/home" /> : <Redirect to="/signin" />}
           </Route>
         </Switch>
       </main>
