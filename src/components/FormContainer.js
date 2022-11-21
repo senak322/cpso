@@ -27,14 +27,14 @@ function FormContainer(props) {
     <div className="form__container">
       <div className="form__wrapper">
         <h1 className="form__title">Войти на платформу ЦПСО</h1>
-        <Form className="form" onSubmit={handleSubmit} noValidate >
-          <Form.Group as={Row} className="mb-3" controlId="formPlaintextLogin">
+        <Form className="form" onSubmit={handleSubmit} noValidate>
+          <Form.Group as={Row} controlId="formPlaintextLogin">
             <Form.Label column sm="2">
               Логин
             </Form.Label>
             <Col sm="10">
               <Form.Control
-              className="input"
+                className="input"
                 required
                 name="email"
                 type="email"
@@ -53,11 +53,7 @@ function FormContainer(props) {
             </Col>
           </Form.Group>
 
-          <Form.Group
-            as={Row}
-            className="mb-3"
-            controlId="formPlaintextPassword"
-          >
+          <Form.Group as={Row} controlId="formPlaintextPassword">
             <Form.Label column sm="2">
               Пароль
             </Form.Label>
@@ -82,7 +78,10 @@ function FormContainer(props) {
           </Form.Group>
 
           <div className="form__container_submit">
-            <Button type="submit" className="mt-3" >
+            <Button
+              type="submit"
+              className={`${isValid ? "" : "disabled"}`}
+            >
               {props.isLoading ? "Вход..." : "Войти"}
             </Button>
             <a
