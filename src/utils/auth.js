@@ -7,11 +7,10 @@ function getResponseData(res) {
   return res.json();
 }
 
-
 export const login = (email, password) => {
   return fetch(`${BASE_URL}/login.php`, {
     method: "POST",
-    mode: 'no-cors',
+    mode: "no-cors",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -33,34 +32,49 @@ export const login = (email, password) => {
 };
 
 export const getContent = (token) => {
-    return fetch(`${BASE_URL}/validate_token.php`, {
-      method: "POST",
-      mode: 'no-cors',
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        token: token
-      })
-    })
-      .then(getResponseData)
-      .then((data) => data);
-  };
+  return fetch(`${BASE_URL}/validate_token.php`, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      token: token,
+    }),
+  })
+    .then(getResponseData)
+    .then((data) => data);
+};
 
-  export const updateUser = (name, password, token) => {
-    return fetch(`${BASE_URL}/update_user.php`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        password: password,
-        name: name
-      })
-    })
-      .then(getResponseData)
-      .then((data) => data);
-  };
+export const updateUser = (name, password, token) => {
+  return fetch(`${BASE_URL}/update_user.php`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      password: password,
+      name: name,
+    }),
+  })
+    .then(getResponseData)
+    .then((data) => data);
+};
+
+export const getStudents = (token) => {
+  return fetch(`${BASE_URL}/get_students.php`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      token: token,
+    }),
+  })
+    .then(getResponseData)
+    .then((data) => data);
+};

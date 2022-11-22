@@ -10,7 +10,7 @@ import Footer from "./components/Footer.js";
 import FormContainer from "./components/FormContainer.js";
 import Home from "./components/Home.js";
 import ProtectedRoute from "./components/ProtectedRoute.js";
-import { login, getContent } from "./utils/auth.js";
+import { login, getContent, getStudents } from "./utils/auth.js";
 import InfoTooltip from './components/InfoTooltip.js';
 
 
@@ -21,6 +21,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [userInfo, setUserInfo] = useState({})
   const history = useHistory();
+  const students = [];
 
   const isOpen = isInfoPopupOpen;
   const books = process.env.PUBLIC_URL + '/books.jpg'
@@ -96,7 +97,11 @@ function App() {
   useEffect(() => {
     tokenCheck();
     if (loggedIn) {
-      console.log(loggedIn);
+      getStudents()
+      .then(res => {
+        students.push(res.students_list);
+        console.log(students);
+      })
     }
   }, [loggedIn]);
 
