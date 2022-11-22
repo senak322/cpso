@@ -73,6 +73,11 @@ function App() {
       })
   }
 
+  function handleLogout() {
+    setLoggedIn(false);
+    localStorage.removeItem("token");
+  }
+
   useEffect(() => {
     function closeByEscape(e) {
       if (e.key === "Escape") {
@@ -88,16 +93,16 @@ function App() {
     }
   }, [isOpen]);
 
-  // useEffect(() => {
-  //   tokenCheck();
-  //   if (loggedIn) {
-  //     console.log(loggedIn);
-  //   }
-  // }, [loggedIn]);
+  useEffect(() => {
+    tokenCheck();
+    if (loggedIn) {
+      console.log(loggedIn);
+    }
+  }, [loggedIn]);
 
   return (
     <>
-      <Header />
+      <Header loggedIn={loggedIn} onLogout={handleLogout}/>
       <main className="main" style={{ backgroundImage: `url(${books})` }}>
         <Switch>
           <ProtectedRoute path="/home" component={Home} loggedIn={loggedIn} />
@@ -111,7 +116,7 @@ function App() {
           />
           </Route>
           
-          <Route path="*">
+          <Route path="/">
             {loggedIn ? <Redirect to="/home" /> : <Redirect to="/signin" />}
           </Route>
         </Switch>

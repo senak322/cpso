@@ -35,6 +35,20 @@ export const login = (email, password) => {
 export const getContent = (token) => {
     return fetch(`${BASE_URL}/validate_token.php`, {
       method: "POST",
+      mode: 'no-cors',
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then(getResponseData)
+      .then((data) => data);
+  };
+
+  export const updateUser = (name, email, token) => {
+    return fetch(`${BASE_URL}/update_user.php`, {
+      method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
