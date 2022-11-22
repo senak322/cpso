@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import useFormAndValidation from "../utils/useFormAndValidation.js";
 
-function FormContainer(props) {
+function SignIn(props) {
   const formValues = {
     email: "",
     password: "",
@@ -98,4 +98,4 @@ function FormContainer(props) {
   );
 }
 
-export default FormContainer;
+export default SignIn;

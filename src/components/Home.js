@@ -1,10 +1,17 @@
 import React from "react";
 
-function Home() {
+
+function Home(props) {
   return (
-    <section className="home">
-      <h2>Тут вся информация о ребенке</h2>
-    </section>
+    <>
+      <nav className="side-bar">
+        
+      </nav>
+      <section className="home">
+        
+        <h2>Тут вся информация о ребенке</h2>
+      </section>
+    </>
   );
 }
 

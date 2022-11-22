@@ -67,6 +67,7 @@ export const updateUser = (name, password, token) => {
 export const getStudents = (token) => {
   return fetch(`${BASE_URL}/get_students.php`, {
     method: "POST",
+    mode: "no-cors",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",

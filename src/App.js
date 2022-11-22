@@ -1,30 +1,28 @@
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import Header from "./components/Header.js";
-import "./App.css";
 
+import Header from "./components/Header.js";
 // import books from "./images/books.jpg";
 import Footer from "./components/Footer.js";
-import FormContainer from "./components/FormContainer.js";
+import SignIn from "./components/SignIn.js";
 import Home from "./components/Home.js";
 import ProtectedRoute from "./components/ProtectedRoute.js";
 import { login, getContent, getStudents } from "./utils/auth.js";
-import InfoTooltip from './components/InfoTooltip.js';
-
+import InfoTooltip from "./components/InfoTooltip.js";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
   const [isAuthOk, setIsAuthOk] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [userInfo, setUserInfo] = useState({})
+  const [userInfo, setUserInfo] = useState({});
   const history = useHistory();
   const students = [];
 
   const isOpen = isInfoPopupOpen;
-  const books = process.env.PUBLIC_URL + '/books.jpg'
+  const books = process.env.PUBLIC_URL + "/books.jpg";
 
   function closeAllPopups() {
     setIsInfoPopupOpen(false);
@@ -46,7 +44,7 @@ function App() {
             setUserInfo({
               id: res.data.id,
               name: res.data.name,
-              email: res.data.email
+              email: res.data.email,
             });
           }
         })
@@ -57,7 +55,7 @@ function App() {
   }
 
   function handleLogin(email, password) {
-    setIsLoading(true)
+    setIsLoading(true);
     login(email, password)
       .then((res) => {
         if (res.token) {
@@ -69,9 +67,9 @@ function App() {
         console.log(err);
         handleAuth(false);
       })
-      .finally(()=>{
-        setIsLoading(false)
-      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
 
   function handleLogout() {
@@ -97,30 +95,31 @@ function App() {
   useEffect(() => {
     tokenCheck();
     if (loggedIn) {
-      getStudents()
-      .then(res => {
+      getStudents().then((res) => {
         students.push(res.students_list);
         console.log(students);
-      })
+      });
     }
   }, [loggedIn]);
 
   return (
     <>
-      <Header loggedIn={loggedIn} onLogout={handleLogout}/>
+      <Header loggedIn={loggedIn} onLogout={handleLogout} />
       <main className="main" style={{ backgroundImage: `url(${books})` }}>
         <Switch>
           <ProtectedRoute path="/home" component={Home} loggedIn={loggedIn} />
           <Route path="/signin">
-            <FormContainer handleLogin={handleLogin} isLoading={isLoading} />
+            <SignIn handleLogin={handleLogin} isLoading={isLoading} />
             <InfoTooltip
-            isOpen={isInfoPopupOpen}
-            isOk={isAuthOk}
-            onClose={closeAllPopups}
-            message={isAuthOk ? '' : `Что-то пошло не так! Попробуйте ещё раз.`}
-          />
+              isOpen={isInfoPopupOpen}
+              isOk={isAuthOk}
+              onClose={closeAllPopups}
+              message={
+                isAuthOk ? "" : `Что-то пошло не так! Попробуйте ещё раз.`
+              }
+            />
           </Route>
-          
+
           <Route path="/">
             {loggedIn ? <Redirect to="/home" /> : <Redirect to="/signin" />}
           </Route>
