@@ -39,14 +39,16 @@ export const getContent = (token) => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
+      body: JSON.stringify({
+        token: token
+      })
     })
       .then(getResponseData)
       .then((data) => data);
   };
 
-  export const updateUser = (name, email, token) => {
+  export const updateUser = (name, password, token) => {
     return fetch(`${BASE_URL}/update_user.php`, {
       method: "POST",
       headers: {
@@ -54,6 +56,10 @@ export const getContent = (token) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
+      body: JSON.stringify({
+        password: password,
+        name: name
+      })
     })
       .then(getResponseData)
       .then((data) => data);
