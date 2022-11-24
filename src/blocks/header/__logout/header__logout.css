@@ -1,0 +1,8 @@
+.header__logout {
+    border: 1px solid rgb(77, 199, 236);
+    border-radius: 10%;
+    background-color: white;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+}

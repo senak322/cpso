@@ -1,0 +1,7 @@
+.home__wrapper {
+    width: 90%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    padding: 25px;
+}

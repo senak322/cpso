@@ -7,7 +7,7 @@ import Header from "./components/Header.js";
 // import books from "./images/books.jpg";
 import Footer from "./components/Footer.js";
 import SignIn from "./components/SignIn.js";
-import Home from "./components/Home.js";
+import Home from "./pages/Home.js";
 import ProtectedRoute from "./components/ProtectedRoute.js";
 import { login, getContent, getStudents } from "./utils/auth.js";
 import InfoTooltip from "./components/InfoTooltip.js";
@@ -66,6 +66,7 @@ function App() {
       .catch((err) => {
         console.log(err);
         handleAuth(false);
+
       })
       .finally(() => {
         setIsLoading(false);
@@ -105,10 +106,10 @@ function App() {
   return (
     <>
       <Header loggedIn={loggedIn} onLogout={handleLogout} />
-      <main className="main" style={{ backgroundImage: `url(${books})` }}>
+      <main className={`main ${loggedIn ? "main__loggined" : "" }`} style={{ backgroundImage: `url(${books})` }}>
         <Switch>
           <ProtectedRoute path="/home" component={Home} loggedIn={loggedIn} />
-          <Route path="/signin">
+          <Route path="/signin" component={SignIn}>
             <SignIn handleLogin={handleLogin} isLoading={isLoading} />
             <InfoTooltip
               isOpen={isInfoPopupOpen}
