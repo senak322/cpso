@@ -7,6 +7,9 @@
 @import url(./blocks/main/main.css);
 @import url(./blocks/main/__loggined/main__loggined.css);
 @import url(./blocks/side-bar/side-bar.css);
+@import url(./blocks/side-bar/__nav/side-bar__nav.css);
+@import url(./blocks/side-bar/__container/side-bar__container.css);
+@import url(./blocks/side-bar/__icon/side-bar__icon.css);
 @import url(./blocks/home/home.css);
 @import url(./blocks/home/__wrapper/home__wrapper.css);
 @import url(./blocks/home/__user-image/home__user-image.css);
@@ -14,6 +17,7 @@
 @import url(./blocks/home/__container/home__container.css);
 @import url(./blocks/home/__title/home__title.css);
 @import url(./blocks/home/__add-student/home__add-student.css);
+@import url(./blocks/home/__students/home__students.css);
 @import url(./blocks/form/form.css);
 @import url(./blocks/form/__container/form__container.css);
 @import url(./blocks/form/__container/_submit/form__container_submit.css);
@@ -51,3 +55,5 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+

@@ -10,7 +10,6 @@ function getResponseData(res) {
 export const login = (email, password) => {
   return fetch(`${BASE_URL}/login.php`, {
     method: "POST",
-    mode: "no-cors",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -34,7 +33,6 @@ export const login = (email, password) => {
 export const getContent = (token) => {
   return fetch(`${BASE_URL}/validate_token.php`, {
     method: "POST",
-    mode: "no-cors",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -52,22 +50,21 @@ export const updateUser = (name, password, token) => {
     method: "POST",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
       password: password,
       name: name,
-    }),
+      token: token,
+    })
   })
     .then(getResponseData)
     .then((data) => data);
 };
 
-export const getStudents = (token) => {
-  return fetch(`${BASE_URL}/get_students.php`, {
+export const validateToken = (token) => {
+  return fetch(`${BASE_URL}/validate_token.php`, {
     method: "POST",
-    mode: "no-cors",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",

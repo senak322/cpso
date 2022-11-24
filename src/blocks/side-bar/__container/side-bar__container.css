@@ -1,0 +1,7 @@
+.side-bar__container {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}

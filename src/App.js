@@ -1,25 +1,25 @@
 import { useState, useEffect } from "react";
 import { Route, Switch, Redirect, useHistory } from "react-router-dom";
-
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Header from "./components/Header.js";
-// import books from "./images/books.jpg";
 import Footer from "./components/Footer.js";
 import SignIn from "./components/SignIn.js";
+import InfoTooltip from "./components/InfoTooltip.js";
 import Home from "./pages/Home.js";
 import ProtectedRoute from "./components/ProtectedRoute.js";
-import { login, getContent, getStudents } from "./utils/auth.js";
-import InfoTooltip from "./components/InfoTooltip.js";
+import { login, getContent, validateToken } from "./utils/auth.js";
+import { CurrentUserContext } from "./contexts/CurrentUserContext.js";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
   const [isAuthOk, setIsAuthOk] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [userInfo, setUserInfo] = useState({});
+  const [currentUser, setCurrentUser] = useState({});
+  const [errMesaage, setErrMessage] = useState("");
+  const [students, setStudents] = useState([]);
   const history = useHistory();
-  const students = [];
 
   const isOpen = isInfoPopupOpen;
   const books = process.env.PUBLIC_URL + "/books.jpg";
@@ -41,12 +41,20 @@ function App() {
           if (res) {
             setLoggedIn(true);
             history.push("/");
-            setUserInfo({
+            setCurrentUser({
               id: res.data.id,
               name: res.data.name,
               email: res.data.email,
             });
           }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      validateToken(token)
+        .then((res) => {
+          setStudents(res.students);
+          console.log(students);
         })
         .catch((err) => {
           console.log(err);
@@ -66,7 +74,7 @@ function App() {
       .catch((err) => {
         console.log(err);
         handleAuth(false);
-
+        setErrMessage(err.message);
       })
       .finally(() => {
         setIsLoading(false);
@@ -95,35 +103,38 @@ function App() {
 
   useEffect(() => {
     tokenCheck();
-    if (loggedIn) {
-      getStudents().then((res) => {
-        students.push(res.students_list);
-        console.log(students);
-      });
-    }
-  }, [loggedIn]);
+  }, []);
 
   return (
     <>
       <Header loggedIn={loggedIn} onLogout={handleLogout} />
-      <main className={`main ${loggedIn ? "main__loggined" : "" }`} style={{ backgroundImage: `url(${books})` }}>
+      <main
+        className={`main ${loggedIn ? "main__loggined" : ""}`}
+        style={{ backgroundImage: `url(${books})` }}
+      >
         <Switch>
-          <ProtectedRoute path="/home" component={Home} loggedIn={loggedIn} />
-          <Route path="/signin" component={SignIn}>
-            <SignIn handleLogin={handleLogin} isLoading={isLoading} />
-            <InfoTooltip
-              isOpen={isInfoPopupOpen}
-              isOk={isAuthOk}
-              onClose={closeAllPopups}
-              message={
-                isAuthOk ? "" : `Что-то пошло не так! Попробуйте ещё раз.`
-              }
+          <CurrentUserContext.Provider value={currentUser}>
+            <ProtectedRoute
+              path="/home"
+              component={Home}
+              students={students}
+              loggedIn={loggedIn}
             />
-          </Route>
 
-          <Route path="/">
-            {loggedIn ? <Redirect to="/home" /> : <Redirect to="/signin" />}
-          </Route>
+            <Route path="/signin">
+              <SignIn handleLogin={handleLogin} isLoading={isLoading} />
+              <InfoTooltip
+                isOpen={isInfoPopupOpen}
+                isOk={isAuthOk}
+                onClose={closeAllPopups}
+                message={isAuthOk ? "" : errMesaage}
+              />
+            </Route>
+
+            <Route path="/">
+              {loggedIn ? <Redirect to="/home" /> : <Redirect to="/signin" />}
+            </Route>
+          </CurrentUserContext.Provider>
         </Switch>
       </main>
       <Footer />
