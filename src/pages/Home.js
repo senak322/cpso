@@ -64,12 +64,12 @@ function Home(props) {
             + Добавить ученика
           </button>
           <ul className="home__students">
-            {props.students.map((el) => {
+            {props.students.isArray ? props.students.map((el) => {
               return (
               <li className="home__student" key={el.userid}>
                 {el.Student_Name}
               </li>)
-            })}
+            }) : props.students}
           </ul>
         </div>
       </section>
