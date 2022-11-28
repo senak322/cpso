@@ -11,3 +11,9 @@
 .header__logout:hover {
     background-color: #f1faff;
 }
+
+@media screen and (max-width: 767px) {
+    .header__logout {
+        height: 2.5rem;
+    }
+  }

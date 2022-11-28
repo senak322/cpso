@@ -1,0 +1,16 @@
+.header__notification {
+    border: none;
+    background-color: white;
+    padding: 0;
+    margin-right: 20px;
+    border-radius: 50%;
+    position: relative;
+    box-sizing: content-box;
+}
+
+
+@media screen and (max-width: 485px) {
+    .header__notification {
+        margin-right: 8px;
+    }
+  }

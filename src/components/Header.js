@@ -2,8 +2,8 @@ import React from "react";
 import logoHeader from "../images/cpso_logo_header.png";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
-import logout from '../images/exit.png';
-
+import logout from "../images/exit.png";
+import Notifications from "./Notifications.js";
 
 function Header(props) {
   return (
@@ -18,8 +18,16 @@ function Header(props) {
             ></img>
           </a>
           {props.loggedIn ? (
-
-            <button type="button" className="header__logout" onClick={props.onLogout}><img className="header__logout_img" src={logout}></img>Выйти</button>
+            <div className="header__container">
+              <Notifications />
+              <button
+                type="button"
+                className="header__logout"
+                onClick={props.onLogout}
+              >
+                <img className="header__logout_img" src={logout}></img>Выйти
+              </button>
+            </div>
           ) : (
             ""
           )}
@@ -30,5 +38,3 @@ function Header(props) {
 }
 
 export default Header;
-
-

@@ -4,6 +4,7 @@
     background-color: white;
     height: 2.5rem;
     transition: all 0.1s linear;
+    margin-top: 10px;
 }
 
 .popup__save:hover {
