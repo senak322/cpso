@@ -5,4 +5,10 @@
     color: #455a64;
     font-weight: 600;
     font-size: 17px;
+    transition: all 0.1s linear;
+}
+
+.home__add-student:hover {
+    background-color: #455a64;
+    color: white;
 }

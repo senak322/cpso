@@ -1,0 +1,11 @@
+.popup__save {
+    border: 2px solid rgb(77, 199, 236);
+    border-radius: 5%;
+    background-color: white;
+    height: 2.5rem;
+    transition: all 0.1s linear;
+}
+
+.popup__save:hover {
+    background-color: #f1faff;
+}

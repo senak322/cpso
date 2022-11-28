@@ -1,0 +1,14 @@
+.side-bar__name {
+  margin: 0 0 0 7px;
+  align-self: center;
+  color: white;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 767px) {
+  .side-bar__name {
+    font-size: 15px;
+    font-weight: 500;
+  }
+}

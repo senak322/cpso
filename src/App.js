@@ -6,6 +6,7 @@ import Header from "./components/Header.js";
 import Footer from "./components/Footer.js";
 import SignIn from "./components/SignIn.js";
 import InfoTooltip from "./components/InfoTooltip.js";
+import AddStudentPopup from "./components/AddStudentPopup.js";
 import Home from "./pages/Home.js";
 import ProtectedRoute from "./components/ProtectedRoute.js";
 import { login, getContent, validateToken } from "./utils/auth.js";
@@ -19,13 +20,19 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [errMesaage, setErrMessage] = useState("");
   const [students, setStudents] = useState([]);
+  const [isAddStudentPopupOpen, setAddStudentPopupOpen] = useState(false);
   const history = useHistory();
 
-  const isOpen = isInfoPopupOpen;
+  const isOpen = isInfoPopupOpen || isAddStudentPopupOpen;
   const books = process.env.PUBLIC_URL + "/books.jpg";
 
   function closeAllPopups() {
     setIsInfoPopupOpen(false);
+    setAddStudentPopupOpen(false)
+  }
+
+  function handleOpenPopup() {
+    setAddStudentPopupOpen(true)
   }
 
   function handleAuth(bool) {
@@ -40,7 +47,7 @@ function App() {
         .then((res) => {
           if (res) {
             setLoggedIn(true);
-            history.push("/");
+            history.push("/home");
             setCurrentUser({
               id: res.data.id,
               name: res.data.name,
@@ -74,7 +81,7 @@ function App() {
       .catch((err) => {
         console.log(err);
         handleAuth(false);
-        setErrMessage(err.message);
+        setErrMessage(err);
       })
       .finally(() => {
         setIsLoading(false);
@@ -84,6 +91,11 @@ function App() {
   function handleLogout() {
     setLoggedIn(false);
     localStorage.removeItem("token");
+  }
+
+  function handleAddStudent(value) {
+    closeAllPopups()
+    console.log(value);
   }
 
   useEffect(() => {
@@ -119,6 +131,7 @@ function App() {
               component={Home}
               students={students}
               loggedIn={loggedIn}
+              onOpen={handleOpenPopup}
             />
 
             <Route path="/signin">
@@ -132,12 +145,21 @@ function App() {
             </Route>
 
             <Route path="/">
-              {loggedIn ? <Redirect to="/home" /> : <Redirect to="/signin" />}
+              {loggedIn ? (
+                <Redirect to="/home/user-info" />
+              ) : (
+                <Redirect to="/signin" />
+              )}
             </Route>
           </CurrentUserContext.Provider>
         </Switch>
       </main>
       <Footer />
+      <AddStudentPopup
+        isOpen={isAddStudentPopupOpen}
+        onClose={closeAllPopups}
+        onSubmit={handleAddStudent}
+      />
     </>
   );
 }

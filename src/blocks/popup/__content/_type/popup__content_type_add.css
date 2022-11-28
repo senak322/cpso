@@ -1,0 +1,7 @@
+.popup__content_type_add {
+    align-items: flex-start;
+    height: fit-content;
+    background-color: azure;
+    box-sizing: content-box;
+    padding: 24px;
+}

@@ -1,58 +1,29 @@
 import React from "react";
 import Settings from "./Settings.js";
-import { Route, Switch, NavLink, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import ProtectedRoute from "../components/ProtectedRoute.js";
-import { FaBars } from "react-icons/fa";
-import { AiFillHome, AiFillSetting } from "react-icons/ai";
 import UserInfo from "./UserInfo.js";
+import SideBar from "../components/SideBar.js";
 
-function Home(props) {
-  
-
+function Home({loggedIn, students, onOpen}) {
   return (
     <>
-      <nav className="side-bar">
-        <div className="side-bar__container">
-          <FaBars className="side-bar__icon" />
-        </div>
-        <ul className="side-bar__nav">
-          <li className="side-bar__container">
-            <NavLink
-              to="/home/user-info"
-              key="home"
-              className="link"
-              activeClassName="side-bar__active"
-            >
-              <AiFillHome className="side-bar__icon" />
-            </NavLink>
-          </li>
-          <li className="side-bar__container">
-            <NavLink
-              to="/home/settings"
-              key="settings"
-              className="link"
-              activeClassName="side-bar__active"
-            >
-              <AiFillSetting className="side-bar__icon" />
-            </NavLink>
-          </li>
-        </ul>
-      </nav>
-
+      <SideBar />
       <Switch>
         <ProtectedRoute
           path="/home/user-info"
           component={UserInfo}
-          loggedIn={props.loggedIn}
-          students={props.students}
+          loggedIn={loggedIn}
+          students={students}
+          onOpen={onOpen}
         />
         <ProtectedRoute
           path="/home/settings"
           component={Settings}
-          loggedIn={props.loggedIn}
+          loggedIn={loggedIn}
         />
         <Route path="/home">
-          {props.loggedIn ? (
+          {loggedIn ? (
             <Redirect to="/home/user-info" />
           ) : (
             <Redirect to="/signin" />

@@ -3,3 +3,9 @@
     margin-left: 15px;
     color: #455a64;
 }
+
+@media screen and (max-width: 767px) {
+    .home__title {
+        font-size: 20px;
+    }
+  }

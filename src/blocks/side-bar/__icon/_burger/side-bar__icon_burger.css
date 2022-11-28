@@ -1,0 +1,8 @@
+.side-bar__icon_burger {
+    padding-left: 12px;
+}
+
+.side-bar__icon_burger:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}

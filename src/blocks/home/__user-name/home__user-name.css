@@ -1,5 +1,11 @@
 .home__user-name {
-    margin-left: 15px;
-    margin-bottom: 0;
-    color: #455a64;
+  margin-left: 15px;
+  margin-bottom: 0;
+  color: #455a64;
+}
+
+@media screen and (max-width: 767px) {
+  .home__user-name {
+    font-size: 25px;
+  }
 }

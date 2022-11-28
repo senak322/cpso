@@ -1,0 +1,11 @@
+.popup__input {
+    width: 100%;
+    border: 2px solid rgb(36 159 197);
+    border-radius: 1%;
+    height: 2.5rem;
+}
+
+.popup__input:focus-visible {
+    box-shadow: 0px 0px 5px rgb(33, 114, 236);
+    outline:rgb(33, 114, 236)
+}
