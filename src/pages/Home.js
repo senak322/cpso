@@ -5,7 +5,7 @@ import ProtectedRoute from "../components/ProtectedRoute.js";
 import UserInfo from "./UserInfo.js";
 import SideBar from "../components/SideBar.js";
 
-function Home({loggedIn, students, onOpen}) {
+function Home({loggedIn, students, onOpenAddStudents, onOpenDelete}) {
   return (
     <>
       <SideBar />
@@ -15,7 +15,8 @@ function Home({loggedIn, students, onOpen}) {
           component={UserInfo}
           loggedIn={loggedIn}
           students={students}
-          onOpen={onOpen}
+          onOpenAddStudents={onOpenAddStudents}
+          onOpenDelete={onOpenDelete}
         />
         <ProtectedRoute
           path="/home/settings"

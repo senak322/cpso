@@ -4,12 +4,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Header from "./components/Header.js";
 import Footer from "./components/Footer.js";
-import SignIn from "./components/SignIn.js";
+import SignIn from "./pages/SignIn.js";
 import InfoTooltip from "./components/InfoTooltip.js";
 import AddStudentPopup from "./components/AddStudentPopup.js";
+import DeleteStudentPopup from "./components/DeleteStudentPopup.js";
 import Home from "./pages/Home.js";
 import ProtectedRoute from "./components/ProtectedRoute.js";
-import { login, getContent, validateToken } from "./utils/auth.js";
+import { login, getContent, addStudent, deleteStudent } from "./utils/auth.js";
 import { CurrentUserContext } from "./contexts/CurrentUserContext.js";
 
 function App() {
@@ -21,18 +22,30 @@ function App() {
   const [errMesaage, setErrMessage] = useState("");
   const [students, setStudents] = useState([]);
   const [isAddStudentPopupOpen, setAddStudentPopupOpen] = useState(false);
+  const [isDeleteStudentPopupOpen, setIsDeleteStudentPopupOpen] =
+    useState(false);
+  const [isAddOk, setIsAddOk] = useState(true);
+  const [addErr, setAddErr] = useState("");
   const history = useHistory();
 
-  const isOpen = isInfoPopupOpen || isAddStudentPopupOpen;
+  const isOpen =
+    isInfoPopupOpen || isAddStudentPopupOpen || isDeleteStudentPopupOpen;
   const books = process.env.PUBLIC_URL + "/books.jpg";
 
   function closeAllPopups() {
     setIsInfoPopupOpen(false);
-    setAddStudentPopupOpen(false)
+    setAddStudentPopupOpen(false);
+    setAddErr("");
+    setIsAddOk(true);
+    setIsDeleteStudentPopupOpen(false);
   }
 
-  function handleOpenPopup() {
-    setAddStudentPopupOpen(true)
+  function openAddStudentsPopup() {
+    setAddStudentPopupOpen(true);
+  }
+
+  function openDeleteStudentsPopup() {
+    setIsDeleteStudentPopupOpen(true);
   }
 
   function handleAuth(bool) {
@@ -53,15 +66,8 @@ function App() {
               name: res.data.name,
               email: res.data.email,
             });
+            setStudents(res.students);
           }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      validateToken(token)
-        .then((res) => {
-          setStudents(res.students);
-          console.log(students);
         })
         .catch((err) => {
           console.log(err);
@@ -75,7 +81,7 @@ function App() {
       .then((res) => {
         if (res.token) {
           setLoggedIn(true);
-          history.push("/");
+          history.push("/home/user-info");
         }
       })
       .catch((err) => {
@@ -93,9 +99,38 @@ function App() {
     localStorage.removeItem("token");
   }
 
-  function handleAddStudent(value) {
-    closeAllPopups()
-    console.log(value);
+  function handleAddStudent(email) {
+    addStudent(email, currentUser.id)
+      .then((res) => {
+        if (res.ok) {
+          setIsAddOk(true);
+          setIsAddOk(false);
+          setAddErr(res.message);
+          closeAllPopups();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsAddOk(false);
+        setAddErr(err);
+      });
+  }
+
+  function handleDeleteStudent(studentId) {
+    setIsLoading(true)
+    deleteStudent(studentId, currentUser.id)
+      .then((res) => {
+        if (res.ok) {
+          console.log(res);
+          closeAllPopups();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
 
   useEffect(() => {
@@ -131,17 +166,12 @@ function App() {
               component={Home}
               students={students}
               loggedIn={loggedIn}
-              onOpen={handleOpenPopup}
+              onOpenAddStudents={openAddStudentsPopup}
+              onOpenDelete={openDeleteStudentsPopup}
             />
 
             <Route path="/signin">
               <SignIn handleLogin={handleLogin} isLoading={isLoading} />
-              <InfoTooltip
-                isOpen={isInfoPopupOpen}
-                isOk={isAuthOk}
-                onClose={closeAllPopups}
-                message={isAuthOk ? "" : errMesaage}
-              />
             </Route>
 
             <Route path="/">
@@ -159,6 +189,20 @@ function App() {
         isOpen={isAddStudentPopupOpen}
         onClose={closeAllPopups}
         onSubmit={handleAddStudent}
+        isAddOk={isAddOk}
+        addErr={addErr}
+      />
+      <DeleteStudentPopup
+        isOpen={isDeleteStudentPopupOpen}
+        onClose={closeAllPopups}  
+        onSubmit={handleDeleteStudent}
+        isLoading={isLoading}
+      />
+      <InfoTooltip
+        isOpen={isInfoPopupOpen}
+        isOk={isAuthOk}
+        onClose={closeAllPopups}
+        message={isAuthOk ? "" : errMesaage}
       />
     </>
   );

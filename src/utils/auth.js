@@ -62,17 +62,34 @@ export const updateUser = (name, password, token) => {
     .then((data) => data);
 };
 
-export const validateToken = (token) => {
-  return fetch(`${BASE_URL}/validate_token.php`, {
+export const addStudent = (email, id) => {
+  return fetch(`${BASE_URL}/attach_student.php`, {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      token: token,
-    }),
+      student_email: email,
+      id: id
+    })
   })
-    .then(getResponseData)
-    .then((data) => data);
-};
+  .then(getResponseData)
+  .then((data) => data);
+}
+
+export const deleteStudent = (studentId, id) => {
+  return fetch(`${BASE_URL}/delete_student.php`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      student_id: studentId,
+      id: id
+    })
+  })
+  .then(getResponseData)
+  .then((data) => data);
+}

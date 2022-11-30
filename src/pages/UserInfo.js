@@ -1,13 +1,20 @@
 import React from "react";
 import personImg from "../images/person2.png";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
+import { AiOutlineDelete } from "react-icons/ai";
 
-function UserInfo({students, onOpen}) {
+function UserInfo({students, onOpenAddStudents, onOpenDelete}) {
   const userContext = React.useContext(CurrentUserContext);
 
-  function handleClick() {
-    onOpen()
+  function handleAddClick() {
+    onOpenAddStudents()
   }
+
+  function hadleDeleteClick(e) {
+    onOpenDelete(e.target.id);
+  }
+
+  
 
   return (
     <section className="home">
@@ -19,19 +26,20 @@ function UserInfo({students, onOpen}) {
         <h2 className="home__title">Выберете ученика:</h2>
       </div>
       <div className="home__wrapper home__container">
-        <button type="button" className="home__add-student" onClick={handleClick}>
+        <button type="button" className="home__add-student" onClick={handleAddClick}>
           + Добавить ученика
         </button>
         <ul className="home__students">
-          {students.isArray
+        {Array.isArray(students)
             ? students.map((el) => {
                 return (
-                  <li className="home__student" key={el.userid}>
-                    {el.Student_Name}
+                  <li className="home__student" key={el.id}>
+                    <p className="home__student-name">{el.lastname + " " + el.firstname + " " + el.middlename}</p>
+                    <AiOutlineDelete onClick={hadleDeleteClick} id={el.id} className="home__add-student home__add-student_type_delete" />
                   </li>
                 );
               })
-            : students}
+            : "Список учеников пуст"}
         </ul>
       </div>
     </section>

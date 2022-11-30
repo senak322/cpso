@@ -1,13 +1,14 @@
 import React from "react";
 import useFormAndValidation from "../utils/useFormAndValidation.js";
 
-function AddStudentPopup({ isOpen, onClose, onSubmit }) {
+function AddStudentPopup({ isOpen, onClose, onSubmit, isAddOk, addErr }) {
   const close = process.env.PUBLIC_URL + "/close.svg";
   const formValues = {
-    email: ""
+    email: "",
   };
 
-  const { values, handleChange, setValues, errors, isValid, handleBlur } = useFormAndValidation();
+  const { values, handleChange, setValues, errors, isValid, handleBlur } =
+    useFormAndValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -16,7 +17,7 @@ function AddStudentPopup({ isOpen, onClose, onSubmit }) {
 
   React.useEffect(() => {
     setValues(formValues);
-  }, []);
+  }, [isOpen]);
 
   return (
     <div className={`popup ${isOpen ? "popup_is-open" : ""} popup_type_info `}>
@@ -51,21 +52,27 @@ function AddStudentPopup({ isOpen, onClose, onSubmit }) {
             onBlur={handleBlur}
           />
           <span
-                className={`form__error ${
-                  isValid ? "" : "form__error_type_active"
-                }`}
-              >
-                {errors.email}
-              </span>
-          <button
-            className="popup__save"
-            type="submit"
-            disabled={isValid ? false : true}
+            className={`form__error ${
+              isValid ? "" : "form__error_type_active"
+            }`}
           >
-            Отправить
-          </button>
+            {errors.email}
+          </span>
+          <div className="popup__wrapper">
+            <button
+              className="popup__save"
+              type="submit"
+              disabled={isValid ? false : true}
+            >
+              Отправить
+            </button>
+            {isAddOk ? "" : <p className="popup__error">{addErr}</p>}
+          </div>
         </form>
-        <p className="popup__description" >После отправки необходимо зайти на почту ученика и подтвердить добавление</p>
+        <p className="popup__description">
+          После отправки необходимо зайти на почту ученика и подтвердить
+          добавление
+        </p>
       </div>
     </div>
   );
