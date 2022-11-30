@@ -30,6 +30,22 @@ export const login = (email, password) => {
     });
 };
 
+export const register = (name, email) => {
+  return fetch(`${BASE_URL}/create_user.php`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: name,
+      email: email
+    }),
+  })
+    .then(getResponseData)
+    .then((data) => data);
+};
+
 export const getContent = (token) => {
   return fetch(`${BASE_URL}/validate_token.php`, {
     method: "POST",

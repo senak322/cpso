@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import useFormAndValidation from "../utils/useFormAndValidation.js";
+import { Link } from "react-router-dom";
 
 function SignIn(props) {
   const formValues = {
@@ -91,6 +92,16 @@ function SignIn(props) {
             >
               Забыли логин или пароль?
             </a>
+            <Link
+            to="/register"
+            className="link"
+          >
+            <Button
+              type="submit"
+              variant="light"
+            >Регистрация
+            </Button>
+          </Link>
           </div>
         </Form>
       </div>

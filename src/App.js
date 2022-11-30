@@ -5,12 +5,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./components/Header.js";
 import Footer from "./components/Footer.js";
 import SignIn from "./pages/SignIn.js";
+import Register from "./pages/Register.js";
 import InfoTooltip from "./components/InfoTooltip.js";
 import AddStudentPopup from "./components/AddStudentPopup.js";
 import DeleteStudentPopup from "./components/DeleteStudentPopup.js";
 import Home from "./pages/Home.js";
 import ProtectedRoute from "./components/ProtectedRoute.js";
-import { login, getContent, addStudent, deleteStudent } from "./utils/auth.js";
+import {
+  login,
+  getContent,
+  addStudent,
+  deleteStudent,
+  register,
+} from "./utils/auth.js";
 import { CurrentUserContext } from "./contexts/CurrentUserContext.js";
 
 function App() {
@@ -24,6 +31,7 @@ function App() {
   const [isAddStudentPopupOpen, setAddStudentPopupOpen] = useState(false);
   const [isDeleteStudentPopupOpen, setIsDeleteStudentPopupOpen] =
     useState(false);
+  const [studentId, setStudentId] = useState("");
   const [isAddOk, setIsAddOk] = useState(true);
   const [addErr, setAddErr] = useState("");
   const history = useHistory();
@@ -44,8 +52,9 @@ function App() {
     setAddStudentPopupOpen(true);
   }
 
-  function openDeleteStudentsPopup() {
+  function openDeleteStudentsPopup(studentId) {
     setIsDeleteStudentPopupOpen(true);
+    setStudentId(studentId);
   }
 
   function handleAuth(bool) {
@@ -94,6 +103,23 @@ function App() {
       });
   }
 
+  function handleRegister(name, email) {
+    setIsLoading(true);
+    register(name, email)
+      .then((res) => {
+        history.push("/signin");
+        console.log(res);
+      })
+      .catch((err) => {
+        handleAuth(false);
+        setErrMessage(err);
+        console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
+
   function handleLogout() {
     setLoggedIn(false);
     localStorage.removeItem("token");
@@ -102,12 +128,8 @@ function App() {
   function handleAddStudent(email) {
     addStudent(email, currentUser.id)
       .then((res) => {
-        if (res.ok) {
-          setIsAddOk(true);
-          setIsAddOk(false);
-          setAddErr(res.message);
-          closeAllPopups();
-        }
+        setAddErr(res.message);
+        closeAllPopups();
       })
       .catch((err) => {
         console.log(err);
@@ -116,14 +138,12 @@ function App() {
       });
   }
 
-  function handleDeleteStudent(studentId) {
-    setIsLoading(true)
+  function handleDeleteStudent() {
+    setIsLoading(true);
     deleteStudent(studentId, currentUser.id)
       .then((res) => {
-        if (res.ok) {
-          console.log(res);
-          closeAllPopups();
-        }
+        console.log(res);
+        closeAllPopups();
       })
       .catch((err) => {
         console.log(err);
@@ -173,6 +193,9 @@ function App() {
             <Route path="/signin">
               <SignIn handleLogin={handleLogin} isLoading={isLoading} />
             </Route>
+            <Route path="/register">
+              <Register handleRegister={handleRegister} isLoading={isLoading} />
+            </Route>
 
             <Route path="/">
               {loggedIn ? (
@@ -194,7 +217,7 @@ function App() {
       />
       <DeleteStudentPopup
         isOpen={isDeleteStudentPopupOpen}
-        onClose={closeAllPopups}  
+        onClose={closeAllPopups}
         onSubmit={handleDeleteStudent}
         isLoading={isLoading}
       />
