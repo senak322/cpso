@@ -1,19 +1,16 @@
 import React from "react";
 import personImg from "../images/person2.png";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
-import { AiOutlineDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import Student from "../components/Student.js";
 
-function UserInfo({students, onOpenAddStudents, onOpenDelete}) {
+function UserInfo({ students, onOpenAddStudents, onOpenDelete, onChangeStudent }) {
   const userContext = React.useContext(CurrentUserContext);
 
   function handleAddClick() {
-    onOpenAddStudents()
+    onOpenAddStudents();
   }
 
-  function hadleDeleteClick(e) {
-    onOpenDelete(e.target.id);
-  }
 
   return (
     <section className="home">
@@ -25,17 +22,24 @@ function UserInfo({students, onOpenAddStudents, onOpenDelete}) {
         <h2 className="home__title">Выберете ученика:</h2>
       </div>
       <div className="home__wrapper home__container">
-        <button type="button" className="home__add-student" onClick={handleAddClick}>
+        <button
+          type="button"
+          className="home__add-student"
+          onClick={handleAddClick}
+        >
           + Добавить ученика
         </button>
         <ul className="home__students">
-        {Array.isArray(students)
+          {Array.isArray(students)
             ? students.map((el) => {
+
                 return (
-                  <Link className="home__link" key={el.id} to={`/home/student${el.id}`}><li className="home__student" key={el.id}>
-                    <p className="home__student-name">{el.lastname + " " + el.firstname + " " + el.middlename}</p>
-                    <AiOutlineDelete onClick={hadleDeleteClick} id={el.id} className="home__add-student home__add-student_type_delete" />
-                  </li>
+                  <Link
+                    className="home__link"
+                    key={el.id}
+                    to={`/home/student${el.id}`}
+                  >
+                    <Student el={el} onOpenDelete={onOpenDelete} onChangeStudent={onChangeStudent}/>
                   </Link>
                 );
               })

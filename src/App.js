@@ -30,6 +30,7 @@ function App() {
   const [isAuthOk, setIsAuthOk] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [currentStudent, setCurrentStudent] = useState({});
   const [errMesaage, setErrMessage] = useState("");
   const [students, setStudents] = useState([]);
   const [isAddStudentPopupOpen, setAddStudentPopupOpen] = useState(false);
@@ -79,6 +80,10 @@ function App() {
   function handleAuth(bool) {
     setIsInfoPopupOpen(!isInfoPopupOpen);
     setIsAuthOk(bool);
+  }
+
+  function changeStudent(el) {
+    setCurrentStudent(el)
   }
 
   function tokenCheck() {
@@ -252,6 +257,7 @@ function App() {
                       students={students}
                       onOpenAddStudents={openAddStudentsPopup}
                       onOpenDelete={openDeleteStudentsPopup}
+                      onChangeStudent={changeStudent}
                     />
                   </ProtectedRoute>
                 }
@@ -260,7 +266,7 @@ function App() {
                 path="student:id"
                 element={
                   <ProtectedRoute loggedIn={loggedIn}>
-                    <StudentInfo students={students} />
+                    <StudentInfo currentStudent={currentStudent} />
                   </ProtectedRoute>
                 }
               />
