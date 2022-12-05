@@ -4,14 +4,16 @@ import { AiFillHome, AiFillSetting } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 
 function SideBar() {
-  const [isActive, setIsActive] = React.useState(false);
+  const [isActiveBar, setIsActiveBar] = React.useState(false);
+
+  const setActive = ({ isActive }) => isActive ? "link_active" : "link";
 
   function handleToggle() {
-    setIsActive(!isActive);
+    setIsActiveBar(!isActiveBar);
   }
 
   return (
-    <nav className={`side-bar ${isActive ? "side-bar_active" : ""}`}>
+    <nav className={`side-bar ${isActiveBar ? "side-bar_active" : ""}`}>
       <div className="side-bar__container">
         <FaBars
           className="side-bar__icon side-bar__icon_burger"
@@ -20,23 +22,13 @@ function SideBar() {
       </div>
       <ul className="side-bar__nav">
         <li className="side-bar__container">
-          <NavLink
-            to="/home/user-info"
-            key="home"
-            className="link"
-            activeClassName="link_active"
-          >
+          <NavLink to="user-info" key="home" className={setActive}>
             <AiFillHome className="side-bar__icon" />
             <p className="side-bar__name">Домой</p>
           </NavLink>
         </li>
         <li className="side-bar__container">
-          <NavLink
-            to="/home/settings"
-            key="settings"
-            className="link"
-            activeClassName="link_active"
-          >
+          <NavLink to="settings" key="settings" className={setActive}>
             <AiFillSetting className="side-bar__icon" />
             <p className="side-bar__name">Настройки</p>
           </NavLink>

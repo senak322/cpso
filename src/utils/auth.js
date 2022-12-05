@@ -61,7 +61,7 @@ export const getContent = (token) => {
     .then((data) => data);
 };
 
-export const updateUser = (name, password, token) => {
+export const updateUser = (name, email, password, token) => {
   return fetch(`${BASE_URL}/update_user.php`, {
     method: "POST",
     headers: {
@@ -69,13 +69,21 @@ export const updateUser = (name, password, token) => {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      password: password,
       name: name,
+      email: email,
+      password: password,
       token: token,
     })
   })
     .then(getResponseData)
-    .then((data) => data);
+    .then((data) => {
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        return data;
+      } else {
+        return;
+      }
+    });
 };
 
 export const addStudent = (email, id) => {

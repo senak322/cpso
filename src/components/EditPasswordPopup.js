@@ -2,10 +2,9 @@ import React from "react";
 import useFormAndValidation from "../utils/useFormAndValidation.js";
 import close from "../images/close.svg";
 
-function AddStudentPopup({ isOpen, onClose, onSubmit, isAddOk, addErr }) {
-  
+function EditPasswordPopup({ isOpen, onClose, onSubmit, isAddOk, addErr }) {
   const formValues = {
-    email: "",
+    password: "",
   };
 
   const { values, handleChange, setValues, errors, isValid, handleBlur } =
@@ -13,7 +12,7 @@ function AddStudentPopup({ isOpen, onClose, onSubmit, isAddOk, addErr }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    onSubmit(values.email);
+    onSubmit(values);
   }
 
   React.useEffect(() => {
@@ -29,26 +28,26 @@ function AddStudentPopup({ isOpen, onClose, onSubmit, isAddOk, addErr }) {
           className="popup__close"
           style={{ backgroundImage: `url(${close})` }}
         />
-        <h3 className="popup__title popup__title_type_add">
-          Укажите E-mail ученика
+        <h3 className="popup__title popup__title_type_edit-name">
+          Укажите новый пароль
         </h3>
         <form
           className="popup__form"
           action="#"
-          name="add-student"
+          name="edit-info"
           onSubmit={handleSubmit}
           noValidate
         >
           <input
             className="popup__input"
-            id="add-student"
-            name="email"
-            type="email"
-            placeholder="Введите E-mail"
-            required=""
+            id="password"
+            name="password"
+            type="password"
+            required
+            placeholder="Введите пароль"
             minLength={2}
             maxLength={40}
-            value={values.email || ""}
+            value={values.password || ""}
             onChange={handleChange}
             onBlur={handleBlur}
           />
@@ -57,7 +56,7 @@ function AddStudentPopup({ isOpen, onClose, onSubmit, isAddOk, addErr }) {
               isValid ? "" : "form__error_type_active"
             }`}
           >
-            {errors.email}
+            {errors.password}
           </span>
           <div className="popup__wrapper">
             <button
@@ -70,13 +69,9 @@ function AddStudentPopup({ isOpen, onClose, onSubmit, isAddOk, addErr }) {
             {isAddOk ? "" : <p className="popup__error">{addErr}</p>}
           </div>
         </form>
-        <p className="popup__description">
-          После отправки необходимо зайти на почту ученика и подтвердить
-          добавление
-        </p>
       </div>
     </div>
   );
 }
 
-export default AddStudentPopup;
+export default EditPasswordPopup;

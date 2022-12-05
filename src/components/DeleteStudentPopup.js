@@ -1,7 +1,8 @@
 import React from "react";
+import close from "../images/close.svg";
 
 function DeleteStudentPopup({ isOpen, onClose, onSubmit, isLoading }) {
-  const close = process.env.PUBLIC_URL + "/close.svg";
+  
 
   function handleSubmit(e) {
     e.preventDefault();

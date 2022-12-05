@@ -2,11 +2,15 @@ import React from "react";
 import personImg from "../images/person2.png";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
-function Settings() {
+function Settings({onOpenEditName, onOpenEditPassword}) {
   const userContext = React.useContext(CurrentUserContext);
 
-  function handleClick() {
+  function handleEditName() {
+    onOpenEditName()
+  }
 
+  function handleEditPassword() {
+    onOpenEditPassword()
   }
 
   return (
@@ -22,23 +26,18 @@ function Settings() {
         <button
           type="button"
           className="home__add-student"
-          onClick={handleClick}
+          onClick={handleEditName}
+        >
+          Изменить ФИО/E-mail
+        </button>
+      </div>
+      <div className="home__wrapper home__container">
+        <button
+          type="button"
+          className="home__add-student"
+          onClick={handleEditPassword}
         >
           Изменить пароль
-        </button>
-        <button
-          type="button"
-          className="home__add-student"
-          onClick={handleClick}
-        >
-          Изменить ФИО
-        </button>
-        <button
-          type="button"
-          className="home__add-student"
-          onClick={handleClick}
-        >
-          Изменить фото профиля
         </button>
       </div>
     </section>

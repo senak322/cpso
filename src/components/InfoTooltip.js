@@ -1,8 +1,9 @@
 import React from "react";
+import close from "../images/close.svg";
 
 
 function InfoTooltip({ isOpen, isOk, onClose, message }) {
-   const close = process.env.PUBLIC_URL + '/close.svg';
+  
   return (
     <div className={`popup ${isOpen ? "popup_is-open" : ""} popup_type_info `}>
       <div className="popup__content popup__content_type_info">

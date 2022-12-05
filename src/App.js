@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
-import { Route, Switch, Redirect, useHistory } from "react-router-dom";
+import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-import Header from "./components/Header.js";
-import Footer from "./components/Footer.js";
+import Layout from "./components/Layout.js";
+import Settings from "./pages/Settings.js";
+import UserInfo from "./pages/UserInfo.js";
+import StudentInfo from "./pages/StudentInfo.js";
 import SignIn from "./pages/SignIn.js";
 import Register from "./pages/Register.js";
 import InfoTooltip from "./components/InfoTooltip.js";
 import AddStudentPopup from "./components/AddStudentPopup.js";
 import DeleteStudentPopup from "./components/DeleteStudentPopup.js";
+import EditNamePopup from "./components/EditNamePopup.js";
+import EditPasswordPopup from "./components/EditPasswordPopup.js";
 import Home from "./pages/Home.js";
 import ProtectedRoute from "./components/ProtectedRoute.js";
 import {
@@ -17,6 +20,7 @@ import {
   addStudent,
   deleteStudent,
   register,
+  updateUser,
 } from "./utils/auth.js";
 import { CurrentUserContext } from "./contexts/CurrentUserContext.js";
 
@@ -31,14 +35,19 @@ function App() {
   const [isAddStudentPopupOpen, setAddStudentPopupOpen] = useState(false);
   const [isDeleteStudentPopupOpen, setIsDeleteStudentPopupOpen] =
     useState(false);
+  const [isEditNamePopupOpen, setIsEditNamePopupOpen] = useState(false);
+  const [isEditPasswordPopupOpen, setIsEditPasswordPopupOpen] = useState(false);
   const [studentId, setStudentId] = useState("");
   const [isAddOk, setIsAddOk] = useState(true);
   const [addErr, setAddErr] = useState("");
-  const history = useHistory();
+  const history = useNavigate();
 
   const isOpen =
-    isInfoPopupOpen || isAddStudentPopupOpen || isDeleteStudentPopupOpen;
-  const books = process.env.PUBLIC_URL + "/books.jpg";
+    isInfoPopupOpen ||
+    isAddStudentPopupOpen ||
+    isDeleteStudentPopupOpen ||
+    isDeleteStudentPopupOpen ||
+    isEditPasswordPopupOpen;
 
   function closeAllPopups() {
     setIsInfoPopupOpen(false);
@@ -46,15 +55,25 @@ function App() {
     setAddErr("");
     setIsAddOk(true);
     setIsDeleteStudentPopupOpen(false);
+    setIsEditNamePopupOpen(false);
+    setIsEditPasswordPopupOpen(false);
   }
 
   function openAddStudentsPopup() {
     setAddStudentPopupOpen(true);
   }
 
-  function openDeleteStudentsPopup(studentId) {
+  function openDeleteStudentsPopup(id) {
     setIsDeleteStudentPopupOpen(true);
-    setStudentId(studentId);
+    setStudentId(id);
+  }
+
+  function openEditNamePopup() {
+    setIsEditNamePopupOpen(true);
+  }
+
+  function openEditPasswordPopup() {
+    setIsEditPasswordPopupOpen(true);
   }
 
   function handleAuth(bool) {
@@ -69,7 +88,7 @@ function App() {
         .then((res) => {
           if (res) {
             setLoggedIn(true);
-            history.push("/home");
+            history("/home/user-info");
             setCurrentUser({
               id: res.data.id,
               name: res.data.name,
@@ -89,8 +108,9 @@ function App() {
     login(email, password)
       .then((res) => {
         if (res.token) {
+          tokenCheck();
           setLoggedIn(true);
-          history.push("/home/user-info");
+          history("/user-info");
         }
       })
       .catch((err) => {
@@ -105,9 +125,10 @@ function App() {
 
   function handleRegister(name, email) {
     setIsLoading(true);
+    debugger;
     register(name, email)
       .then((res) => {
-        history.push("/signin");
+        history("/signin");
         console.log(res);
       })
       .catch((err) => {
@@ -128,6 +149,7 @@ function App() {
   function handleAddStudent(email) {
     addStudent(email, currentUser.id)
       .then((res) => {
+        tokenCheck();
         setAddErr(res.message);
         closeAllPopups();
       })
@@ -142,7 +164,8 @@ function App() {
     setIsLoading(true);
     deleteStudent(studentId, currentUser.id)
       .then((res) => {
-        console.log(res);
+        tokenCheck();
+        console.log(res.message);
         closeAllPopups();
       })
       .catch((err) => {
@@ -150,6 +173,35 @@ function App() {
       })
       .finally(() => {
         setIsLoading(false);
+      });
+  }
+
+  function handleEditName(values) {
+    const token = localStorage.getItem("token");
+    updateUser(values.name, values.email, "", token)
+      .then((res) => {
+        console.log(res.message);
+        tokenCheck();
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+        setAddErr(err);
+      });
+  }
+
+  function handleEditPassword(values) {
+    const token = localStorage.getItem("token");
+
+    updateUser(currentUser.name, currentUser.email, values.password, token)
+      .then((res) => {
+        console.log(res.message);
+        tokenCheck();
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+        setAddErr(err);
       });
   }
 
@@ -174,59 +226,119 @@ function App() {
 
   return (
     <>
-      <Header loggedIn={loggedIn} onLogout={handleLogout} />
-      <main
-        className={`main ${loggedIn ? "main__loggined" : ""}`}
-        style={{ backgroundImage: `url(${books})` }}
-      >
-        <Switch>
-          <CurrentUserContext.Provider value={currentUser}>
-            <ProtectedRoute
+      <CurrentUserContext.Provider value={currentUser}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Layout loggedIn={loggedIn} onLogout={handleLogout} />
+              </>
+            }
+          >
+            <Route
               path="/home"
-              component={Home}
-              students={students}
-              loggedIn={loggedIn}
-              onOpenAddStudents={openAddStudentsPopup}
-              onOpenDelete={openDeleteStudentsPopup}
+              element={
+                <ProtectedRoute loggedIn={loggedIn}>
+                  <Home />
+                </ProtectedRoute>
+              }
+            >
+              <Route
+                path="user-info"
+                element={
+                  <ProtectedRoute loggedIn={loggedIn}>
+                    <UserInfo
+                      students={students}
+                      onOpenAddStudents={openAddStudentsPopup}
+                      onOpenDelete={openDeleteStudentsPopup}
+                    />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="student:id"
+                element={
+                  <ProtectedRoute loggedIn={loggedIn}>
+                    <StudentInfo students={students} />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="settings"
+                element={
+                  <ProtectedRoute loggedIn={loggedIn}>
+                    <Settings
+                      loggedIn={loggedIn}
+                      onOpenEditName={openEditNamePopup}
+                      onOpenEditPassword={openEditPasswordPopup}
+                    />
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
+
+            <Route
+              path="/signin"
+              element={
+                <SignIn handleLogin={handleLogin} isLoading={isLoading} />
+              }
             />
-
-            <Route path="/signin">
-              <SignIn handleLogin={handleLogin} isLoading={isLoading} />
-            </Route>
-            <Route path="/register">
-              <Register handleRegister={handleRegister} isLoading={isLoading} />
-            </Route>
-
-            <Route path="/">
-              {loggedIn ? (
-                <Redirect to="/home/user-info" />
+            <Route
+              path="/register"
+              element={
+                <Register
+                  handleRegister={handleRegister}
+                  isLoading={isLoading}
+                />
+              }
+            />
+          </Route>
+          <Route
+            path="*"
+            element={
+              loggedIn ? (
+                <Navigate to="/home/user-info" />
               ) : (
-                <Redirect to="/signin" />
-              )}
-            </Route>
-          </CurrentUserContext.Provider>
-        </Switch>
-      </main>
-      <Footer />
-      <AddStudentPopup
-        isOpen={isAddStudentPopupOpen}
-        onClose={closeAllPopups}
-        onSubmit={handleAddStudent}
-        isAddOk={isAddOk}
-        addErr={addErr}
-      />
-      <DeleteStudentPopup
-        isOpen={isDeleteStudentPopupOpen}
-        onClose={closeAllPopups}
-        onSubmit={handleDeleteStudent}
-        isLoading={isLoading}
-      />
-      <InfoTooltip
-        isOpen={isInfoPopupOpen}
-        isOk={isAuthOk}
-        onClose={closeAllPopups}
-        message={isAuthOk ? "" : errMesaage}
-      />
+                <Navigate to="/signin" />
+              )
+            }
+          />
+        </Routes>
+        <AddStudentPopup
+          isOpen={isAddStudentPopupOpen}
+          onClose={closeAllPopups}
+          onSubmit={handleAddStudent}
+          isAddOk={isAddOk}
+          addErr={addErr}
+        />
+        <DeleteStudentPopup
+          isOpen={isDeleteStudentPopupOpen}
+          onClose={closeAllPopups}
+          onSubmit={handleDeleteStudent}
+          isLoading={isLoading}
+        />
+        <EditNamePopup
+          isOpen={isEditNamePopupOpen}
+          onClose={closeAllPopups}
+          onSubmit={handleEditName}
+          addErr={addErr}
+        />
+
+        <EditPasswordPopup
+          isOpen={isEditPasswordPopupOpen}
+          onClose={closeAllPopups}
+          onSubmit={handleEditPassword}
+          addErr={addErr}
+        />
+        <InfoTooltip
+          isOpen={isInfoPopupOpen}
+          isOk={isAuthOk}
+          onClose={closeAllPopups}
+          message={isAuthOk ? "" : errMesaage}
+        />
+      </CurrentUserContext.Provider>
     </>
   );
 }

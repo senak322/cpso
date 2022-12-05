@@ -2,6 +2,7 @@ import React from "react";
 import personImg from "../images/person2.png";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import { AiOutlineDelete } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 function UserInfo({students, onOpenAddStudents, onOpenDelete}) {
   const userContext = React.useContext(CurrentUserContext);
@@ -13,8 +14,6 @@ function UserInfo({students, onOpenAddStudents, onOpenDelete}) {
   function hadleDeleteClick(e) {
     onOpenDelete(e.target.id);
   }
-
-  
 
   return (
     <section className="home">
@@ -33,10 +32,11 @@ function UserInfo({students, onOpenAddStudents, onOpenDelete}) {
         {Array.isArray(students)
             ? students.map((el) => {
                 return (
-                  <li className="home__student" key={el.id}>
+                  <Link className="home__link" key={el.id} to={`/home/student${el.id}`}><li className="home__student" key={el.id}>
                     <p className="home__student-name">{el.lastname + " " + el.firstname + " " + el.middlename}</p>
                     <AiOutlineDelete onClick={hadleDeleteClick} id={el.id} className="home__add-student home__add-student_type_delete" />
                   </li>
+                  </Link>
                 );
               })
             : "Список учеников пуст"}

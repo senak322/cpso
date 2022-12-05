@@ -1,11 +1,15 @@
 import React from "react";
 import useFormAndValidation from "../utils/useFormAndValidation.js";
 import close from "../images/close.svg";
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
-function AddStudentPopup({ isOpen, onClose, onSubmit, isAddOk, addErr }) {
-  
+function EditNamePopup({ isOpen, onClose, onSubmit, isAddOk, addErr }) {
+  const userContext = React.useContext(CurrentUserContext);
+
   const formValues = {
-    email: "",
+    name: userContext.name,
+    email: userContext.email,
+    password: "",
   };
 
   const { values, handleChange, setValues, errors, isValid, handleBlur } =
@@ -13,7 +17,7 @@ function AddStudentPopup({ isOpen, onClose, onSubmit, isAddOk, addErr }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    onSubmit(values.email);
+    onSubmit(values);
   }
 
   React.useEffect(() => {
@@ -29,23 +33,43 @@ function AddStudentPopup({ isOpen, onClose, onSubmit, isAddOk, addErr }) {
           className="popup__close"
           style={{ backgroundImage: `url(${close})` }}
         />
-        <h3 className="popup__title popup__title_type_add">
-          Укажите E-mail ученика
+        <h3 className="popup__title popup__title_type_edit-name">
+          Укажите новые данные
         </h3>
         <form
           className="popup__form"
           action="#"
-          name="add-student"
+          name="edit-info"
           onSubmit={handleSubmit}
           noValidate
         >
           <input
             className="popup__input"
-            id="add-student"
+            id="edit-name"
+            name="name"
+            type="text"
+            placeholder="Введите ФИО"
+            required
+            minLength={2}
+            maxLength={40}
+            value={values.name || ""}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+          <span
+            className={`form__error ${
+              isValid ? "" : "form__error_type_active"
+            }`}
+          >
+            {errors.name}
+          </span>
+          <input
+            className="popup__input"
+            id="edit-email"
             name="email"
             type="email"
             placeholder="Введите E-mail"
-            required=""
+            required
             minLength={2}
             maxLength={40}
             value={values.email || ""}
@@ -57,8 +81,9 @@ function AddStudentPopup({ isOpen, onClose, onSubmit, isAddOk, addErr }) {
               isValid ? "" : "form__error_type_active"
             }`}
           >
-            {errors.email}
+            {errors.name}
           </span>
+
           <div className="popup__wrapper">
             <button
               className="popup__save"
@@ -70,13 +95,9 @@ function AddStudentPopup({ isOpen, onClose, onSubmit, isAddOk, addErr }) {
             {isAddOk ? "" : <p className="popup__error">{addErr}</p>}
           </div>
         </form>
-        <p className="popup__description">
-          После отправки необходимо зайти на почту ученика и подтвердить
-          добавление
-        </p>
       </div>
     </div>
   );
 }
 
-export default AddStudentPopup;
+export default EditNamePopup;

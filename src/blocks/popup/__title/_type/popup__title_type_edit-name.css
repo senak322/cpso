@@ -1,0 +1,12 @@
+.popup__title_type_edit-name {
+    font-size: 25px;
+    color: #455a64;
+    padding: 29px 0 44px 23px;
+}
+
+@media screen and (max-width: 767px) {
+    .popup__title_type_edit-name {
+        font-size: 20px;
+        padding: 18px 0 39px 12px;
+    }
+  }

@@ -1,5 +1,7 @@
 .link_active {
-   opacity: 0.5;
-   cursor: default;
+  opacity: 0.5;
+  cursor: default;
+  display: flex;
+  text-decoration: none;
+  transition: all 0.3s linear;
 }
-

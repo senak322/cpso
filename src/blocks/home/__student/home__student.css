@@ -5,4 +5,11 @@
     justify-content: space-between;
     border: 2px solid;
     align-items: center;
+    cursor: pointer;
+    transition: all 0.1s linear;
+}
+
+.home__student:hover {
+    background-color: #455a64;
+    color: white;
 }
