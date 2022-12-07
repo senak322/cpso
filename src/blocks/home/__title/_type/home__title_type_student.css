@@ -1,0 +1,9 @@
+.home__title_type_student {
+    margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 410px) {
+    .home__title_type_student {
+        margin-left: 0;
+  }
+}

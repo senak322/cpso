@@ -7,7 +7,7 @@ function Student({ el, onOpenDelete, onChangeStudent }) {
   }
 
   function changeStudent() {
-    onChangeStudent(el)
+    onChangeStudent(el);
   }
 
   return (

@@ -1,0 +1,22 @@
+.home__description {
+    color: #455a64;
+    font-family: 'Inter',Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    margin: 17px 20px;
+}
+
+@media screen and (max-width: 767px) {
+    .home__description {
+        margin: 15px 16px;
+        font-size: 15px;
+    }
+  }
+
+  @media screen and (max-width: 410px) {
+    .home__description {
+        margin: 10px 0;
+        font-size: 15px;
+    }
+  }

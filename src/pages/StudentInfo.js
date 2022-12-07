@@ -12,10 +12,10 @@ function StudentInfo({ currentStudent }) {
         <h1 className="home__user-name">{currentStudent.firstname + " " + currentStudent.lastname + " " + currentStudent.middlename}</h1>
       </div>
       <div className="home__wrapper home__container">
-        <h2 className="home__title">Информация о ученике</h2>
-        <p className="popup__description">E-mail: {currentStudent.username}</p>
-        <p className="popup__description">Школа: {currentStudent.department}</p>
-        <p className="popup__description">Оценки: </p>
+        <h2 className="home__title home__title_type_student">Информация об ученике</h2>
+        <p className="home__description">E-mail: {currentStudent.username}</p>
+        <p className="home__description">Класс: {currentStudent.department}</p>
+        <p className="home__description">Оценки: </p>
         
       </div>
       

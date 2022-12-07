@@ -25,12 +25,14 @@
 @import url(./blocks/home/__user-name/home__user-name.css);
 @import url(./blocks/home/__container/home__container.css);
 @import url(./blocks/home/__title/home__title.css);
+@import url(./blocks/home/__title/_type/home__title_type_student.css);
 @import url(./blocks/home/__add-student/home__add-student.css);
 @import url(./blocks/home/__add-student/_type/home__add-student_type_delete.css);
 @import url(./blocks/home/__students/home__students.css);
 @import url(./blocks/home/__student/home__student.css);
 @import url(./blocks/home/__student-name/home__student-name.css);
 @import url(./blocks/home/__link/home__link.css);
+@import url(./blocks/home/__description/home__description.css);
 @import url(./blocks/form/form.css);
 @import url(./blocks/form/__container/form__container.css);
 @import url(./blocks/form/__container/_submit/form__container_submit.css);

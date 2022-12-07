@@ -19,7 +19,7 @@ function UserInfo({ students, onOpenAddStudents, onOpenDelete, onChangeStudent }
         <h1 className="home__user-name">{userContext.name}</h1>
       </div>
       <div className="home__wrapper home__container">
-        <h2 className="home__title">Выберете ученика:</h2>
+        <h2 className="home__title">Выберите ученика:</h2>
       </div>
       <div className="home__wrapper home__container">
         <button
