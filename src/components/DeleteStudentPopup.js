@@ -18,6 +18,7 @@ function DeleteStudentPopup({ isOpen, onClose, onSubmit, isLoading }) {
           className="popup__close"
           style={{ backgroundImage: `url(${close})` }}
         />
+        <p className="popup__title popup__title_type_title">Удаление ученика из списка</p>
         <h3 className="popup__title popup__title_type_add popup__title_type_delete">Вы уверены?</h3>
         <form
           className="popup__form"

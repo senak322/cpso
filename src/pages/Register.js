@@ -87,7 +87,7 @@ function Register(props) {
             >
               {props.isLoading ? "Регистрация..." : "Зарегистрироваться"}
             </Button>
-            <p>Уже зарегистрированы?</p>
+            <p className="form__discription">Уже зарегистрированы?</p>
             <Link
             to="/signin"
             className="link"

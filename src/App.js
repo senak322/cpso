@@ -276,7 +276,6 @@ function App() {
                 element={
                   <ProtectedRoute loggedIn={loggedIn}>
                     <Settings
-                      loggedIn={loggedIn}
                       onOpenEditName={openEditNamePopup}
                       onOpenEditPassword={openEditPasswordPopup}
                     />

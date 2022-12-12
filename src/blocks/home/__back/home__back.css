@@ -1,0 +1,24 @@
+.home__back {
+    border: 1px solid rgb(77, 199, 236);
+    border-radius: 10%;
+    background-color: white;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    transition: all 0.1s linear;
+    margin: 15px;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+}
+
+
+
+.home__back:hover {
+    background-color: #f1faff;
+}
+
+@media screen and (max-width: 767px) {
+    .home__back {
+        height: 2.5rem;
+        margin: 10px;
+    }
+  }

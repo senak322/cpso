@@ -33,6 +33,7 @@
 @import url(./blocks/home/__student-name/home__student-name.css);
 @import url(./blocks/home/__link/home__link.css);
 @import url(./blocks/home/__description/home__description.css);
+@import url(./blocks/home/__back/home__back.css);
 @import url(./blocks/form/form.css);
 @import url(./blocks/form/__container/form__container.css);
 @import url(./blocks/form/__container/_submit/form__container_submit.css);
@@ -41,6 +42,7 @@
 @import url(./blocks/form/__link/form__link.css);
 @import url(./blocks/form/__error/form__error.css);
 @import url(./blocks/form/__error/_type/form__error_type_active.css);
+@import url(./blocks/form/__discription/form__discription.css);
 @import url(./blocks/footer/footer.css);
 @import url(./blocks/footer/__container/footer__container.css);
 @import url(./blocks/footer/__nav/footer__nav.css);
@@ -59,6 +61,7 @@
 @import url(./blocks/popup/__title/_type/popup__title_type_add.css);
 @import url(./blocks/popup/__title/_type/popup__title_type_delete.css);
 @import url(./blocks/popup/__title/_type/popup__title_type_edit-name.css);
+@import url(./blocks/popup/__title/_type/popup__title_type_title.css);
 @import url(./blocks/popup/__form/popup__form.css);
 @import url(./blocks/popup/_is-open/popup_is-open.css);
 @import url(./blocks/popup/__input/popup__input.css);

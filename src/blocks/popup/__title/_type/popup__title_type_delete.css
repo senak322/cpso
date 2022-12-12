@@ -1,3 +1,9 @@
 .popup__title_type_delete {
     padding: 29px 0 32px 0;
 }
+
+@media screen and (max-width: 767px) {
+    .popup__title_type_delete {
+        padding: 19px 0 32px 0;
+    }
+  }
