@@ -117,3 +117,18 @@ export const deleteStudent = (studentId, id) => {
   .then(getResponseData)
   .then((data) => data);
 }
+
+export const getCourses = (studentId) => {
+  return fetch(`${BASE_URL}/get_courses.php`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      userid: studentId
+    })
+  })
+  .then(getResponseData)
+  .then((data) => data);
+}

@@ -30,6 +30,7 @@
 @import url(./blocks/home/__add-student/_type/home__add-student_type_delete.css);
 @import url(./blocks/home/__students/home__students.css);
 @import url(./blocks/home/__student/home__student.css);
+@import url(./blocks/home/__student/_type/home__student_type_class.css);
 @import url(./blocks/home/__student-name/home__student-name.css);
 @import url(./blocks/home/__link/home__link.css);
 @import url(./blocks/home/__description/home__description.css);

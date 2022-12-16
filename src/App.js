@@ -13,6 +13,7 @@ import DeleteStudentPopup from "./components/DeleteStudentPopup.js";
 import EditNamePopup from "./components/EditNamePopup.js";
 import EditPasswordPopup from "./components/EditPasswordPopup.js";
 import Home from "./pages/Home.js";
+import Courses from "./pages/Courses.js";
 import ProtectedRoute from "./components/ProtectedRoute.js";
 import {
   login,
@@ -21,6 +22,7 @@ import {
   deleteStudent,
   register,
   updateUser,
+  getCourses,
 } from "./utils/auth.js";
 import { CurrentUserContext } from "./contexts/CurrentUserContext.js";
 
@@ -31,6 +33,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [currentStudent, setCurrentStudent] = useState({});
+  const [courses, setCourses] = useState({});
   const [errMesaage, setErrMessage] = useState("");
   const [students, setStudents] = useState([]);
   const [isAddStudentPopupOpen, setAddStudentPopupOpen] = useState(false);
@@ -82,8 +85,16 @@ function App() {
     setIsAuthOk(bool);
   }
 
+  function handleGetCourses(studentId) {
+    getCourses(studentId).then((res) => {
+      console.log(res);
+      setCourses(res);
+    });
+  }
+
   function changeStudent(el) {
-    setCurrentStudent(el)
+    setCurrentStudent(el);
+    handleGetCourses(el.id)
   }
 
   function tokenCheck() {
@@ -266,10 +277,21 @@ function App() {
                 path="student:id"
                 element={
                   <ProtectedRoute loggedIn={loggedIn}>
-                    <StudentInfo currentStudent={currentStudent} />
+                    <StudentInfo currentStudent={currentStudent} courses={courses} />
+                  </ProtectedRoute>
+                }
+              >
+                <Route
+                path="courses"
+                element={
+                  <ProtectedRoute loggedIn={loggedIn}>
+                    <Courses
+                      
+                    />
                   </ProtectedRoute>
                 }
               />
+              </Route>
 
               <Route
                 path="settings"

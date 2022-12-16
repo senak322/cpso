@@ -17,9 +17,10 @@ function useFormAndValidation(obj) {
     setIsValid(event.target.closest("form").checkValidity());
   };
 
- 
+
 
   return { values, handleChange, setValues, errors, setErrors, isValid, setIsValid, handleBlur };
+
 }
 
 export default useFormAndValidation;

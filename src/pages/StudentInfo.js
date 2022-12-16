@@ -2,8 +2,9 @@ import React from "react";
 import personImg from "../images/person2.png";
 import { useNavigate } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
-function StudentInfo({ currentStudent }) {
+function StudentInfo({ currentStudent, courses }) {
   const navigate = useNavigate();
 
   const goBack = () => {
@@ -34,9 +35,17 @@ function StudentInfo({ currentStudent }) {
         <p className="home__description">
           Текущий класс: {currentStudent.current_class}
         </p>
-        <p className="home__description">Оценки: </p>
+        <ul className="home__description">
+          Доступные классы:{" "}
+          {courses.courses
+            ? courses.courses.map((el) => {
+                return <li className="home__student home__student_type_class" key={el.id}>{el.name}</li>;
+              })
+            : "Нет доступных курсов"}
+        </ul>
         <button className="home__back" type="button" onClick={goBack}>
-          <BiArrowBack/>Назад
+          <BiArrowBack />
+          Назад
         </button>
       </div>
     </section>
