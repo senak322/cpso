@@ -3,9 +3,11 @@ import personImg from "../images/person2.png";
 import { useNavigate } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import CourseName from '../components/CourseName.js';
 
-function StudentInfo({ currentStudent, courses }) {
+function StudentInfo({ currentStudent, courses, onChangeCourse }) {
   const navigate = useNavigate();
+  
 
   const goBack = () => {
     navigate(-1);
@@ -39,7 +41,11 @@ function StudentInfo({ currentStudent, courses }) {
           Доступные классы:{" "}
           {courses.courses
             ? courses.courses.map((el) => {
-                return <li className="home__student home__student_type_class" key={el.id}>{el.name}</li>;
+                return (
+                  <Link className="home__link" to={`/home/course${el.id}`} key={el.id}>
+                    <CourseName el={el} onChangeCourse={onChangeCourse}/>
+                  </Link>
+                );
               })
             : "Нет доступных курсов"}
         </ul>

@@ -132,3 +132,19 @@ export const getCourses = (studentId) => {
   .then(getResponseData)
   .then((data) => data);
 }
+
+export const getGrades = (studentId, courseId) => {
+  return fetch(`${BASE_URL}/get_grades.php`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      userid : studentId,
+      courseid : courseId
+    })
+  })
+  .then(getResponseData)
+  .then((data) => data);
+}

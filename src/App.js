@@ -13,7 +13,7 @@ import DeleteStudentPopup from "./components/DeleteStudentPopup.js";
 import EditNamePopup from "./components/EditNamePopup.js";
 import EditPasswordPopup from "./components/EditPasswordPopup.js";
 import Home from "./pages/Home.js";
-import Courses from "./pages/Courses.js";
+import CourseInfo from "./pages/CourseInfo.js";
 import ProtectedRoute from "./components/ProtectedRoute.js";
 import {
   login,
@@ -23,6 +23,7 @@ import {
   register,
   updateUser,
   getCourses,
+  getGrades
 } from "./utils/auth.js";
 import { CurrentUserContext } from "./contexts/CurrentUserContext.js";
 
@@ -44,6 +45,7 @@ function App() {
   const [studentId, setStudentId] = useState("");
   const [isAddOk, setIsAddOk] = useState(true);
   const [addErr, setAddErr] = useState("");
+  const [grades, setGrades] = useState([]);
   const history = useNavigate();
 
   const isOpen =
@@ -94,7 +96,7 @@ function App() {
 
   function changeStudent(el) {
     setCurrentStudent(el);
-    handleGetCourses(el.id)
+    handleGetCourses(el.id);
   }
 
   function tokenCheck() {
@@ -221,6 +223,19 @@ function App() {
       });
   }
 
+  function handleGetGrades(studentId, courseId) {
+    getGrades(studentId, courseId).then(res => {
+      console.log(res);
+      setGrades(res);
+    })
+  }
+
+  function changeCourse(el) {
+    handleGetGrades(currentStudent.id, el.id)
+  }
+
+ 
+
   useEffect(() => {
     function closeByEscape(e) {
       if (e.key === "Escape") {
@@ -277,21 +292,23 @@ function App() {
                 path="student:id"
                 element={
                   <ProtectedRoute loggedIn={loggedIn}>
-                    <StudentInfo currentStudent={currentStudent} courses={courses} />
-                  </ProtectedRoute>
-                }
-              >
-                <Route
-                path="courses"
-                element={
-                  <ProtectedRoute loggedIn={loggedIn}>
-                    <Courses
-                      
+                    <StudentInfo
+                      currentStudent={currentStudent}
+                      courses={courses}
+                      onChangeCourse={changeCourse}
                     />
                   </ProtectedRoute>
                 }
               />
-              </Route>
+                <Route
+                  path="course:classid"
+                  element={
+                    <ProtectedRoute loggedIn={loggedIn}>
+                      <CourseInfo currentStudent={currentStudent} getGrades={handleGetGrades} grades={grades}/>
+                    </ProtectedRoute>
+                  }
+                />
+              
 
               <Route
                 path="settings"
