@@ -1,20 +1,14 @@
-import { useEffect } from "react";
+
 import personImg from "../images/person2.png";
 import { BiArrowBack } from "react-icons/bi";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function CourseInfo({ currentStudent, getGrades, grades }) {
   const navigate = useNavigate();
 
-  let { id } = useParams();
-
   const goBack = () => {
     navigate(-1);
   };
-
-  // useEffect(() => {
-  //   getGrades(currentStudent.id, id);
-  // }, []);
 
   console.log(grades);
 
@@ -32,10 +26,15 @@ function CourseInfo({ currentStudent, getGrades, grades }) {
       </div>
       <div className="home__wrapper home__container">
         <ul className="home__description">
-          Предметы:
+          <p className="">Предметы:</p>
           {grades.grades ? (
             grades.grades.map((el) => {
-              return <li>el</li>;
+              return <li key={el.item_id
+              }>
+                <h3>{el.item}</h3>
+                <p>{el.module}</p>
+                <p>{el.grade}</p>
+              </li>;
             })
           ) : (
             <p>Оценок ещё нет</p>
