@@ -23,7 +23,8 @@ import {
   register,
   updateUser,
   getCourses,
-  getGrades
+  getGrades,
+  getFiles
 } from "./utils/auth.js";
 import { CurrentUserContext } from "./contexts/CurrentUserContext.js";
 
@@ -234,7 +235,11 @@ function App() {
     handleGetGrades(currentStudent.id, el.id)
   }
 
- 
+ function handleGetFiles() {
+  getFiles(currentStudent.id).then(res => {
+    console.log(res);
+  })
+ }
 
   useEffect(() => {
     function closeByEscape(e) {
