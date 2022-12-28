@@ -134,7 +134,7 @@ export const getCourses = (studentId) => {
 }
 
 export const getGrades = (studentId, courseId) => {
-  return fetch(`${BASE_URL}/get_grades.php`, {
+  return fetch(`${BASE_URL}/get_grades_v2.php`, {
     method: "POST",
     headers: {
       Accept: "application/json",

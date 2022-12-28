@@ -2,7 +2,7 @@ import personImg from "../images/person2.png";
 import { BiArrowBack } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 
-function CourseInfo({ currentStudent, getGrades, grades }) {
+function CourseInfo({ currentStudent, grades }) {
   const navigate = useNavigate();
 
   const goBack = () => {
@@ -27,16 +27,25 @@ function CourseInfo({ currentStudent, getGrades, grades }) {
         <h2 className="home__title">Предметы и оценки</h2>
       </div>
       <div className="home__wrapper home__container">
-      
-
         <ul className="home__description">
           {grades.grades ? (
             grades.grades.map((el) => {
               return (
-                <li key={el.item_id}>
+                <li key={el.id}>
                   <h3>{el.item}</h3>
                   <p>{el.module}</p>
-                  <p>{el.grade}</p>
+                  <ul>
+                    
+                    {el.modules.map((el) => {
+                      return (
+                        <li key={el.id}>
+                          <h4>{el.item_name}</h4>
+                          <p>Оценка по пятибалльной системе: {el.grade}</p>
+                          <p>Оценка в баллах: {el.points}</p>
+                        </li>
+                      );
+                    })}
+                  </ul>
                 </li>
               );
             })
