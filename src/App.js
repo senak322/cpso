@@ -47,6 +47,7 @@ function App() {
   const [isAddOk, setIsAddOk] = useState(true);
   const [addErr, setAddErr] = useState("");
   const [grades, setGrades] = useState([]);
+  const [files, setFiles] = useState([]);
   const history = useNavigate();
 
   const isOpen =
@@ -95,9 +96,17 @@ function App() {
     });
   }
 
+  function handleGetFiles(id) {
+    getFiles(id).then(res => {
+      console.log(res);
+      setFiles(res.files);
+    })
+   }
+
   function changeStudent(el) {
     setCurrentStudent(el);
     handleGetCourses(el.id);
+    handleGetFiles(el.id)
   }
 
   function tokenCheck() {
@@ -235,11 +244,6 @@ function App() {
     handleGetGrades(currentStudent.id, el.id)
   }
 
- function handleGetFiles() {
-  getFiles(currentStudent.id).then(res => {
-    console.log(res);
-  })
- }
 
   useEffect(() => {
     function closeByEscape(e) {
@@ -289,6 +293,7 @@ function App() {
                       onOpenAddStudents={openAddStudentsPopup}
                       onOpenDelete={openDeleteStudentsPopup}
                       onChangeStudent={changeStudent}
+                      
                     />
                   </ProtectedRoute>
                 }
@@ -301,6 +306,7 @@ function App() {
                       currentStudent={currentStudent}
                       courses={courses}
                       onChangeCourse={changeCourse}
+                      files={files}
                     />
                   </ProtectedRoute>
                 }

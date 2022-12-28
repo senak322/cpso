@@ -5,7 +5,7 @@ import { BiArrowBack } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import CourseName from '../components/CourseName.js';
 
-function StudentInfo({ currentStudent, courses, onChangeCourse }) {
+function StudentInfo({ currentStudent, courses, onChangeCourse, files }) {
   const navigate = useNavigate();
   
 
@@ -48,6 +48,25 @@ function StudentInfo({ currentStudent, courses, onChangeCourse }) {
                 );
               })
             : "Нет доступных курсов"}
+        </ul>
+        
+      </div>
+      <div className="home__wrapper home__container">
+        <h2 className="home__title home__title_type_student">
+          Доступные справки
+        </h2>
+        
+        <ul className="home__description home__description_type_files">
+          
+          {files
+            ? files.map((el, index) => {
+                return (
+                  <a className="home__link mb-2" key={index} href={el.link}>
+                    {el.type}
+                  </a>
+                );
+              })
+            : "Нет доступных справок"}
         </ul>
         <button className="home__back" type="button" onClick={goBack}>
           <BiArrowBack />
