@@ -35,6 +35,7 @@
 @import url(./blocks/home/__link/home__link.css);
 @import url(./blocks/home/__description/home__description.css);
 @import url(./blocks/home/__description/_type/home__description_type_files.css);
+@import url(./blocks/home/__lesson/home__lesson.css);
 @import url(./blocks/home/__back/home__back.css);
 @import url(./blocks/form/form.css);
 @import url(./blocks/form/__container/form__container.css);

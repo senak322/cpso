@@ -39,7 +39,7 @@ function CourseInfo({ currentStudent, grades }) {
                     {el.modules.map((el) => {
                       return (
                         <li key={el.id}>
-                          <h4>{el.item_name}</h4>
+                          <h4 className="home__lesson mb-3">{el.item_name}</h4>
                           <p>Оценка по пятибалльной системе: {el.grade}</p>
                           <p>Оценка в баллах: {el.points}</p>
                         </li>

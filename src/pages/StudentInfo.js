@@ -61,7 +61,7 @@ function StudentInfo({ currentStudent, courses, onChangeCourse, files }) {
           {files
             ? files.map((el, index) => {
                 return (
-                  <a className="home__link mb-2" key={index} href={el.link}>
+                  <a className="home__link mb-2" target="_blank" key={index} href={el.link}>
                     {el.type}
                   </a>
                 );
