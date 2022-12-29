@@ -2,7 +2,7 @@ import personImg from "../images/person2.png";
 import { BiArrowBack } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 
-function CourseInfo({ currentStudent, grades }) {
+function CourseInfo({ currentStudent, grades, files }) {
   const navigate = useNavigate();
 
   const goBack = () => {
@@ -27,6 +27,10 @@ function CourseInfo({ currentStudent, grades }) {
         <h2 className="home__title">Предметы и оценки</h2>
       </div>
       <div className="home__wrapper home__container">
+      <button className="home__back" type="button" onClick={goBack}>
+          <BiArrowBack />
+          Назад
+        </button>
         <ul className="home__description">
           {grades.grades ? (
             grades.grades.map((el) => {
@@ -53,6 +57,50 @@ function CourseInfo({ currentStudent, grades }) {
             <p>Оценок ещё нет</p>
           )}
         </ul>
+        <div className="home__files-container">
+          <ul className="home__description home__description_type_files">
+            <h4 className="home__title_type_student">
+              Справки о прикреплении к школе:
+            </h4>
+            {files
+              ? files.map((el, index) => {
+                  if (el.type_id === "attach")
+                    return (
+                      <li key={index}>
+                        <a
+                          className="home__link mb-2"
+                          target="_blank"
+                          href={el.link}
+                        >
+                          {el.type}
+                        </a>
+                      </li>
+                    );
+                })
+              : "Нет доступных справок"}
+          </ul>
+          <ul className="home__description home__description_type_files">
+            <h4 className="home__title_type_student">Справки об аттестации:</h4>
+            {files
+              ? files.map((el, index) => {
+                  if (el.type_id === "attestation") {
+                    return (
+                      <li key={index}>
+                        <a
+                          className="home__link mb-2"
+                          target="_blank"
+                          href={el.link}
+                        >
+                          {el.type}
+                        </a>
+                      </li>
+                    );
+                  }
+                })
+              : "Нет доступных справок"}
+          </ul>
+        </div>
+
         <button className="home__back" type="button" onClick={goBack}>
           <BiArrowBack />
           Назад

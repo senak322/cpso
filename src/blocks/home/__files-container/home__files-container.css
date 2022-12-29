@@ -1,0 +1,13 @@
+.home__files-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+
+
+@media screen and (max-width: 1028px) {
+    .home__files-container {
+        flex-direction: column;
+    }
+  }

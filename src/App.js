@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Layout from "./components/Layout.js";
@@ -24,12 +24,14 @@ import {
   updateUser,
   getCourses,
   getGrades,
-  getFiles
+  getFiles,
+  getCourseFiles,
 } from "./utils/auth.js";
 import { CurrentUserContext } from "./contexts/CurrentUserContext.js";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
   const [isAuthOk, setIsAuthOk] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -48,6 +50,7 @@ function App() {
   const [addErr, setAddErr] = useState("");
   const [grades, setGrades] = useState([]);
   const [files, setFiles] = useState([]);
+  const [courseFiles, setCourseFiles] = useState([]);
   const history = useNavigate();
 
   const isOpen =
@@ -97,17 +100,44 @@ function App() {
   }
 
   function handleGetFiles(id) {
-    getFiles(id).then(res => {
+    getFiles(id).then((res) => {
       console.log(res);
       setFiles(res.files);
-    })
-   }
+    });
+  }
 
   function changeStudent(el) {
     setCurrentStudent(el);
     handleGetCourses(el.id);
-    handleGetFiles(el.id)
+    handleGetFiles(el.id);
   }
+
+  const cbTokenCheck = useCallback(() => {
+    setLoading(true);
+    const token = localStorage.getItem("token");
+    if (!token) {
+      throw new Error("No token in storage");
+    }
+
+    getContent(token)
+      .then((res) => {
+        if (res) {
+          setLoggedIn(true);
+          history("/home/user-info");
+          setCurrentUser({
+            id: res.data.id,
+            name: res.data.name,
+            email: res.data.email,
+          });
+          setStudents(res.students);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    setLoading(false);
+  }, []);
 
   function tokenCheck() {
     const token = localStorage.getItem("token");
@@ -234,16 +264,31 @@ function App() {
   }
 
   function handleGetGrades(studentId, courseId) {
-    getGrades(studentId, courseId).then(res => {
-      console.log(res);
-      setGrades(res);
-    })
+    getGrades(studentId, courseId)
+      .then((res) => {
+        console.log(res);
+        setGrades(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function handleGetCourseFiles(studentId, courseNum) {
+    getCourseFiles(studentId, courseNum)
+      .then((res) => {
+        console.log(res);
+        setCourseFiles(res.files);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function changeCourse(el) {
-    handleGetGrades(currentStudent.id, el.id)
+    handleGetGrades(currentStudent.id, el.id);
+    handleGetCourseFiles(currentStudent.id, el.class_number);
   }
-
 
   useEffect(() => {
     function closeByEscape(e) {
@@ -261,7 +306,8 @@ function App() {
   }, [isOpen]);
 
   useEffect(() => {
-    tokenCheck();
+    cbTokenCheck();
+    // tokenCheck();
   }, []);
 
   return (
@@ -293,7 +339,6 @@ function App() {
                       onOpenAddStudents={openAddStudentsPopup}
                       onOpenDelete={openDeleteStudentsPopup}
                       onChangeStudent={changeStudent}
-                      
                     />
                   </ProtectedRoute>
                 }
@@ -311,15 +356,19 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-                <Route
-                  path="course:classid"
-                  element={
-                    <ProtectedRoute loggedIn={loggedIn}>
-                      <CourseInfo currentStudent={currentStudent} getGrades={handleGetGrades} grades={grades}/>
-                    </ProtectedRoute>
-                  }
-                />
-              
+              <Route
+                path="course:classid"
+                element={
+                  <ProtectedRoute loggedIn={loggedIn}>
+                    <CourseInfo
+                      currentStudent={currentStudent}
+                      getGrades={handleGetGrades}
+                      grades={grades}
+                      files={courseFiles}
+                    />
+                  </ProtectedRoute>
+                }
+              />
 
               <Route
                 path="settings"
