@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import SpinnerMain from "./components/SpinnerMain.js";
 import Layout from "./components/Layout.js";
 import Settings from "./pages/Settings.js";
 import UserInfo from "./pages/UserInfo.js";
@@ -29,9 +30,10 @@ import {
 } from "./utils/auth.js";
 import { CurrentUserContext } from "./contexts/CurrentUserContext.js";
 
+
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [pageLoading, setPageLoading] = useState(true);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
   const [isAuthOk, setIsAuthOk] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -112,34 +114,37 @@ function App() {
     handleGetFiles(el.id);
   }
 
-  const cbTokenCheck = useCallback(() => {
-    setLoading(true);
-    const token = localStorage.getItem("token");
-    if (!token) {
-      throw new Error("No token in storage");
-    }
+  // const cbTokenCheck = useCallback(() => {
+  //   setPageLoading(true);
+  //   const token = localStorage.getItem("token");
+  //   if (!token) {
+  //     throw new Error("No token in storage");
+  //   }
 
-    getContent(token)
-      .then((res) => {
-        if (res) {
-          setLoggedIn(true);
-          history("/home/user-info");
-          setCurrentUser({
-            id: res.data.id,
-            name: res.data.name,
-            email: res.data.email,
-          });
-          setStudents(res.students);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  //   getContent(token)
+  //     .then((res) => {
+  //       if (res) {
+  //         setLoggedIn(true);
+  //         history("/home/user-info");
+  //         setCurrentUser({
+  //           id: res.data.id,
+  //           name: res.data.name,
+  //           email: res.data.email,
+  //         });
+  //         setStudents(res.students);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     })
+  //     .finally(() => {
+  //       setPageLoading(false);
+  //     })
 
-    setLoading(false);
-  }, []);
+  // }, []);
 
   function tokenCheck() {
+    setPageLoading(true);
     const token = localStorage.getItem("token");
     if (token) {
       getContent(token)
@@ -157,7 +162,10 @@ function App() {
         })
         .catch((err) => {
           console.log(err);
-        });
+        })
+        .finally(() => {
+          setPageLoading(false);
+        })
     }
   }
 
@@ -239,6 +247,7 @@ function App() {
     updateUser(values.name, values.email, "", token)
       .then((res) => {
         console.log(res.message);
+        // cbTokenCheck();
         tokenCheck();
         closeAllPopups();
       })
@@ -254,6 +263,7 @@ function App() {
     updateUser(currentUser.name, currentUser.email, values.password, token)
       .then((res) => {
         console.log(res.message);
+        // cbTokenCheck();
         tokenCheck();
         closeAllPopups();
       })
@@ -306,144 +316,145 @@ function App() {
   }, [isOpen]);
 
   useEffect(() => {
-    cbTokenCheck();
-    // tokenCheck();
+    // cbTokenCheck();
+    tokenCheck();
   }, []);
 
   return (
-    <>
-      <CurrentUserContext.Provider value={currentUser}>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Layout loggedIn={loggedIn} onLogout={handleLogout} />
-              </>
-            }
-          >
+    pageLoading ? <SpinnerMain /> :
+      <>
+        <CurrentUserContext.Provider value={currentUser}>
+          <Routes>
             <Route
-              path="/home"
+              path="/"
               element={
-                <ProtectedRoute loggedIn={loggedIn}>
-                  <Home />
-                </ProtectedRoute>
+                <>
+                  <Layout loggedIn={loggedIn} onLogout={handleLogout} />
+                </>
               }
             >
               <Route
-                path="user-info"
+                path="/home"
                 element={
-                  <ProtectedRoute loggedIn={loggedIn}>
-                    <UserInfo
-                      students={students}
-                      onOpenAddStudents={openAddStudentsPopup}
-                      onOpenDelete={openDeleteStudentsPopup}
-                      onChangeStudent={changeStudent}
-                    />
+                  <ProtectedRoute loggedIn={loggedIn} >
+                    <Home />
                   </ProtectedRoute>
                 }
-              />
-              <Route
-                path="student:id"
-                element={
-                  <ProtectedRoute loggedIn={loggedIn}>
-                    <StudentInfo
-                      currentStudent={currentStudent}
-                      courses={courses}
-                      onChangeCourse={changeCourse}
-                      files={files}
-                    />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="course:classid"
-                element={
-                  <ProtectedRoute loggedIn={loggedIn}>
-                    <CourseInfo
-                      currentStudent={currentStudent}
-                      getGrades={handleGetGrades}
-                      grades={grades}
-                      files={courseFiles}
-                    />
-                  </ProtectedRoute>
-                }
-              />
+              >
+                <Route
+                  path="user-info"
+                  element={
+                    <ProtectedRoute loggedIn={loggedIn} >
+                      <UserInfo
+                        students={students}
+                        onOpenAddStudents={openAddStudentsPopup}
+                        onOpenDelete={openDeleteStudentsPopup}
+                        onChangeStudent={changeStudent}
+                      />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="student:id"
+                  element={
+                    <ProtectedRoute loggedIn={loggedIn}>
+                      <StudentInfo
+                        currentStudent={currentStudent}
+                        courses={courses}
+                        onChangeCourse={changeCourse}
+                        files={files}
+                      />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="course:classid"
+                  element={
+                    <ProtectedRoute loggedIn={loggedIn}>
+                      <CourseInfo
+                        currentStudent={currentStudent}
+                        getGrades={handleGetGrades}
+                        grades={grades}
+                        files={courseFiles}
+                      />
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="settings"
+                  element={
+                    <ProtectedRoute loggedIn={loggedIn}>
+                      <Settings
+                        onOpenEditName={openEditNamePopup}
+                        onOpenEditPassword={openEditPasswordPopup}
+                      />
+                    </ProtectedRoute>
+                  }
+                />
+              </Route>
 
               <Route
-                path="settings"
+                path="/signin"
                 element={
-                  <ProtectedRoute loggedIn={loggedIn}>
-                    <Settings
-                      onOpenEditName={openEditNamePopup}
-                      onOpenEditPassword={openEditPasswordPopup}
-                    />
-                  </ProtectedRoute>
+                  <SignIn handleLogin={handleLogin} isLoading={isLoading} />
+                }
+              />
+              <Route
+                path="/register"
+                element={
+                  <Register
+                    handleRegister={handleRegister}
+                    isLoading={isLoading}
+                  />
                 }
               />
             </Route>
-
             <Route
-              path="/signin"
+              path="*"
               element={
-                <SignIn handleLogin={handleLogin} isLoading={isLoading} />
+                loggedIn ? (
+                  <Navigate to="/home/user-info" />
+                ) : (
+                  <Navigate to="/signin" />
+                )
               }
             />
-            <Route
-              path="/register"
-              element={
-                <Register
-                  handleRegister={handleRegister}
-                  isLoading={isLoading}
-                />
-              }
-            />
-          </Route>
-          <Route
-            path="*"
-            element={
-              loggedIn ? (
-                <Navigate to="/home/user-info" />
-              ) : (
-                <Navigate to="/signin" />
-              )
-            }
+          </Routes>
+          <AddStudentPopup
+            isOpen={isAddStudentPopupOpen}
+            onClose={closeAllPopups}
+            onSubmit={handleAddStudent}
+            isAddOk={isAddOk}
+            addErr={addErr}
           />
-        </Routes>
-        <AddStudentPopup
-          isOpen={isAddStudentPopupOpen}
-          onClose={closeAllPopups}
-          onSubmit={handleAddStudent}
-          isAddOk={isAddOk}
-          addErr={addErr}
-        />
-        <DeleteStudentPopup
-          isOpen={isDeleteStudentPopupOpen}
-          onClose={closeAllPopups}
-          onSubmit={handleDeleteStudent}
-          isLoading={isLoading}
-        />
-        <EditNamePopup
-          isOpen={isEditNamePopupOpen}
-          onClose={closeAllPopups}
-          onSubmit={handleEditName}
-          addErr={addErr}
-        />
+          <DeleteStudentPopup
+            isOpen={isDeleteStudentPopupOpen}
+            onClose={closeAllPopups}
+            onSubmit={handleDeleteStudent}
+            isLoading={isLoading}
+          />
+          <EditNamePopup
+            isOpen={isEditNamePopupOpen}
+            onClose={closeAllPopups}
+            onSubmit={handleEditName}
+            addErr={addErr}
+          />
 
-        <EditPasswordPopup
-          isOpen={isEditPasswordPopupOpen}
-          onClose={closeAllPopups}
-          onSubmit={handleEditPassword}
-          addErr={addErr}
-        />
-        <InfoTooltip
-          isOpen={isInfoPopupOpen}
-          isOk={isAuthOk}
-          onClose={closeAllPopups}
-          message={isAuthOk ? "" : errMesaage}
-        />
-      </CurrentUserContext.Provider>
-    </>
+          <EditPasswordPopup
+            isOpen={isEditPasswordPopupOpen}
+            onClose={closeAllPopups}
+            onSubmit={handleEditPassword}
+            addErr={addErr}
+          />
+          <InfoTooltip
+            isOpen={isInfoPopupOpen}
+            isOk={isAuthOk}
+            onClose={closeAllPopups}
+            message={isAuthOk ? "" : errMesaage}
+          />
+        </CurrentUserContext.Provider>
+      </>
   );
 }
 
