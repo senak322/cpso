@@ -3,7 +3,7 @@ import React from "react";
 function SpinnerMain() {
     return (
         <div className="animate__container">
-        <h2 class="animate">Загрузка...</h2>
+        <h2 className="animate">Загрузка...</h2>
         </div>
     )
 }
