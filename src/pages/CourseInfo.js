@@ -27,7 +27,7 @@ function CourseInfo({ currentStudent, grades, files }) {
         <h2 className="home__title">Предметы и оценки</h2>
       </div>
       <div className="home__wrapper home__container">
-      <button className="home__back" type="button" onClick={goBack}>
+        <button className="home__back" type="button" onClick={goBack}>
           <BiArrowBack />
           Назад
         </button>
@@ -39,7 +39,7 @@ function CourseInfo({ currentStudent, grades, files }) {
                   <h3>{el.item}</h3>
                   <p>{el.module}</p>
                   <ul>
-                    
+
                     {el.modules.map((el) => {
                       return (
                         <li key={el.id}>
@@ -64,39 +64,39 @@ function CourseInfo({ currentStudent, grades, files }) {
             </h4>
             {files
               ? files.map((el, index) => {
-                  if (el.type_id === "attach")
-                    return (
-                      <li key={index}>
-                        <a
-                          className="home__link mb-2"
-                          target="_blank"
-                          href={el.link}
-                        >
-                          {el.type}
-                        </a>
-                      </li>
-                    );
-                })
+                if (el.type_id === "attach")
+                  return (
+                    <li key={index}>
+                      <a
+                        className="home__link mb-2"
+
+                        href={el.link}
+                      >
+                        {el.type}
+                      </a>
+                    </li>
+                  );
+              })
               : "Нет доступных справок"}
           </ul>
           <ul className="home__description home__description_type_files">
             <h4 className="home__title_type_student">Справки об аттестации:</h4>
             {files
               ? files.map((el, index) => {
-                  if (el.type_id === "attestation") {
-                    return (
-                      <li key={index}>
-                        <a
-                          className="home__link mb-2"
-                          target="_blank"
-                          href={el.link}
-                        >
-                          {el.type}
-                        </a>
-                      </li>
-                    );
-                  }
-                })
+                if (el.type_id === "attestation") {
+                  return (
+                    <li key={index}>
+                      <a
+                        className="home__link mb-2"
+                        target="_blank"
+                        href={el.link}
+                      >
+                        {el.type}
+                      </a>
+                    </li>
+                  );
+                }
+              })
               : "Нет доступных справок"}
           </ul>
         </div>

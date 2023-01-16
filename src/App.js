@@ -320,8 +320,12 @@ function App() {
     tokenCheck();
   }, []);
 
+  if (pageLoading) {
+    return (<SpinnerMain />)
+  }
+
   return (
-    pageLoading ? <SpinnerMain /> :
+    
       <>
         <CurrentUserContext.Provider value={currentUser}>
           <Routes>

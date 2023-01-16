@@ -45,16 +45,16 @@ function StudentInfo({ currentStudent, courses, onChangeCourse, files }) {
           Доступные классы:{" "}
           {courses.courses
             ? courses.courses.map((el) => {
-                return (
-                  <Link
-                    className="home__link"
-                    to={`/home/course${el.id}`}
-                    key={el.id}
-                  >
-                    <CourseName el={el} onChangeCourse={onChangeCourse} />
-                  </Link>
-                );
-              })
+              return (
+                <Link
+                  className="home__link"
+                  to={`/home/course${el.id}`}
+                  key={el.id}
+                >
+                  <CourseName el={el} onChangeCourse={onChangeCourse} />
+                </Link>
+              );
+            })
             : "Нет доступных курсов"}
         </ul>
       </div>
@@ -69,39 +69,39 @@ function StudentInfo({ currentStudent, courses, onChangeCourse, files }) {
             </h4>
             {files
               ? files.map((el, index) => {
-                  if (el.type_id === "attach")
-                    return (
-                      <li key={index}>
-                        <a
-                          className="home__link mb-2"
-                          target="_blank"
-                          href={el.link}
-                        >
-                          {el.type}
-                        </a>
-                      </li>
-                    );
-                })
+                if (el.type_id === "attach") {
+                  return (
+                    <li key={index}>
+                      <a
+                        className="home__link mb-2"
+                        href={el.link}
+                      >
+                        {el.type}
+                      </a>
+                    </li>
+                  );
+                } return null;
+              })
               : "Нет доступных справок"}
           </ul>
           <ul className="home__description home__description_type_files">
             <h4 className="home__title_type_student">Справки об аттестации:</h4>
             {files
               ? files.map((el, index) => {
-                  if (el.type_id === "attestation") {
-                    return (
-                      <li key={index}>
-                        <a
-                          className="home__link mb-2"
-                          target="_blank"
-                          href={el.link}
-                        >
-                          {el.type}
-                        </a>
-                      </li>
-                    );
-                  }
-                })
+                if (el.type_id === "attestation") {
+                  return (
+                    <li key={index}>
+                      <a
+                        className="home__link mb-2"
+
+                        href={el.link}
+                      >
+                        {el.type}
+                      </a>
+                    </li>
+                  );
+                } return null;
+              })
               : "Нет доступных справок"}
           </ul>
         </div>

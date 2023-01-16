@@ -25,7 +25,7 @@ function Header(props) {
                 className="header__logout"
                 onClick={props.onLogout}
               >
-                <img className="header__logout_img" src={logout}></img>Выйти
+                <img className="header__logout_img" alt="Выйти" src={logout}></img>Выйти
               </button>
             </div>
           ) : (
