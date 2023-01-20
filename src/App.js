@@ -3,6 +3,9 @@ import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SpinnerMain from "./components/SpinnerMain.js";
 import Layout from "./components/Layout.js";
+import books from "./images/books.jpg";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import Settings from "./pages/Settings.js";
 import UserInfo from "./pages/UserInfo.js";
 import StudentInfo from "./pages/StudentInfo.js";
@@ -176,7 +179,7 @@ function App() {
         if (res.token) {
           tokenCheck();
           setLoggedIn(true);
-          history("/user-info");
+          history("/home/user-info");
         }
       })
       .catch((err) => {
@@ -320,23 +323,31 @@ function App() {
     tokenCheck();
   }, []);
 
-  if (pageLoading) {
-    return (<SpinnerMain />)
-  }
+  // if (pageLoading) {
+  //   return (<SpinnerMain />)
+  // } 
 
   return (
-    
-      <>
+
+    <>
+      <Header loggedIn={loggedIn} onLogout={handleLogout} />
+
+      <main
+        className={`main ${loggedIn ? "main__loggined" : ""}`}
+        style={{ backgroundImage: `url(${books})` }}
+      >
+
+
         <CurrentUserContext.Provider value={currentUser}>
           <Routes>
-            <Route
+            {/* <Route
               path="/"
               element={
                 <>
                   <Layout loggedIn={loggedIn} onLogout={handleLogout} />
                 </>
               }
-            >
+            > */}
               <Route
                 path="/home"
                 element={
@@ -401,7 +412,7 @@ function App() {
               <Route
                 path="/signin"
                 element={
-                  <SignIn handleLogin={handleLogin} isLoading={isLoading} />
+                  <SignIn handleLogin={handleLogin} isLoading={isLoading} loggedIn={loggedIn} />
                 }
               />
               <Route
@@ -413,7 +424,17 @@ function App() {
                   />
                 }
               />
-            </Route>
+            {/* </Route> */}
+            <Route
+              path="/"
+              element={
+                loggedIn ? (
+                  <Navigate to="/home/user-info" />
+                ) : (
+                  <Navigate to="/signin" />
+                )
+              }
+            />
             <Route
               path="*"
               element={
@@ -458,7 +479,9 @@ function App() {
             message={isAuthOk ? "" : errMesaage}
           />
         </CurrentUserContext.Provider>
-      </>
+      </main>
+      <Footer />
+    </>
   );
 }
 

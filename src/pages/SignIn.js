@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import useFormAndValidation from "../utils/useFormAndValidation.js";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 function SignIn(props) {
   const formValues = {
@@ -23,6 +23,12 @@ function SignIn(props) {
   React.useEffect(() => {
     setValues(formValues);
   }, []);
+
+  if (props.loggedIn) {
+    return (
+      <Navigate to="/home/user-info" />
+    )
+  }
 
   return (
     <div className="form__container">

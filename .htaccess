@@ -1,0 +1,10 @@
+Options All -Indexes
+Options -MultiViews
+AddType application/x-httpd-php .php .html
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule ^ index.html [QSA,L]
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
