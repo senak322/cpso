@@ -33,7 +33,6 @@ import {
 } from "./utils/auth.js";
 import { CurrentUserContext } from "./contexts/CurrentUserContext.js";
 
-
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
@@ -92,11 +91,6 @@ function App() {
     setIsEditPasswordPopupOpen(true);
   }
 
-  function handleAuth(bool) {
-    setIsInfoPopupOpen(!isInfoPopupOpen);
-    setIsAuthOk(bool);
-  }
-
   function handleGetCourses(studentId) {
     getCourses(studentId).then((res) => {
       console.log(res);
@@ -113,8 +107,16 @@ function App() {
 
   function changeStudent(el) {
     setCurrentStudent(el);
-    handleGetCourses(el.id);
-    handleGetFiles(el.id);
+    console.log(el);
+    localStorage.setItem("currentStudent", JSON.stringify(el));
+    getCoursesAndFiles(el.id);
+    // handleGetCourses(el.id);
+    // handleGetFiles(el.id);
+  }
+
+  function getCoursesAndFiles(id) {
+    handleGetCourses(id);
+    handleGetFiles(id);
   }
 
   // const cbTokenCheck = useCallback(() => {
@@ -154,7 +156,7 @@ function App() {
         .then((res) => {
           if (res) {
             setLoggedIn(true);
-            history("/home/user-info");
+
             setCurrentUser({
               id: res.data.id,
               name: res.data.name,
@@ -168,7 +170,7 @@ function App() {
         })
         .finally(() => {
           setPageLoading(false);
-        })
+        });
     }
   }
 
@@ -184,7 +186,8 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-        handleAuth(false);
+        setIsAuthOk(false);
+        setIsInfoPopupOpen(true);
         setErrMessage(err);
       })
       .finally(() => {
@@ -194,14 +197,14 @@ function App() {
 
   function handleRegister(name, email) {
     setIsLoading(true);
-    debugger;
     register(name, email)
       .then((res) => {
         history("/signin");
         console.log(res);
       })
       .catch((err) => {
-        handleAuth(false);
+        setIsAuthOk(false);
+        setIsInfoPopupOpen(true);
         setErrMessage(err);
         console.log(err);
       })
@@ -323,12 +326,11 @@ function App() {
     tokenCheck();
   }, []);
 
-  // if (pageLoading) {
-  //   return (<SpinnerMain />)
-  // } 
+  if (pageLoading) {
+    return <SpinnerMain />;
+  }
 
   return (
-
     <>
       <Header loggedIn={loggedIn} onLogout={handleLogout} />
 
@@ -336,95 +338,91 @@ function App() {
         className={`main ${loggedIn ? "main__loggined" : ""}`}
         style={{ backgroundImage: `url(${books})` }}
       >
-
-
         <CurrentUserContext.Provider value={currentUser}>
           <Routes>
-            {/* <Route
-              path="/"
+            <Route
+              path="/home"
               element={
-                <>
-                  <Layout loggedIn={loggedIn} onLogout={handleLogout} />
-                </>
+                <ProtectedRoute loggedIn={loggedIn}>
+                  <Home />
+                </ProtectedRoute>
               }
-            > */}
+            >
               <Route
-                path="/home"
+                path="user-info"
                 element={
-                  <ProtectedRoute loggedIn={loggedIn} >
-                    <Home />
+                  <ProtectedRoute loggedIn={loggedIn}>
+                    <UserInfo
+                      students={students}
+                      onOpenAddStudents={openAddStudentsPopup}
+                      onOpenDelete={openDeleteStudentsPopup}
+                      onChangeStudent={changeStudent}
+                    />
                   </ProtectedRoute>
                 }
-              >
-                <Route
-                  path="user-info"
-                  element={
-                    <ProtectedRoute loggedIn={loggedIn} >
-                      <UserInfo
-                        students={students}
-                        onOpenAddStudents={openAddStudentsPopup}
-                        onOpenDelete={openDeleteStudentsPopup}
-                        onChangeStudent={changeStudent}
-                      />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="student:id"
-                  element={
-                    <ProtectedRoute loggedIn={loggedIn}>
-                      <StudentInfo
-                        currentStudent={currentStudent}
-                        courses={courses}
-                        onChangeCourse={changeCourse}
-                        files={files}
-                      />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="course:classid"
-                  element={
-                    <ProtectedRoute loggedIn={loggedIn}>
-                      <CourseInfo
-                        currentStudent={currentStudent}
-                        getGrades={handleGetGrades}
-                        grades={grades}
-                        files={courseFiles}
-                      />
-                    </ProtectedRoute>
-                  }
-                />
-
-                <Route
-                  path="settings"
-                  element={
-                    <ProtectedRoute loggedIn={loggedIn}>
-                      <Settings
-                        onOpenEditName={openEditNamePopup}
-                        onOpenEditPassword={openEditPasswordPopup}
-                      />
-                    </ProtectedRoute>
-                  }
-                />
-              </Route>
-
+              />
               <Route
-                path="/signin"
+                path="student:id"
                 element={
-                  <SignIn handleLogin={handleLogin} isLoading={isLoading} loggedIn={loggedIn} />
+                  <ProtectedRoute loggedIn={loggedIn}>
+                    <StudentInfo
+                      currentStudent={currentStudent}
+                      courses={courses}
+                      onChangeCourse={changeCourse}
+                      files={files}
+                      onLoading={getCoursesAndFiles}
+                      students={students}
+                    />
+                  </ProtectedRoute>
                 }
               />
               <Route
-                path="/register"
+                path="course:classid"
                 element={
-                  <Register
-                    handleRegister={handleRegister}
-                    isLoading={isLoading}
-                  />
+                  <ProtectedRoute loggedIn={loggedIn}>
+                    <CourseInfo
+                      currentStudent={currentStudent}
+                      getGrades={handleGetGrades}
+                      grades={grades}
+                      files={courseFiles}
+                    />
+                  </ProtectedRoute>
                 }
               />
-            {/* </Route> */}
+
+              <Route
+                path="settings"
+                element={
+                  <ProtectedRoute loggedIn={loggedIn}>
+                    <Settings
+                      onOpenEditName={openEditNamePopup}
+                      onOpenEditPassword={openEditPasswordPopup}
+                    />
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
+
+            <Route
+              path="/signin"
+              element={
+                <SignIn
+                  handleLogin={handleLogin}
+                  isLoading={isLoading}
+                  loggedIn={loggedIn}
+                />
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <Register
+                  handleRegister={handleRegister}
+                  isLoading={isLoading}
+                />
+              }
+            />
+
             <Route
               path="/"
               element={

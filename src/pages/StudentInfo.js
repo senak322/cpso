@@ -1,29 +1,38 @@
-import React from "react";
+import {useEffect} from "react";
 import personImg from "../images/person2.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import CourseName from "../components/CourseName.js";
 
-function StudentInfo({ currentStudent, courses, onChangeCourse, files }) {
+function StudentInfo({ currentStudent, courses, onChangeCourse, files, onLoading, students }) {
   const navigate = useNavigate();
+
+  let { id } = useParams();
+
+  
+  const studentEl = JSON.parse(localStorage.getItem("currentStudent"))
+  console.log(studentEl);
 
   const goBack = () => {
     navigate(-1);
   };
 
-  console.log(currentStudent);
+  useEffect(() => {
+    onLoading(id)
+  }, [id])
+
 
   return (
     <section className="home">
       <div className="home__wrapper">
         <img className="home__user-image" src={personImg} alt="user"></img>
         <h1 className="home__user-name">
-          {currentStudent.lastname +
+          {studentEl.lastname +  
             " " +
-            currentStudent.firstname +
+            studentEl.firstname +
             " " +
-            currentStudent.middlename}
+            studentEl.middlename}
         </h1>
       </div>
 
@@ -35,11 +44,11 @@ function StudentInfo({ currentStudent, courses, onChangeCourse, files }) {
         <h2 className="home__title home__title_type_student">
           Информация об ученике
         </h2>
-        <p className="home__description">Школа: {currentStudent.institution}</p>
-        <p className="home__description">E-mail: {currentStudent.username}</p>
-        <p className="home__description">Классы: {currentStudent.department}</p>
+        <p className="home__description">Школа: {studentEl.institution}</p>
+        <p className="home__description">E-mail: {studentEl.username}</p>
+        <p className="home__description">Классы: {studentEl.department}</p>
         <p className="home__description">
-          Текущий класс: {currentStudent.current_class}
+          Текущий класс: {studentEl.current_class}
         </p>
         <ul className="home__description">
           Доступные классы:{" "}
