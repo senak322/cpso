@@ -1,26 +1,35 @@
 import personImg from "../images/person2.png";
 import { BiArrowBack } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import {useEffect} from "react";
 
-function CourseInfo({ currentStudent, grades, files }) {
+function CourseInfo({  grades, files, onLoading }) {
   const navigate = useNavigate();
+
+  let { classid } = useParams();
 
   const goBack = () => {
     navigate(-1);
   };
+  
 
-  console.log(grades);
+  const studentEl = JSON.parse(localStorage.getItem("currentStudent"));
+  const courseEl = JSON.parse(localStorage.getItem("currentCourse"));
+
+  useEffect(() => {
+    onLoading(courseEl, classid)
+  }, [])
 
   return (
     <section className="home">
       <div className="home__wrapper">
         <img className="home__user-image" src={personImg} alt="user"></img>
         <h1 className="home__user-name">
-          {currentStudent.lastname +
+          {studentEl.lastname +
             " " +
-            currentStudent.firstname +
+            studentEl.firstname +
             " " +
-            currentStudent.middlename}
+            studentEl.middlename}
         </h1>
       </div>
       <div className="home__wrapper home__container">

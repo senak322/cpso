@@ -5,7 +5,7 @@ import { BiArrowBack } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import CourseName from "../components/CourseName.js";
 
-function StudentInfo({ currentStudent, courses, onChangeCourse, files, onLoading, students }) {
+function StudentInfo({ currentStudent, courses, onChangeCourse, files, onLoading }) {
   const navigate = useNavigate();
 
   let { id } = useParams();

@@ -302,9 +302,30 @@ function App() {
   }
 
   function changeCourse(el) {
-    handleGetGrades(currentStudent.id, el.id);
-    handleGetCourseFiles(currentStudent.id, el.class_number);
+    localStorage.setItem("currentCourse", JSON.stringify(el));
+    getGradesAndFiles(el)
   }
+
+  function getGradesAndFiles(el, id) {
+    const studentEl = JSON.parse(localStorage.getItem("currentStudent"));
+    console.log(studentEl);
+    handleGetGrades(studentEl.id, id);
+    handleGetCourseFiles(studentEl.id, el.class_number);
+  }
+
+  // function changeStudent(el) {
+  //   setCurrentStudent(el);
+  //   console.log(el);
+  //   localStorage.setItem("currentStudent", JSON.stringify(el));
+  //   getCoursesAndFiles(el.id);
+  //   // handleGetCourses(el.id);
+  //   // handleGetFiles(el.id);
+  // }
+
+  // function getCoursesAndFiles(id) {
+  //   handleGetCourses(id);
+  //   handleGetFiles(id);
+  // }
 
   useEffect(() => {
     function closeByEscape(e) {
@@ -371,7 +392,7 @@ function App() {
                       onChangeCourse={changeCourse}
                       files={files}
                       onLoading={getCoursesAndFiles}
-                      students={students}
+                      
                     />
                   </ProtectedRoute>
                 }
@@ -385,6 +406,7 @@ function App() {
                       getGrades={handleGetGrades}
                       grades={grades}
                       files={courseFiles}
+                      onLoading={getGradesAndFiles}
                     />
                   </ProtectedRoute>
                 }
