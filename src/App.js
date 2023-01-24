@@ -171,7 +171,10 @@ function App() {
         .finally(() => {
           setPageLoading(false);
         });
+    } else {
+      setPageLoading(false);
     }
+    
   }
 
   function handleLogin(email, password) {
@@ -343,15 +346,16 @@ function App() {
   }, [isOpen]);
 
   useEffect(() => {
-    // cbTokenCheck();
     tokenCheck();
-  }, []);
+  }, []);  
 
   if (pageLoading) {
     return <SpinnerMain />;
-  }
+  } 
 
   return (
+    
+
     <>
       <Header loggedIn={loggedIn} onLogout={handleLogout} />
 
