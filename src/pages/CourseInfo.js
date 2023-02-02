@@ -10,11 +10,16 @@ function CourseInfo({  grades, files, onLoading }) {
   const courseEl = JSON.parse(localStorage.getItem("currentCourse"));
 
   function havefiles(type) {
+    console.log(files);
     function haveNeededType(el) {
-      return el.type_id === type
+      return el.type_id === type;
     }
 
-    return files.some(haveNeededType)
+    if (files === undefined) {
+      return null;
+    } else {
+      return files.some(haveNeededType);
+    } 
   }
 
   useEffect(() => {

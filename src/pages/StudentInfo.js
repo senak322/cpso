@@ -13,13 +13,11 @@ function StudentInfo({ courses, onChangeCourse, files, onLoading }) {
 
   function havefiles(type) {
   
-    console.log(files);
-
     function haveNeededType(el) {
       return el.type_id === type;
     }
 
-    if (files.length === 0) {
+    if (files === undefined) {
       return null;
     } else {
       return files.some(haveNeededType);
