@@ -1,46 +1,44 @@
-import {useEffect} from "react";
-import personImg from "../images/person2.png";
-import { useNavigate, useParams } from "react-router-dom";
-import { BiArrowBack } from "react-icons/bi";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import CourseName from "../components/CourseName.js";
+import UserHeader from "../components/UserHeader";
+import BackButton from "../components/BackButton";
 
-function StudentInfo({ currentStudent, courses, onChangeCourse, files, onLoading }) {
-  const navigate = useNavigate();
-
+function StudentInfo({ courses, onChangeCourse, files, onLoading }) {
   let { id } = useParams();
 
-  
-  const studentEl = JSON.parse(localStorage.getItem("currentStudent"))
+  const studentEl = JSON.parse(localStorage.getItem("currentStudent"));
   console.log(studentEl);
 
-  const goBack = () => {
-    navigate(-1);
-  };
+  function havefiles(type) {
+  
+    console.log(files);
+
+    function haveNeededType(el) {
+      return el.type_id === type;
+    }
+
+    if (files.length === 0) {
+      return null;
+    } else {
+      return files.some(haveNeededType);
+    }
+    
+  }
 
   useEffect(() => {
-    onLoading(id)
-  }, [id])
-
+    onLoading(id);
+  }, [id]);
 
   return (
     <section className="home">
-      <div className="home__wrapper">
-        <img className="home__user-image" src={personImg} alt="user"></img>
-        <h1 className="home__user-name">
-          {studentEl.lastname +  
-            " " +
-            studentEl.firstname +
-            " " +
-            studentEl.middlename}
-        </h1>
-      </div>
-
+      <UserHeader />
+      <Link to={`/home/student${id}/register`}>
+        Зарегистрировать ученика в учебной программе
+      </Link>
       <div className="home__wrapper home__container">
-        <button className="home__back" type="button" onClick={goBack}>
-          <BiArrowBack />
-          Назад
-        </button>
+        <BackButton />
         <h2 className="home__title home__title_type_student">
           Информация об ученике
         </h2>
@@ -54,16 +52,16 @@ function StudentInfo({ currentStudent, courses, onChangeCourse, files, onLoading
           Доступные классы:{" "}
           {courses.courses
             ? courses.courses.map((el) => {
-              return (
-                <Link
-                  className="home__link"
-                  to={`/home/course${el.id}`}
-                  key={el.id}
-                >
-                  <CourseName el={el} onChangeCourse={onChangeCourse} />
-                </Link>
-              );
-            })
+                return (
+                  <Link
+                    className="home__link"
+                    to={`/home/course${el.id}`}
+                    key={el.id}
+                  >
+                    <CourseName el={el} onChangeCourse={onChangeCourse} />
+                  </Link>
+                );
+              })
             : "Нет доступных курсов"}
         </ul>
       </div>
@@ -76,48 +74,41 @@ function StudentInfo({ currentStudent, courses, onChangeCourse, files, onLoading
             <h4 className="home__title_type_student">
               Справки о прикреплении к школе:
             </h4>
-            {files
+            {havefiles("attach")
               ? files.map((el, index) => {
-                if (el.type_id === "attach") {
-                  return (
-                    <li key={index}>
-                      <a
-                        className="home__link mb-2"
-                        href={el.link}
-                      >
-                        {el.type}
-                      </a>
-                    </li>
-                  );
-                } return null;
-              })
+                  if (el.type_id === "attach") {
+                    return (
+                      <li key={index}>
+                        <a className="home__link mb-2" href={el.link}>
+                          {el.type}
+                        </a>
+                      </li>
+                    );
+                  } else {
+                    return null;
+                  }
+                })
               : "Нет доступных справок"}
           </ul>
           <ul className="home__description home__description_type_files">
             <h4 className="home__title_type_student">Справки об аттестации:</h4>
-            {files
+            {havefiles("attestation")
               ? files.map((el, index) => {
-                if (el.type_id === "attestation") {
-                  return (
-                    <li key={index}>
-                      <a
-                        className="home__link mb-2"
-
-                        href={el.link}
-                      >
-                        {el.type}
-                      </a>
-                    </li>
-                  );
-                } return null;
-              })
+                  if (el.type_id === "attestation") {
+                    return (
+                      <li key={index}>
+                        <a className="home__link mb-2" href={el.link}>
+                          {el.type}
+                        </a>
+                      </li>
+                    );
+                  }
+                  return null;
+                })
               : "Нет доступных справок"}
           </ul>
         </div>
-        <button className="home__back" type="button" onClick={goBack}>
-          <BiArrowBack />
-          Назад
-        </button>
+        <BackButton />
       </div>
     </section>
   );

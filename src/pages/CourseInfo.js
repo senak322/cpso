@@ -1,45 +1,34 @@
-import personImg from "../images/person2.png";
-import { BiArrowBack } from "react-icons/bi";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {useEffect} from "react";
+import UserHeader from "../components/UserHeader";
+import BackButton from "../components/BackButton";
 
 function CourseInfo({  grades, files, onLoading }) {
-  const navigate = useNavigate();
-
-  let { classid } = useParams();
-
-  const goBack = () => {
-    navigate(-1);
-  };
   
-
-  const studentEl = JSON.parse(localStorage.getItem("currentStudent"));
+  let { classid } = useParams();
+  
   const courseEl = JSON.parse(localStorage.getItem("currentCourse"));
+
+  function havefiles(type) {
+    function haveNeededType(el) {
+      return el.type_id === type
+    }
+
+    return files.some(haveNeededType)
+  }
 
   useEffect(() => {
     onLoading(courseEl, classid)
-  }, [])
+  }, [classid])
 
   return (
     <section className="home">
-      <div className="home__wrapper">
-        <img className="home__user-image" src={personImg} alt="user"></img>
-        <h1 className="home__user-name">
-          {studentEl.lastname +
-            " " +
-            studentEl.firstname +
-            " " +
-            studentEl.middlename}
-        </h1>
-      </div>
+      <UserHeader />
       <div className="home__wrapper home__container">
         <h2 className="home__title">Предметы и оценки</h2>
       </div>
       <div className="home__wrapper home__container">
-        <button className="home__back" type="button" onClick={goBack}>
-          <BiArrowBack />
-          Назад
-        </button>
+        <BackButton />
         <ul className="home__description">
           {grades.grades ? (
             grades.grades.map((el) => {
@@ -71,7 +60,7 @@ function CourseInfo({  grades, files, onLoading }) {
             <h4 className="home__title_type_student">
               Справки о прикреплении к школе:
             </h4>
-            {files
+            { havefiles("attach")
               ? files.map((el, index) => {
                 if (el.type_id === "attach")
                   return (
@@ -90,7 +79,7 @@ function CourseInfo({  grades, files, onLoading }) {
           </ul>
           <ul className="home__description home__description_type_files">
             <h4 className="home__title_type_student">Справки об аттестации:</h4>
-            {files
+            { havefiles("attestation")
               ? files.map((el, index) => {
                 if (el.type_id === "attestation") {
                   return (
@@ -99,21 +88,19 @@ function CourseInfo({  grades, files, onLoading }) {
                         className="home__link mb-2"
                         target="_blank"
                         href={el.link}
+                        rel="noreferrer"
                       >
                         {el.type}
                       </a>
                     </li>
                   );
-                }
+                } return null;
               })
               : "Нет доступных справок"}
           </ul>
         </div>
 
-        <button className="home__back" type="button" onClick={goBack}>
-          <BiArrowBack />
-          Назад
-        </button>
+        <BackButton />
       </div>
     </section>
   );
