@@ -12,7 +12,6 @@ function StudentInfo({ courses, onChangeCourse, files, onLoading }) {
   console.log(studentEl);
 
   function havefiles(type) {
-  
     function haveNeededType(el) {
       return el.type_id === type;
     }
@@ -22,7 +21,6 @@ function StudentInfo({ courses, onChangeCourse, files, onLoading }) {
     } else {
       return files.some(haveNeededType);
     }
-    
   }
 
   useEffect(() => {
@@ -32,11 +30,12 @@ function StudentInfo({ courses, onChangeCourse, files, onLoading }) {
   return (
     <section className="home">
       <UserHeader />
-      <Link to={`/home/student${id}/register`}>
-        Зарегистрировать ученика в учебной программе
-      </Link>
+
       <div className="home__wrapper home__container">
         <BackButton />
+        <Link className="home__add-student home__link home__regiser" to={`/home/registerstudent`}>
+          Зарегистрировать ученика в учебной программе
+        </Link>
         <h2 className="home__title home__title_type_student">
           Информация об ученике
         </h2>

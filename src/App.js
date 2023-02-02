@@ -18,6 +18,7 @@ import EditPasswordPopup from "./components/EditPasswordPopup.js";
 import Home from "./pages/Home.js";
 import CourseInfo from "./pages/CourseInfo.js";
 import ProtectedRoute from "./components/ProtectedRoute.js";
+import RegisterStudent from "./pages/RegisterStudent";
 import {
   login,
   getContent,
@@ -397,6 +398,14 @@ function App() {
                       onLoading={getCoursesAndFiles}
                       
                     />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="registerstudent"
+                element={
+                  <ProtectedRoute loggedIn={loggedIn}>
+                    <RegisterStudent />
                   </ProtectedRoute>
                 }
               />

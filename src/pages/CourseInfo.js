@@ -42,7 +42,6 @@ function CourseInfo({  grades, files, onLoading }) {
                   <h3>{el.item}</h3>
                   <p>{el.module}</p>
                   <ul>
-
                     {el.modules.map((el) => {
                       return (
                         <li key={el.id}>

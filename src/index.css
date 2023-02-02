@@ -40,6 +40,7 @@
 @import url(./blocks/home/__lesson/home__lesson.css);
 @import url(./blocks/home/__files-container/home__files-container.css);
 @import url(./blocks/home/__back/home__back.css);
+@import url(./blocks/home/__regiser/home__regiser.css);
 @import url(./blocks/form/form.css);
 @import url(./blocks/form/__container/form__container.css);
 @import url(./blocks/form/__container/_submit/form__container_submit.css);
@@ -49,6 +50,8 @@
 @import url(./blocks/form/__error/form__error.css);
 @import url(./blocks/form/__error/_type/form__error_type_active.css);
 @import url(./blocks/form/__discription/form__discription.css);
+@import url(./blocks/regiser/regiser.css);
+@import url(./blocks/regiser/__form/regiser__form.css);
 @import url(./blocks/footer/footer.css);
 @import url(./blocks/footer/__container/footer__container.css);
 @import url(./blocks/footer/__nav/footer__nav.css);

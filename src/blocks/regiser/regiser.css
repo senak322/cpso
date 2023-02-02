@@ -1,0 +1,9 @@
+.regiser {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    margin: 1.5rem;
+    flex-direction: column;
+    align-items: center;
+}

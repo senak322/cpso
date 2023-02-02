@@ -1,0 +1,7 @@
+.home__regiser {
+    display: flex;
+    padding: 7px;
+    align-self: center;
+    border-radius: 0;
+    margin-bottom: 1rem;
+}
