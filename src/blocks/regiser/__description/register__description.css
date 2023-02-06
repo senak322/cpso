@@ -1,0 +1,11 @@
+.register__description {
+    min-height: 40px;
+    padding: 10px;
+    display: flex;
+    background-color: darkgray;
+    align-items: center;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: white;
+}

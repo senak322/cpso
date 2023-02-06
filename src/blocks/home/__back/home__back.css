@@ -1,6 +1,6 @@
 .home__back {
     border: 1px solid rgb(77, 199, 236);
-    border-radius: 10%;
+    border-radius: 10px;
     background-color: white;
     height: 3rem;
     display: flex;
@@ -9,8 +9,6 @@
     margin: 15px;
     font-family: 'Inter', Arial, Helvetica, sans-serif;
 }
-
-
 
 .home__back:hover {
     background-color: #f1faff;

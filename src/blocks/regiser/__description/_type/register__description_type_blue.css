@@ -1,0 +1,10 @@
+.register__description_type_blue {
+    text-decoration: none;
+    background-color: blue;
+    transition: all 0.1s linear;
+}
+
+.register__description_type_blue:hover {
+    color: white;
+    background-color: rgba(102, 102, 251, 0.752);
+}
