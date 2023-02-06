@@ -19,6 +19,8 @@ import Home from "./pages/Home.js";
 import CourseInfo from "./pages/CourseInfo.js";
 import ProtectedRoute from "./components/ProtectedRoute.js";
 import RegisterStudent from "./pages/RegisterStudent";
+import RegisterStudentForm from "./pages/RegisterStudentForm";
+import RegisterStudentDocuments from "./pages/RegisterStudentDocuments";
 import {
   login,
   getContent,
@@ -406,6 +408,22 @@ function App() {
                 element={
                   <ProtectedRoute loggedIn={loggedIn}>
                     <RegisterStudent />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="form"
+                element={
+                  <ProtectedRoute loggedIn={loggedIn}>
+                    <RegisterStudentForm />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="form-documents"
+                element={
+                  <ProtectedRoute loggedIn={loggedIn}>
+                    <RegisterStudentDocuments />
                   </ProtectedRoute>
                 }
               />
