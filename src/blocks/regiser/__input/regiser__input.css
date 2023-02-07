@@ -1,0 +1,22 @@
+.regiser__input {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.125rem;
+  box-sizing: border-box;
+  font-size: 1rem;
+  height: 2.25rem;
+  line-height: 1.25rem;
+  margin-top: 0.25rem;
+  order: 2;
+  padding: 0.25rem 0.5rem;
+  width: 15rem;
+  transition: all 0.25s;
+  width: 100%;
+}
+
+.regiser__input:hover {
+    border: 1px solid rgba(53, 39, 252, 0.649);
+}
+
+.regiser__input:focus {
+    outline: 1px solid rgb(26, 26, 243)
+}

@@ -53,10 +53,16 @@
 @import url(./blocks/regiser/regiser.css);
 @import url(./blocks/regiser/__form/regiser__form.css);
 @import url(./blocks/regiser/__container/register__container.css);
+@import url(./blocks/regiser/__container/_type/register__container_type_radio.css);
 @import url(./blocks/regiser/__title/register__title.css);
 @import url(./blocks/regiser/__description/register__description.css);
 @import url(./blocks/regiser/__description/_type/register__description_type_green.css);
 @import url(./blocks/regiser/__description/_type/register__description_type_blue.css);
+@import url(./blocks/regiser/__label/regiser__label.css);
+@import url(./blocks/regiser/__input/regiser__input.css);
+@import url(./blocks/regiser/__radio/regiser__radio.css);
+@import url(./blocks/regiser/__star/regiser__star.css);
+@import url(./blocks/regiser/__text/regiser__text.css);
 @import url(./blocks/footer/footer.css);
 @import url(./blocks/footer/__container/footer__container.css);
 @import url(./blocks/footer/__nav/footer__nav.css);
