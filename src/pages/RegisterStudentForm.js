@@ -71,7 +71,7 @@ function RegisterStudentForm() {
             ></input>
             <span
               className={`form__error form__error_type_register ${
-                isValid ? "" : "form__error_type_active"
+                isInputValid ? "" : "form__error_type_active"
               }`}
             >
               {errors.email}
@@ -154,6 +154,14 @@ function RegisterStudentForm() {
                 <option>Санкт-петербург</option>
                 <option>Пермь</option>
                 <option>Хабаровск</option>
+              </select>
+              <p className="register__label">
+                Выберите пол ученика
+                <span className="register__star">*</span>
+              </p>
+              <select className="register__select">
+                <option>М</option>
+                <option>Ж</option>
               </select>{" "}
             </>
           ) : (
