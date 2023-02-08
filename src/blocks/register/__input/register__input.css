@@ -1,4 +1,4 @@
-.regiser__input {
+.register__input {
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.125rem;
   box-sizing: border-box;
@@ -13,10 +13,10 @@
   width: 100%;
 }
 
-.regiser__input:hover {
+.register__input:hover {
     border: 1px solid rgba(53, 39, 252, 0.649);
 }
 
-.regiser__input:focus {
+.register__input:focus {
     outline: 1px solid rgb(26, 26, 243)
 }

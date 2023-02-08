@@ -4,7 +4,7 @@ import { HiArrowNarrowRight } from "react-icons/hi";
 
 function RegisterStudent() {
   return (
-    <div className="regiser">
+    <div className="register">
       <div className="register__container">
         <h2 className="register__title">Регистрация ученика</h2>
         <p className="register__description">

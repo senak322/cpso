@@ -1,0 +1,11 @@
+.register__input_type_error {
+    border: 1px solid rgba(249, 46, 46, 0.125);
+}
+
+.register__input_type_error:hover {
+    border: 1px solid rgba(252, 39, 39, 0.649);
+}
+
+.register__input_type_error:focus {
+    outline: 1px solid rgb(239, 39, 39)
+}

@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 function Register(props) {
   const formValues = {
     name: "",
-    email: ""
+    email: "",
   };
 
   const { values, handleChange, setValues, errors, isValid, handleBlur } =
@@ -29,9 +29,9 @@ function Register(props) {
       <div className="form__wrapper">
         <h1 className="form__title">Регистрация на платформе ЦПСО</h1>
         <Form className="form" onSubmit={handleSubmit} noValidate>
-        <Form.Group as={Row} controlId="formPlaintextName">
+          <Form.Group as={Row} controlId="formPlaintextName">
             <Form.Label column sm="2">
-            ФИО
+              ФИО
             </Form.Label>
             <Col sm="10">
               <Form.Control
@@ -56,7 +56,7 @@ function Register(props) {
 
           <Form.Group as={Row} controlId="formPlaintextLogin">
             <Form.Label column sm="2">
-            E-mail
+              E-mail
             </Form.Label>
             <Col sm="10">
               <Form.Control
@@ -79,25 +79,16 @@ function Register(props) {
             </Col>
           </Form.Group>
 
-          
           <div className="form__container_submit">
-            <Button
-              type="submit"
-              className={`${isValid ? "" : "disabled"}`}
-            >
+            <Button type="submit" className={`${isValid ? "" : "disabled"}`}>
               {props.isLoading ? "Регистрация..." : "Зарегистрироваться"}
             </Button>
             <p className="form__discription">Уже зарегистрированы?</p>
-            <Link
-            to="/signin"
-            className="link"
-          >
-            <Button
-              type="submit"
-              variant="light"
-            >Войти
-            </Button>
-          </Link>
+            <Link to="/signin" className="link">
+              <Button type="submit" variant="light">
+                Войти
+              </Button>
+            </Link>
           </div>
         </Form>
       </div>
