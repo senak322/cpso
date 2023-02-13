@@ -11,6 +11,7 @@ function useFormAndValidation(obj) {
     setValues({ ...values, [name]: value });
     setIsValid(event.target.closest("form").checkValidity());
     setIsInputValid(event.target.closest("input").checkValidity())
+    console.log(values);
   };
 
   const handleBlur = (event) => {
@@ -20,9 +21,14 @@ function useFormAndValidation(obj) {
     setIsInputValid(event.target.closest("input").checkValidity())
   };
 
+  const handleChangeSelect = (event) => {
+    const { value, name } = event.target;
+    setValues({ ...values, [name]: value });
+  }
 
 
-  return { values, handleChange, setValues, errors, setErrors, isValid, setIsValid, handleBlur, isInputValid };
+
+  return { values, handleChange, setValues, errors, setErrors, isValid, setIsValid, handleBlur, isInputValid, handleChangeSelect };
 
 }
 
