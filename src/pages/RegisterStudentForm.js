@@ -147,7 +147,7 @@ function RegisterStudentForm() {
                     <option value="ЧОУ Школа разговорных языков">
                       ЧОУ Школа разговорных языков
                     </option>
-                    <option selected="selected" value="Нет данных">
+                    <option selected="selected" value="">
                       Нет данных
                     </option>
                   </select>
@@ -388,6 +388,26 @@ function RegisterStudentForm() {
                 <option value="Ямайка">Ямайка</option>
                 <option value="Япония">Япония</option>
               </select>
+              {values.coutnry === "Россия" ? (
+                <>
+                  <p className="register__label">
+                    Регион постоянного проживания (только для РФ)
+                    <span className="register__star">*</span>
+                  </p>
+                  <select
+                    className="register__select"
+                    name="region"
+                    value={values.region || ""}
+                    onChange={handleChangeSelect}
+                  >
+                    <option value="">Выберите регион</option>
+                    <option value="m">М</option>
+                    <option value="w">Ж</option>
+                  </select>{" "}
+                </>
+              ) : (
+                ""
+              )}
               <p className="register__label">
                 Выберите пол ученика
                 <span className="register__star">*</span>
