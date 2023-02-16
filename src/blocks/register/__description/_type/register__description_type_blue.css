@@ -2,6 +2,7 @@
     text-decoration: none;
     background-color: blue;
     transition: all 0.1s linear;
+    margin-top: 2rem;
 }
 
 .register__description_type_blue:hover {

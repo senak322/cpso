@@ -60,12 +60,14 @@
 @import url(./blocks/register/__description/_type/register__description_type_green.css);
 @import url(./blocks/register/__description/_type/register__description_type_blue.css);
 @import url(./blocks/register/__label/register__label.css);
+@import url(./blocks/register/__label/_type/register__label_type_date.css);
 @import url(./blocks/register/__input/register__input.css);
 @import url(./blocks/register/__input/_type/register__input_type_error.css);
 @import url(./blocks/register/__radio/register__radio.css);
 @import url(./blocks/register/__star/register__star.css);
 @import url(./blocks/register/__text/register__text.css);
 @import url(./blocks/register/__select/register__select.css);
+@import url(./blocks/register/__comment/register__comment.css);
 @import url(./blocks/footer/footer.css);
 @import url(./blocks/footer/__container/footer__container.css);
 @import url(./blocks/footer/__nav/footer__nav.css);

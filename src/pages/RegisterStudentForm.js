@@ -134,7 +134,7 @@ function RegisterStudentForm() {
                   </p>
                   <select
                     className="register__select"
-                    value={values.school_name || ""}
+                    value={values.school_name || "default"}
                     name="school_name"
                     onChange={handleChangeSelect}
                   >
@@ -147,13 +147,11 @@ function RegisterStudentForm() {
                     <option value="ЧОУ Школа разговорных языков">
                       ЧОУ Школа разговорных языков
                     </option>
-                    <option selected="selected" value="">
-                      Нет данных
-                    </option>
+                    <option value="default">Нет данных</option>
                   </select>
                 </>
               ) : (
-                ""
+                <>{(values.school_name = "")}</>
               )}
               <p className="register__label">
                 Страна постоянного проживания ученика
@@ -162,13 +160,11 @@ function RegisterStudentForm() {
               <select
                 className="register__select"
                 name="coutnry"
-                value={values.coutnry || ""}
+                value={values.coutnry || "default"}
                 onChange={handleChangeSelect}
               >
-                <option value="">Выберите страну из списка</option>
-                <option value="Россия" selected="selected">
-                  Россия
-                </option>
+                <option value="default">Выберите страну из списка</option>
+                <option value="Россия">Россия</option>
                 <option value="Абхазия">Абхазия</option>
                 <option value="Австралия">Австралия</option>
                 <option value="Австрия">Австрия</option>
@@ -397,13 +393,11 @@ function RegisterStudentForm() {
                   <select
                     className="register__select"
                     name="region"
-                    value={values.region || ""}
+                    value={values.region || "default"}
                     onChange={handleChangeSelect}
                   >
-                    <option value="">Выберите регион</option>
-                    <option value="Москва" selected="selected">
-                      Москва
-                    </option>
+                    <option value="default">Выберите регион</option>
+                    <option value="Москва">Москва</option>
                     <option value="Московская область">
                       Московская область
                     </option>
@@ -611,13 +605,123 @@ function RegisterStudentForm() {
               <select
                 className="register__select"
                 name="gender"
-                value={values.gender || ""}
+                value={values.gender || "default"}
                 onChange={handleChangeSelect}
               >
-                <option value="">Укажите пол ученика</option>
+                <option value="default">Укажите пол ученика</option>
                 <option value="m">М</option>
                 <option value="w">Ж</option>
               </select>{" "}
+              <label
+                className="register__label register__label_type_date"
+                htmlFor="birdth"
+              >
+                Укажите дату рождения ребенка
+                <span className="register__star">*</span>
+                <input
+                  className="register__input"
+                  name="birdth"
+                  value={values.birdth || ""}
+                  onChange={handleChange}
+                  // onBlur={handleBlur}
+                  id="birdth"
+                  type="date"
+                ></input>
+              </label>
+              <p className="register__label">
+                Учебный год, на который приобретён пакет класса
+                <span className="register__star">*</span>
+              </p>
+              <select
+                className="register__select"
+                name="learn_year"
+                value={values.learn_year || "default"}
+                onChange={handleChangeSelect}
+              >
+                <option value="default">Укажите учебный год</option>
+                <option value="2022">2022/2023</option>
+                <option value="2023">2023/2024</option>
+              </select>
+              <label className="register__label">
+                Контактное лицо для информирования и общения (родитель/куратор)
+                <span className="register__star">*</span>
+                <p className="register__comment">
+                  ФИО родителя (опекуна) или куратора группы.
+                </p>
+                <input
+                  className={`register__input ${
+                    isInputValid ? "" : "register__input_type_error"
+                  }`}
+                  name="contact_name"
+                  value={values.contact_name || ""}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  type="text"
+                  placeholder="ФИО"
+                  required
+                ></input>
+                <span
+                  className={`form__error form__error_type_register ${
+                    isValid ? "" : "form__error_type_active"
+                  }`}
+                >
+                  {errors.contact_name}
+                </span>
+              </label>
+              <label className="register__label">
+                E-mail контактного лица (родитель/куратора) для информирования и
+                общения
+                <span className="register__star">*</span>
+                <p className="register__comment">
+                  Укажите электронный адрес родителя или куратора группы
+                </p>
+                <input
+                  className={`register__input ${
+                    isInputValid ? "" : "register__input_type_error"
+                  }`}
+                  name="contact_email"
+                  value={values.contact_email || ""}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  type="email"
+                  placeholder="E-mail"
+                  required
+                ></input>
+                <span
+                  className={`form__error form__error_type_register ${
+                    isValid ? "" : "form__error_type_active"
+                  }`}
+                >
+                  {errors.contact_email}
+                </span>
+              </label>
+              <label className="register__label">
+                Телефон контактного лица (родителя/куратора) для информирования
+                и общения
+                <span className="register__star">*</span>
+                <p className="register__comment">
+                  Укажите номер телефона родителя или куратора группы.
+                </p>
+                <input
+                  className={`register__input ${
+                    isInputValid ? "" : "register__input_type_error"
+                  }`}
+                  name="contact_tel"
+                  value={values.contact_tel || ""}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  type="let"
+                  placeholder="+7 (XXX) XXX XX XX"
+                  required
+                ></input>
+                <span
+                  className={`form__error form__error_type_register ${
+                    isValid ? "" : "form__error_type_active"
+                  }`}
+                >
+                  {errors.contact_tel}
+                </span>
+              </label>
             </>
           ) : (
             ""
