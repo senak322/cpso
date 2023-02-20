@@ -19,6 +19,8 @@ function RegisterStudentForm() {
     handleBlur,
     isInputValid,
     handleChangeSelect,
+    hadleChangeFiles,
+    handleSubmitForm,
   } = useFormAndValidation();
 
   React.useEffect(() => {
@@ -29,7 +31,7 @@ function RegisterStudentForm() {
     <div className="register">
       <div className="register__container">
         <h2 className="register__title">Анкета ученика</h2>
-        <form className="register__form">
+        <form className="register__form" onSubmit={handleSubmitForm}>
           <label className="register__label">
             Фамилия, Имя, Отчество ученика
             <span className="register__star">*</span> (поля с звездочкой
@@ -722,6 +724,25 @@ function RegisterStudentForm() {
                   {errors.contact_tel}
                 </span>
               </label>
+              <label className="register__label" htmlFor="application">
+                Заявление в школу<span className="register__star">*</span>
+                <p className="register__comment">
+                  Просим прикрепить качественную копию заполненного документа в
+                  формате PDF, а не фото с телефона. Шаблон заявления можно
+                  скачать выше. Если у вас несколько страниц скан-копии
+                  отдельными файлами, то вы можете прикрепить их все, выбрав
+                  сразу несколько файлов.
+                </p>
+              </label>
+              <input
+                multiple
+                accept="image/*, .png, .jpg, .jpeg, .pdf"  
+                name="application"
+                id="application"
+                type="file"
+                onChange={hadleChangeFiles}
+              ></input>
+              <button type="submit">Отправить</button>
             </>
           ) : (
             ""
