@@ -66,6 +66,7 @@
 @import url(./blocks/register/__radio/register__radio.css);
 @import url(./blocks/register/__star/register__star.css);
 @import url(./blocks/register/__text/register__text.css);
+@import url(./blocks/register/__text/_type/register__text_type_end.css);
 @import url(./blocks/register/__select/register__select.css);
 @import url(./blocks/register/__comment/register__comment.css);
 @import url(./blocks/register/__docs/register__docs.css);

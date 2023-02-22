@@ -1,3 +1,8 @@
 .register__select {
     margin-bottom: 2rem;
+    outline: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.register__select:hover {
+    outline: 1px solid rgba(53, 39, 252, 0.649);
 }

@@ -712,7 +712,7 @@ function RegisterStudentForm() {
                   value={values.contact_tel || ""}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  type="let"
+                  type="tel"
                   placeholder="+7 (XXX) XXX XX XX"
                   required
                 ></input>
@@ -970,7 +970,7 @@ function RegisterStudentForm() {
                 </span>
               </label>
               <label className="register__label">
-              Паспорт родителя (законного представителя)
+                Паспорт родителя (законного представителя)
                 <span className="register__star">*</span>
                 <input
                   className={`register__input ${
@@ -994,21 +994,126 @@ function RegisterStudentForm() {
               </label>
               <label
                 className="register__label register__label_type_date"
-                htmlFor="birth_certificate_date"
+                htmlFor="parent_passport_date"
               >
                 Укажите дату выдачи Свидетельства о рождении ученика
                 <span className="register__star">*</span>
                 <input
                   className="register__input"
-                  name="birth_certificate_date"
-                  value={values.birth_certificate_date || ""}
+                  name="parent_passport_date"
+                  value={values.parent_passport_date || ""}
                   onChange={handleChange}
                   // onBlur={handleBlur}
-                  id="birth_certificate_date"
+                  id="parent_passport_date"
                   type="date"
                 ></input>
               </label>
-              <button type="submit">Отправить</button>
+              <label className="register__label">
+                Кем выдан Паспорт родителя (законного представителя)
+                <span className="register__star">*</span>
+                <input
+                  className={`register__input ${
+                    isInputValid ? "" : "register__input_type_error"
+                  }`}
+                  name="parent_passport_issued"
+                  value={values.parent_passport_issued || ""}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  type="text"
+                  placeholder="Номер паспорта"
+                  required
+                ></input>
+                <span
+                  className={`form__error form__error_type_register ${
+                    isValid ? "" : "form__error_type_active"
+                  }`}
+                >
+                  {errors.parent_passport_issued}
+                </span>
+              </label>
+              <div className="register__docs">
+                <label
+                  className="register__label"
+                  htmlFor="parent_passport_copy"
+                >
+                  Копия Паспорта родителя (законного представителя): первая
+                  страница и страница с регистрацией
+                  <span className="register__star">*</span>
+                  <p className="register__comment">
+                    Просим прикрепить качественную копию документа в формате
+                    PDF, а не фото с телефона. Если у вас несколько страниц
+                    скан-копии отдельными файлами, то вы можете прикрепить их
+                    все, выбрав сразу несколько файлов.
+                  </p>
+                </label>
+                <input
+                  multiple
+                  accept="image/*, .png, .jpg, .jpeg, .pdf"
+                  name="parent_passport_copy"
+                  id="parent_passport_copy"
+                  type="file"
+                  required
+                  onChange={hadleChangeFiles}
+                ></input>
+              </div>
+              <label className="register__label">
+                Телефон родителя (законного представителя)
+                <span className="register__star">*</span>
+                <input
+                  className={`register__input ${
+                    isInputValid ? "" : "register__input_type_error"
+                  }`}
+                  name="parent_tel"
+                  value={values.parent_tel || ""}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  type="tel"
+                  placeholder="+7 (XXX) XXX XX XX"
+                  required
+                ></input>
+                <span
+                  className={`form__error form__error_type_register ${
+                    isValid ? "" : "form__error_type_active"
+                  }`}
+                >
+                  {errors.parent_tel}
+                </span>
+              </label>
+              <label className="register__label">
+                Электронная почта родителя (законного представителя)
+                <span className="register__star">*</span>
+                <input
+                  className={`register__input ${
+                    isInputValid ? "" : "register__input_type_error"
+                  }`}
+                  type="email"
+                  name="parent_email"
+                  placeholder="E-mail"
+                  value={values.parent_email || ""}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  required
+                ></input>
+                <span
+                  className={`form__error form__error_type_register ${
+                    isInputValid ? "" : "form__error_type_active"
+                  }`}
+                >
+                  {errors.parent_email}
+                </span>
+              </label>
+              <p className="register__text register__text_type_end">
+                После того, как
+                вы прикрепите все необходимые документы, просим вас еще раз
+                проверить регистрационную форму и только после этого нажать
+                кнопку{" "}
+                <span style={{ fontWeight: 700 }}>
+                  "Отправить данные в ЦПСО".
+                </span>{" "}
+                В течение суток мы проверим ваши документы и направим доступ на
+                платформу.
+              </p>
+              <button className="btn" type="submit">Отправить данные в ЦПСО</button>
             </>
           ) : (
             ""
