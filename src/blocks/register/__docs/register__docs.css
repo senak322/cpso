@@ -1,0 +1,8 @@
+.register__docs {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    background-color: #cdddff;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}

@@ -68,6 +68,8 @@
 @import url(./blocks/register/__text/register__text.css);
 @import url(./blocks/register/__select/register__select.css);
 @import url(./blocks/register/__comment/register__comment.css);
+@import url(./blocks/register/__docs/register__docs.css);
+@import url(./blocks/register/__link/register__link.css);
 @import url(./blocks/footer/footer.css);
 @import url(./blocks/footer/__container/footer__container.css);
 @import url(./blocks/footer/__nav/footer__nav.css);

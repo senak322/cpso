@@ -5,7 +5,7 @@ function useFormAndValidation(obj) {
   const [isValid, setIsValid] = useState(false);
   const [isInputValid, setIsInputValid] = useState(true);
   const [errors, setErrors] = useState({});
-  const [selectedFile, setSelectedFile] = useState([]);
+  const [selectedFiles, setSelectedFiles] = useState({});
 
   const handleChange = (event) => {
     const { value, name } = event.target;
@@ -28,14 +28,16 @@ function useFormAndValidation(obj) {
   }
 
   const hadleChangeFiles = (event) => {
-    console.log(event.target.files);
-    setSelectedFile(...event.target.files);
+    const { name } = event.target;
+    console.log(name);
+    setSelectedFiles({...selectedFiles, [name]: event.target.files});
+    console.log(selectedFiles);
   }
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
     const fromData = new FormData();
-    fromData.append('files', selectedFile);
+    fromData.append('files', selectedFiles);
     fromData.append('values', values);
     console.log(fromData);
   }

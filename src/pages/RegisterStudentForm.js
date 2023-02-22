@@ -724,24 +724,159 @@ function RegisterStudentForm() {
                   {errors.contact_tel}
                 </span>
               </label>
-              <label className="register__label" htmlFor="application">
-                Заявление в школу<span className="register__star">*</span>
+              <div className="register__docs">
+                <label className="register__label" htmlFor="application">
+                  Заявление в школу<span className="register__star">*</span>
+                  <p className="register__comment">
+                    Просим прикрепить качественную копию заполненного документа
+                    в формате PDF, а не фото с телефона. Шаблон заявления можно
+                    скачать выше. Если у вас несколько страниц скан-копии
+                    отдельными файлами, то вы можете прикрепить их все, выбрав
+                    сразу несколько файлов.
+                  </p>
+                </label>
+                <input
+                  multiple
+                  accept="image/*, .png, .jpg, .jpeg, .pdf"
+                  name="application"
+                  id="application"
+                  type="file"
+                  required
+                  onChange={hadleChangeFiles}
+                ></input>
+                <a
+                  className="register__link"
+                  href="https://hssc-exam.ru/reg_form_23/blanks/examples/1505/Заявление.pdf"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Образец заявления
+                </a>
+              </div>
+              <div className="register__docs">
+                <label className="register__label" htmlFor="opd">
+                  Согласие на обработку персональных данных
+                  <span className="register__star">*</span>
+                  <p className="register__comment">
+                    Просим прикрепить качественную копию заполненного документа
+                    в формате PDF, а не фото с телефона. Шаблон договора можно
+                    скачать выше. Если у вас несколько страниц скан-копии
+                    отдельными файлами, то вы можете прикрепить их все, выбрав
+                    сразу несколько файлов.
+                  </p>
+                </label>
+                <input
+                  required
+                  multiple
+                  accept="image/*, .png, .jpg, .jpeg, .pdf"
+                  name="opd"
+                  id="opd"
+                  type="file"
+                  onChange={hadleChangeFiles}
+                ></input>
+                <a
+                  className="register__link"
+                  href="https://hssc-exam.ru/reg_form_23/blanks/examples/1505/Согласие.pdf"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Образец согласия на ОПД
+                </a>
+              </div>
+              <div className="register__docs">
+                <label className="register__label" htmlFor="old_school">
+                  Документы (при их наличии), подтверждающие освоение
+                  образовательных программ начального общего, основного общего,
+                  среднего общего образования (скан-копия личного дела или
+                  справки о промежуточной аттестации)
+                  <p className="register__comment">
+                    Просим прикрепить качественную копию документа в формате
+                    PDF, а не фото с телефона. Если у вас несколько страниц
+                    скан-копии отдельными файлами, то вы можете прикрепить их
+                    все, выбрав сразу несколько файлов.
+                  </p>
+                </label>
+                <input
+                  multiple
+                  accept="image/*, .png, .jpg, .jpeg, .pdf"
+                  name="old_school"
+                  id="old_school"
+                  type="file"
+                  onChange={hadleChangeFiles}
+                ></input>
+              </div>
+              <div className="register__docs">
+                <label className="register__label" htmlFor="attorney">
+                  Доверенность на подачу документов
+                  <span className="register__star">*</span>
+                  <p className="register__comment">
+                    Просим прикрепить качественную копию заполненного документа
+                    в формате PDF, а не фото с телефона. Шаблон договора можно
+                    скачать выше. Если у вас несколько страниц скан-копии
+                    отдельными файлами, то вы можете прикрепить их все, выбрав
+                    сразу несколько файлов.
+                  </p>
+                </label>
+                <input
+                  multiple
+                  accept="image/*, .png, .jpg, .jpeg, .pdf"
+                  name="attorney"
+                  id="attorney"
+                  type="file"
+                  required
+                  onChange={hadleChangeFiles}
+                ></input>
+                <a
+                  className="register__link"
+                  href="https://hssc-exam.ru/reg_form_23/blanks/examples/Доверенность.pdf"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Образец доверенности
+                </a>
+              </div>
+              <label className="register__label">
+              Номер Свидетельства о рождении ученика
+                <span className="register__star">*</span>
                 <p className="register__comment">
-                  Просим прикрепить качественную копию заполненного документа в
-                  формате PDF, а не фото с телефона. Шаблон заявления можно
-                  скачать выше. Если у вас несколько страниц скан-копии
-                  отдельными файлами, то вы можете прикрепить их все, выбрав
-                  сразу несколько файлов.
+                Укажите серию и номер Свидетельства о рождении ученика. Важно! Даже при наличии паспорта, необходимо указать данные свидетельства
                 </p>
+                <input
+                  className={`register__input ${
+                    isInputValid ? "" : "register__input_type_error"
+                  }`}
+                  name="birth_certificate"
+                  value={values.birth_certificate || ""}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  type="text"
+                  placeholder="Cерия и номер Свидетельства о рождении"
+                  required
+                ></input>
+                <span
+                  className={`form__error form__error_type_register ${
+                    isValid ? "" : "form__error_type_active"
+                  }`}
+                >
+                  {errors.birth_certificate}
+                </span>
               </label>
-              <input
-                multiple
-                accept="image/*, .png, .jpg, .jpeg, .pdf"  
-                name="application"
-                id="application"
-                type="file"
-                onChange={hadleChangeFiles}
-              ></input>
+              <label
+                className="register__label register__label_type_date"
+                htmlFor="birth_certificate_date"
+              >
+                Укажите дату выдачи Свидетельства о рождении ученика
+                <span className="register__star">*</span>
+                <input
+                  className="register__input"
+                  name="birth_certificate_date"
+                  value={values.birth_certificate_date || ""}
+                  onChange={handleChange}
+                  // onBlur={handleBlur}
+                  id="birth_certificate_date"
+                  type="date"
+                ></input>
+              </label>
               <button type="submit">Отправить</button>
             </>
           ) : (
