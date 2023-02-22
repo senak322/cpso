@@ -836,10 +836,12 @@ function RegisterStudentForm() {
                 </a>
               </div>
               <label className="register__label">
-              Номер Свидетельства о рождении ученика
+                Номер Свидетельства о рождении ученика
                 <span className="register__star">*</span>
                 <p className="register__comment">
-                Укажите серию и номер Свидетельства о рождении ученика. Важно! Даже при наличии паспорта, необходимо указать данные свидетельства
+                  Укажите серию и номер Свидетельства о рождении ученика. Важно!
+                  Даже при наличии паспорта, необходимо указать данные
+                  свидетельства
                 </p>
                 <input
                   className={`register__input ${
@@ -859,6 +861,135 @@ function RegisterStudentForm() {
                   }`}
                 >
                   {errors.birth_certificate}
+                </span>
+              </label>
+              <label
+                className="register__label register__label_type_date"
+                htmlFor="birth_certificate_date"
+              >
+                Укажите дату выдачи Свидетельства о рождении ученика
+                <span className="register__star">*</span>
+                <input
+                  className="register__input"
+                  name="birth_certificate_date"
+                  value={values.birth_certificate_date || ""}
+                  onChange={handleChange}
+                  // onBlur={handleBlur}
+                  id="birth_certificate_date"
+                  type="date"
+                ></input>
+              </label>
+              <label className="register__label">
+                Кем выдано Свидетельство о рождении ученика
+                <span className="register__star">*</span>
+                <input
+                  className={`register__input ${
+                    isInputValid ? "" : "register__input_type_error"
+                  }`}
+                  name="birth_issued"
+                  value={values.birth_issued || ""}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  type="text"
+                  placeholder="Кем выдано"
+                  required
+                ></input>
+                <span
+                  className={`form__error form__error_type_register ${
+                    isValid ? "" : "form__error_type_active"
+                  }`}
+                >
+                  {errors.birth_issued}
+                </span>
+              </label>
+              <div className="register__docs">
+                <label className="register__label" htmlFor="copy_birth">
+                  Копия Свидетельства о рождении ученика
+                  <span className="register__star">*</span>
+                  <p className="register__comment">
+                    Просим прикрепить качественную копию документа в формате
+                    PDF, а не фото с телефона. Если у вас несколько страниц
+                    скан-копии отдельными файлами, то вы можете прикрепить их
+                    все, выбрав сразу несколько файлов.
+                  </p>
+                </label>
+                <input
+                  multiple
+                  accept="image/*, .png, .jpg, .jpeg, .pdf"
+                  name="copy_birth"
+                  id="copy_birth"
+                  type="file"
+                  required
+                  onChange={hadleChangeFiles}
+                ></input>
+              </div>
+              <label className="register__label">
+                Адрес регистрации ученика по месту жительства
+                <span className="register__star">*</span>
+                <input
+                  className={`register__input ${
+                    isInputValid ? "" : "register__input_type_error"
+                  }`}
+                  name="registration_address"
+                  value={values.registration_address || ""}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  type="text"
+                  placeholder="123456, Россия, город Москва, улица Преображенская, дом 11, кв. 25"
+                  required
+                ></input>
+                <span
+                  className={`form__error form__error_type_register ${
+                    isValid ? "" : "form__error_type_active"
+                  }`}
+                >
+                  {errors.registration_address}
+                </span>
+              </label>
+              <label className="register__label">
+                ФИО родителя (законного представителя)
+                <span className="register__star">*</span>
+                <input
+                  className={`register__input ${
+                    isInputValid ? "" : "register__input_type_error"
+                  }`}
+                  name="parent_name"
+                  value={values.parent_name || ""}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  type="text"
+                  placeholder="ФИО"
+                  required
+                ></input>
+                <span
+                  className={`form__error form__error_type_register ${
+                    isValid ? "" : "form__error_type_active"
+                  }`}
+                >
+                  {errors.parent_name}
+                </span>
+              </label>
+              <label className="register__label">
+              Паспорт родителя (законного представителя)
+                <span className="register__star">*</span>
+                <input
+                  className={`register__input ${
+                    isInputValid ? "" : "register__input_type_error"
+                  }`}
+                  name="parent_passport_num"
+                  value={values.parent_passport_num || ""}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  type="text"
+                  placeholder="Номер паспорта"
+                  required
+                ></input>
+                <span
+                  className={`form__error form__error_type_register ${
+                    isValid ? "" : "form__error_type_active"
+                  }`}
+                >
+                  {errors.parent_passport_num}
                 </span>
               </label>
               <label
