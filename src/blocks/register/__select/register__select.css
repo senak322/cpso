@@ -1,8 +1,16 @@
 .register__select {
     margin-bottom: 2rem;
-    outline: 1px solid rgba(0, 0, 0, 0.125);
+    outline: 1px solid rgba(34, 0, 255, 0.125);
+    border-radius: 5px;
+    min-height: 2rem;
+    border-color: rgba(0, 0, 0, 0.044);
+    transition: all 0.25s linear;
 }
 
 .register__select:hover {
     outline: 1px solid rgba(53, 39, 252, 0.649);
+}
+
+.register__select:focus-visible {
+    outline: 1px solid rgb(99 88 250);
 }
