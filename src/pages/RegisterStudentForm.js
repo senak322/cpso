@@ -1113,7 +1113,7 @@ function RegisterStudentForm() {
                 В течение суток мы проверим ваши документы и направим доступ на
                 платформу.
               </p>
-              <button className="register__description register__description_type_blue" type="submit">Отправить данные в ЦПСО</button>
+              <button className="register__description register__description_type_blue register__description_type_submit" disabled={isValid ? false : true} type="submit">Отправить данные в ЦПСО</button>
             </>
           ) : (
             ""
