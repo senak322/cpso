@@ -1,3 +1,4 @@
 .register__description_type_green {
     background-color: #198754;
+    flex-direction: column;
 }
