@@ -60,6 +60,7 @@
 @import url(./blocks/register/__description/_type/register__description_type_green.css);
 @import url(./blocks/register/__description/_type/register__description_type_blue.css);
 @import url(./blocks/register/__description/_type/register__description_type_submit.css);
+@import url(./blocks/register/__description/_type/register__description_type_grey.css);
 @import url(./blocks/register/__doc-link/register__doc-link.css);
 @import url(./blocks/register/__label/register__label.css);
 @import url(./blocks/register/__label/_type/register__label_type_date.css);

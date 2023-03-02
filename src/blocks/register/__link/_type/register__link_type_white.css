@@ -1,9 +1,14 @@
 .register__link_type_white {
-    background-color:  rgba(202, 201, 201, 0.712);;
+    background-color: #ffffff;
     width: 100%;
     color: black;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    justify-content: space-between;
 }
 
 .register__link_type_white:hover {
-    background-color: rgb(130, 126, 126);
+    background-color: rgb(12 70 138 / 50%);
 }
