@@ -1119,12 +1119,12 @@ function RegisterStudentForm() {
             ""
           )}
         </form>
-        <Link
+        {/* <Link
           className="register__description register__description_type_blue"
           to="/home/form-documents"
         >
           Далее <HiArrowNarrowRight />
-        </Link>
+        </Link> */}
         <BackButton />
       </div>
     </div>

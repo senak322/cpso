@@ -1,3 +1,8 @@
 .register__description_type_submit {
     justify-content: center;
+    border: 0;
+}
+
+.register__description_type_submit:disabled {
+    background-color: grey;
 }
