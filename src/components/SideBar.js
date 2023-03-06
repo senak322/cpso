@@ -24,13 +24,13 @@ function SideBar() {
         <li className="side-bar__container">
           <NavLink to="user-info" key="home" className={setActive}>
             <AiFillHome className="side-bar__icon" />
-            <p className="side-bar__name">Домой</p>
+            {/* <p className="side-bar__name">Домой</p> */}
           </NavLink>
         </li>
         <li className="side-bar__container">
           <NavLink to="settings" key="settings" className={setActive}>
             <AiFillSetting className="side-bar__icon" />
-            <p className="side-bar__name">Настройки</p>
+            {/* <p className="side-bar__name">Настройки</p> */}
           </NavLink>
         </li>
       </ul>

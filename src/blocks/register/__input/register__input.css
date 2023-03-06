@@ -1,6 +1,6 @@
 .register__input {
   border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.125rem;
+  border-radius: 5px;
   box-sizing: border-box;
   font-size: 1rem;
   height: 2.25rem;
