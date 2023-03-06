@@ -2,3 +2,9 @@
     margin-bottom: 2rem;
     text-align: center;
 }
+
+@media screen and (max-width: 767px) {
+    .register__title  {
+        margin-bottom: 1.5rem;
+    }
+  }

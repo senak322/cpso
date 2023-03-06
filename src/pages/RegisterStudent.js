@@ -22,7 +22,7 @@ function RegisterStudent() {
             >
               Скачать Перечень документов, которые необходимо представить в
               школу
-              <AiOutlineDoubleRight /></a>
+              <AiOutlineDoubleRight className="register__double-arrow" /></a>
             
           </li>
           <li className="register__doc-link">
@@ -33,7 +33,7 @@ function RegisterStudent() {
               href="https://hssc-exam.ru/reg_form_23/blanks/1505/Заявление%20на%20прикрепление%20СО%201505.pdf"
             >
               Скачать Заявление в школу (шаблон)
-              <AiOutlineDoubleRight /></a>
+              <AiOutlineDoubleRight className="register__double-arrow" /></a>
             
           </li>
           <li className="register__doc-link">
@@ -44,7 +44,7 @@ function RegisterStudent() {
               href="https://hssc-exam.ru/reg_form_23/blanks/1505/Согласие%20на%20обработку%20ПД%201505.pdf"
             >
               Скачать Согласие на обработку персональных данных (шаблон)
-              <AiOutlineDoubleRight /></a>
+              <AiOutlineDoubleRight className="register__double-arrow" /></a>
             
           </li>
           <li className="register__doc-link">
@@ -55,7 +55,7 @@ function RegisterStudent() {
               href="https://hssc-exam.ru/reg_form_23/blanks/Доверенность.pdf"
             >
               Скачать Доверенность на подачу документов (шаблон)
-              <AiOutlineDoubleRight /></a>
+              <AiOutlineDoubleRight className="register__double-arrow" /></a>
             
           </li>
         </ul>

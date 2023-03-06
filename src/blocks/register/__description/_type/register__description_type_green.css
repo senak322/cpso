@@ -1,5 +1,12 @@
 .register__description_type_green {
     background-color: #818dffde;
     flex-direction: column;
-    color: black;   
+    color: black;
+    width: 80%;
 }
+
+@media screen and (max-width: 1024px) {
+    .register__description_type_green  {
+        width: 100%;
+    }
+  }

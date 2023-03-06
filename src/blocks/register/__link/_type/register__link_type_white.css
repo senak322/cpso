@@ -12,3 +12,9 @@
 .register__link_type_white:hover {
     background-color: rgb(12 70 138 / 50%);
 }
+
+@media screen and (max-width: 767px) {
+    .register__link_type_white  {
+        font-size: 0.9rem;
+    }
+  }

@@ -92,7 +92,7 @@ function RegisterStudentForm() {
               Где проходили последнюю аттестацию?
               <span className="register__star">*</span>
             </p>
-            <label>
+            <label className="register__custom-radio">
               <input
                 className="register__radio"
                 id="cpso"
@@ -101,9 +101,9 @@ function RegisterStudentForm() {
                 type="radio"
                 onChange={handleChange}
               ></input>
-              ЦПСО
+              <span>ЦПСО</span>
             </label>
-            <label>
+            <label className="register__custom-radio">
               <input
                 className="register__radio"
                 id="not-cpso"
@@ -112,9 +112,9 @@ function RegisterStudentForm() {
                 type="radio"
                 onChange={handleChange}
               ></input>
-              Не в ЦПСО
+              <span>Не в ЦПСО</span>
             </label>
-            <label>
+            <label className="register__custom-radio">
               <input
                 className="register__radio"
                 id="not-all"
@@ -123,7 +123,7 @@ function RegisterStudentForm() {
                 type="radio"
                 onChange={handleChange}
               ></input>
-              Не проходил совсем
+              <span>Не проходил совсем</span>
             </label>
           </div>
           {values.school ? (
