@@ -2,3 +2,9 @@
     font-weight: 500;
     font-size: 17px;
 }
+
+@media screen and (max-width: 767px) {
+    .register__label  {
+        font-size: 1rem;
+    }
+  }
