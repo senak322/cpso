@@ -31,6 +31,7 @@
 @import url(./blocks/home/__add-student/home__add-student.css);
 @import url(./blocks/home/__add-student/_type/home__add-student_type_delete.css);
 @import url(./blocks/home/__students/home__students.css);
+@import url(./blocks/home/__students/_type/home__students_type_class.css);
 @import url(./blocks/home/__student/home__student.css);
 @import url(./blocks/home/__student/_type/home__student_type_class.css);
 @import url(./blocks/home/__student-name/home__student-name.css);
@@ -41,6 +42,7 @@
 @import url(./blocks/home/__files-container/home__files-container.css);
 @import url(./blocks/home/__back/home__back.css);
 @import url(./blocks/home/__regiser/home__regiser.css);
+@import url(./blocks/home/__class/home__class.css);
 @import url(./blocks/form/form.css);
 @import url(./blocks/form/__container/form__container.css);
 @import url(./blocks/form/__container/_submit/form__container_submit.css);

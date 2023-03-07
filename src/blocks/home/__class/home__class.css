@@ -1,0 +1,15 @@
+.home__class {
+    border: 2px solid;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.1s linear;
+    margin: 1rem 1rem;
+    width: fit-content;
+    padding: 0.5rem;
+}
+
+.home__class:hover {
+    background-color: #455a64;
+    color: white;
+}
