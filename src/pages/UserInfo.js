@@ -57,9 +57,15 @@ function UserInfo({
         <h2 className="home__title">Мои классы:</h2>
         <ul className="home__students home__students_type_class">
           Вы приобрели
-          <Class num="6" />
-          <Class num="7" />
-          <Class num="8" />
+          <Link className="home__link" to={`/home/class6`}>
+            <Class num="6" />
+          </Link>
+          <Link className="home__link" to={`/home/class7`}>
+            <Class num="7" />
+          </Link>
+          <Link className="home__link" to={`/home/class8`}>
+            <Class num="8" />
+          </Link>
         </ul>
       </div>
     </section>

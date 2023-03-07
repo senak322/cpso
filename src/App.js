@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import Settings from "./pages/Settings.js";
 import UserInfo from "./pages/UserInfo.js";
 import StudentInfo from "./pages/StudentInfo.js";
+import ClassStatus from "./pages/ClassStatus.js";
 import SignIn from "./pages/SignIn.js";
 import Register from "./pages/Register.js";
 import InfoTooltip from "./components/InfoTooltip.js";
@@ -176,7 +177,6 @@ function App() {
     } else {
       setPageLoading(false);
     }
-    
   }
 
   function handleLogin(email, password) {
@@ -308,7 +308,7 @@ function App() {
 
   function changeCourse(el) {
     localStorage.setItem("currentCourse", JSON.stringify(el));
-    getGradesAndFiles(el)
+    getGradesAndFiles(el);
   }
 
   function getGradesAndFiles(el, id) {
@@ -349,15 +349,13 @@ function App() {
 
   useEffect(() => {
     tokenCheck();
-  }, []);  
+  }, []);
 
   if (pageLoading) {
     return <SpinnerMain />;
-  } 
+  }
 
   return (
-    
-
     <>
       <Header loggedIn={loggedIn} onLogout={handleLogout} />
 
@@ -398,8 +396,15 @@ function App() {
                       onChangeCourse={changeCourse}
                       files={files}
                       onLoading={getCoursesAndFiles}
-                      
                     />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="class:id"
+                element={
+                  <ProtectedRoute loggedIn={loggedIn}>
+                    <ClassStatus />
                   </ProtectedRoute>
                 }
               />

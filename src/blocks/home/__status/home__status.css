@@ -1,0 +1,13 @@
+.home__status::before {
+  width: 10px;
+  height: 10px;
+  content: " ";
+  text-align: center;
+  line-height: 2em;
+  border-radius: 1em;
+  background: dodgerblue;
+  margin: 0 1em;
+  display: inline-block;
+  color: white;
+  position: relative;
+}
