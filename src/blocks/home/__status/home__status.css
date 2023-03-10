@@ -1,6 +1,10 @@
+.home__status {
+  position: relative;
+}
+
 .home__status::before {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   content: " ";
   text-align: center;
   line-height: 2em;
@@ -9,5 +13,7 @@
   margin: 0 1em;
   display: inline-block;
   color: white;
-  position: relative;
+  position: absolute;
+  left: -2.5rem;
+  top: 0.3rem;
 }

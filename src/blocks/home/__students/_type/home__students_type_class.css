@@ -1,7 +1,6 @@
 .home__students_type_class {
     margin: 0;
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
 }

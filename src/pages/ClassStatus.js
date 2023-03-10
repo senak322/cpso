@@ -11,6 +11,7 @@ function ClassStatus() {
             <button type="button" className="btn btn-primary">5 Класс</button>
             <p>Войдите в класс и прикрепите ученика</p>
           </li>
+          <span></span>
           <li className="home__status">
             <h6>Шаг 2. Зачисление ученика в школу</h6>
             <button type="button" className="btn btn-primary">5 Класс</button>
@@ -38,8 +39,9 @@ function ClassStatus() {
             <h6>Шаг 6. Справка сформирована</h6>
           </li>
         </ul>
-        <button type="button" className="btn btn-danger">Купить следующий класс</button>
-        <button type="button" className="btn btn-secondary">Открепиться из школы</button>
+        
+        <button type="button" className="btn btn-danger mb-3 mx-3">Купить следующий класс</button>
+        <button type="button" className="btn btn-secondary mb-3 mx-3">Открепиться из школы</button>
         <BackButton />
       </div>
     </section>
