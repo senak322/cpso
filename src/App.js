@@ -318,6 +318,10 @@ function App() {
     handleGetCourseFiles(studentEl.id, el.class_number);
   }
 
+  function addToClass(){
+    
+  }
+
   // function changeStudent(el) {
   //   setCurrentStudent(el);
   //   console.log(el);
@@ -404,7 +408,7 @@ function App() {
                 path="class:id"
                 element={
                   <ProtectedRoute loggedIn={loggedIn}>
-                    <ClassStatus />
+                    <ClassStatus addToClass={addToClass} />
                   </ProtectedRoute>
                 }
               />
