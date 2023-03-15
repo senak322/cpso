@@ -22,6 +22,7 @@ import ProtectedRoute from "./components/ProtectedRoute.js";
 import RegisterStudent from "./pages/RegisterStudent";
 import RegisterStudentForm from "./pages/RegisterStudentForm";
 import RegisterStudentDocuments from "./pages/RegisterStudentDocuments";
+import AddStudentToClass from "./pages/AddStudentToClass";
 import {
   login,
   getContent,
@@ -318,10 +319,6 @@ function App() {
     handleGetCourseFiles(studentEl.id, el.class_number);
   }
 
-  function addToClass(){
-    
-  }
-
   // function changeStudent(el) {
   //   setCurrentStudent(el);
   //   console.log(el);
@@ -408,7 +405,15 @@ function App() {
                 path="class:id"
                 element={
                   <ProtectedRoute loggedIn={loggedIn}>
-                    <ClassStatus addToClass={addToClass} />
+                    <ClassStatus />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="class:id/addstudent"
+                element={
+                  <ProtectedRoute loggedIn={loggedIn}>
+                    <AddStudentToClass  />
                   </ProtectedRoute>
                 }
               />

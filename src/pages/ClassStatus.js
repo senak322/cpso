@@ -1,6 +1,6 @@
 import React from "react";
 import BackButton from "../components/BackButton";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 function ClassStatus({addToClass}) {
 
@@ -12,7 +12,7 @@ function ClassStatus({addToClass}) {
         <ul className="home__status-list">
           <li className="home__status">
             <h6>Шаг 1. Прикрепление ученика к классу</h6>
-            <button type="button" className="btn btn-primary" onClick={addToClass}>{id} Класс</button>
+            <Link to={`/home/class${id}/addstudent`} ><button type="button" className="btn btn-primary" onClick={addToClass}>{id} Класс</button></Link>
             <p>Войдите в класс и прикрепите ученика</p>
           </li>
           <span></span>
