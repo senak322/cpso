@@ -1,14 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 import BackButton from "../components/BackButton";
-import { HiArrowNarrowRight } from "react-icons/hi";
+
 import useFormAndValidation from "../utils/useFormAndValidation.js";
 
 function RegisterStudentForm() {
-  const formValues = {
-    name: "",
-    email: "",
-  };
+  const formValues = {};
 
   const {
     values,
@@ -1103,17 +1100,22 @@ function RegisterStudentForm() {
                 </span>
               </label>
               <p className="register__text register__text_type_end">
-                После того, как
-                вы прикрепите все необходимые документы, просим вас еще раз
-                проверить регистрационную форму и только после этого нажать
-                кнопку{" "}
+                После того, как вы прикрепите все необходимые документы, просим
+                вас еще раз проверить регистрационную форму и только после этого
+                нажать кнопку{" "}
                 <span style={{ fontWeight: 700 }}>
                   "Отправить данные в ЦПСО".
                 </span>{" "}
                 В течение суток мы проверим ваши документы и направим доступ на
                 платформу.
               </p>
-              <button className="register__description register__description_type_blue register__description_type_submit" disabled={isValid ? false : true} type="submit">Отправить данные в ЦПСО</button>
+              <button
+                className="register__description register__description_type_blue register__description_type_submit"
+                disabled={isValid ? false : true}
+                type="submit"
+              >
+                Отправить данные в ЦПСО
+              </button>
             </>
           ) : (
             ""

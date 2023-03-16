@@ -23,6 +23,7 @@ import RegisterStudent from "./pages/RegisterStudent";
 import RegisterStudentForm from "./pages/RegisterStudentForm";
 import RegisterStudentDocuments from "./pages/RegisterStudentDocuments";
 import AddStudentToClass from "./pages/AddStudentToClass";
+import AddStudentDocs from "./pages/AddStudentDocs";
 import {
   login,
   getContent,
@@ -413,7 +414,15 @@ function App() {
                 path="class:id/addstudent"
                 element={
                   <ProtectedRoute loggedIn={loggedIn}>
-                    <AddStudentToClass  />
+                    <AddStudentToClass students={students} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="class:id/addstudentdocs"
+                element={
+                  <ProtectedRoute loggedIn={loggedIn}>
+                    <AddStudentDocs students={students} />
                   </ProtectedRoute>
                 }
               />
