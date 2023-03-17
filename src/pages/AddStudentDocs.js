@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import useFormAndValidation from "../utils/useFormAndValidation.js";
 
 function AddStudentDocs() {
-  let { id } = useParams();
+  let { classid } = useParams();
 
   const formValues = {};
 
@@ -19,7 +19,7 @@ function AddStudentDocs() {
   return (
     <section className="register">
       <div className="register__container">
-        <h1 className="register__add-header">{id} класс</h1>
+        <h1 className="register__add-header">{classid} класс</h1>
         <form className="register__form" onSubmit={handleSubmitForm}>
           <h4
             className="register__add-description mb-3"

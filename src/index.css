@@ -85,6 +85,7 @@
 @import url(./blocks/register/__add-header/register__add-header.css);
 @import url(./blocks/register/__add-description/register__add-description.css);
 @import url(./blocks/register/__add-btn/register__add-btn.css);
+@import url(./blocks/register/__user-name/register__user-name.css);
 @import url(./blocks/footer/footer.css);
 @import url(./blocks/footer/__container/footer__container.css);
 @import url(./blocks/footer/__nav/footer__nav.css);

@@ -3,7 +3,7 @@ import personImg from "../images/person2.png";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import { Link } from "react-router-dom";
 import Student from "../components/Student.js";
-import Class from "../components/Class.js";
+
 
 function UserInfo({
   students,
@@ -53,21 +53,7 @@ function UserInfo({
             : "Список учеников пуст"}
         </ul>
       </div>
-      <div className="home__wrapper home__container">
-        <h2 className="home__title">Мои классы:</h2>
-        <ul className="home__students home__students_type_class">
-          Вы приобрели
-          <Link className="home__link home__link_type_class" to={`/home/class6`}>
-            <Class num="6" />
-          </Link>
-          <Link className="home__link home__link_type_class" to={`/home/class7`}>
-            <Class num="7" />
-          </Link>
-          <Link className="home__link home__link_type_class" to={`/home/class8`}>
-            <Class num="8" />
-          </Link>
-        </ul>
-      </div>
+      
     </section>
   );
 }

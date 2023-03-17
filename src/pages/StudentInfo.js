@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import CourseName from "../components/CourseName.js";
 import UserHeader from "../components/UserHeader";
 import BackButton from "../components/BackButton";
+import Class from "../components/Class.js";
 
 function StudentInfo({ courses, onChangeCourse, files, onLoading }) {
   let { id } = useParams();
@@ -37,7 +38,7 @@ function StudentInfo({ courses, onChangeCourse, files, onLoading }) {
           Зарегистрировать ученика в учебной программе
         </Link>
         <h2 className="home__title home__title_type_student">
-          Информация об ученике
+          Информация об ученике:
         </h2>
         <p className="home__description">Школа: {studentEl.institution}</p>
         <p className="home__description">E-mail: {studentEl.username}</p>
@@ -60,6 +61,21 @@ function StudentInfo({ courses, onChangeCourse, files, onLoading }) {
                 );
               })
             : "Нет доступных курсов"}
+        </ul>
+      </div>
+      <div className="home__wrapper home__container">
+        <h2 className="home__title">Мои классы:</h2>
+        <ul className="home__students home__students_type_class">
+          Вы приобрели
+          <Link className="home__link home__link_type_class" to={`/home/student${id}/class6`}>
+            <Class num="6" />
+          </Link>
+          <Link className="home__link home__link_type_class" to={`/home/student${id}/class7`}>
+            <Class num="7" />
+          </Link>
+          <Link className="home__link home__link_type_class" to={`/home/student${id}/class8`}>
+            <Class num="8" />
+          </Link>
         </ul>
       </div>
       <div className="home__wrapper home__container">

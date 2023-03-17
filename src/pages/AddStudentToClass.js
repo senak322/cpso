@@ -1,10 +1,12 @@
 import React from "react";
 import BackButton from "../components/BackButton";
-  import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import useFormAndValidation from "../utils/useFormAndValidation.js";
 
-function AddStudentToClass({ students }) {
-  let { id } = useParams();
+function AddStudentToClass() {
+  let { classid } = useParams();
+
+  const studentEl = JSON.parse(localStorage.getItem("currentStudent"));
 
   const formValues = {};
 
@@ -15,35 +17,16 @@ function AddStudentToClass({ students }) {
     setValues(formValues);
   }, []);
 
-  console.log(values);
 
   return (
     <section className="register">
       <div className="register__container">
-        <h1 className="register__add-header">{id} класс</h1>
+        <h1 className="register__add-header">{classid} класс</h1>
         <form className="register__form" onSubmit={handleSubmitForm}>
           <p className="register__add-description">
-            Выберите ученика которого хотите прикрепить к данному классу
+            Ученик, который будет прикреплен к данному классу:
           </p>
-          <select
-            className="register__select"
-            name="student"
-            value={values.student || "default"}
-            onChange={handleChangeSelect}
-          >
-            <option value="default" disabled>
-              Выберите ученика из списка
-            </option>
-            {Array.isArray(students)
-              ? students.map((el) => {
-                  return (
-                    <option key={el.id} value={el.id}>
-                      {el.lastname + " " + el.firstname + " " + el.middlename}
-                    </option>
-                  );
-                })
-              : "Нет данных"}
-          </select>
+          <h2 className="register__user-name">{studentEl.firstname + " " + studentEl.lastname + " " + studentEl.middlename}</h2>
           <p className="register__add-description">
             Выберите школу для прикрепления
           </p>

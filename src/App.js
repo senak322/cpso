@@ -403,7 +403,7 @@ function App() {
                 }
               />
               <Route
-                path="class:id"
+                path="student:id/class:classid"
                 element={
                   <ProtectedRoute loggedIn={loggedIn}>
                     <ClassStatus />
@@ -411,18 +411,18 @@ function App() {
                 }
               />
               <Route
-                path="class:id/addstudent"
+                path="student:id/class:classid/addstudent"
                 element={
                   <ProtectedRoute loggedIn={loggedIn}>
-                    <AddStudentToClass students={students} />
+                    <AddStudentToClass currentStudent={currentStudent} />
                   </ProtectedRoute>
                 }
               />
               <Route
-                path="class:id/addstudentdocs"
+                path="student:id/class:classid/addstudentdocs"
                 element={
                   <ProtectedRoute loggedIn={loggedIn}>
-                    <AddStudentDocs students={students} />
+                    <AddStudentDocs  />
                   </ProtectedRoute>
                 }
               />
