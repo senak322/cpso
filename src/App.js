@@ -114,7 +114,7 @@ function App() {
     setCurrentStudent(el);
     console.log(el);
     localStorage.setItem("currentStudent", JSON.stringify(el));
-    cbGetCoursesAndFiles(el.id)
+    // cbGetCoursesAndFiles(el.id)
   }
 
   const cbGetCoursesAndFiles = useCallback((id) => {
