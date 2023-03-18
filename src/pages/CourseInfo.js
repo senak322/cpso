@@ -24,7 +24,7 @@ function CourseInfo({  grades, files, onLoading }) {
 
   useEffect(() => {
     onLoading(courseEl, classid)
-  }, [classid])
+  }, [])
 
   return (
     <section className="home">

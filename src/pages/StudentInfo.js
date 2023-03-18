@@ -26,7 +26,7 @@ function StudentInfo({ courses, onChangeCourse, files, onLoading }) {
 
   useEffect(() => {
     onLoading(id);
-  }, [id]);
+  }, [onLoading, id]);
 
   return (
     <section className="home">

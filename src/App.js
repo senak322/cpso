@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SpinnerMain from "./components/SpinnerMain.js";
@@ -114,46 +114,16 @@ function App() {
     setCurrentStudent(el);
     console.log(el);
     localStorage.setItem("currentStudent", JSON.stringify(el));
-    getCoursesAndFiles(el.id);
-    // handleGetCourses(el.id);
-    // handleGetFiles(el.id);
+    cbGetCoursesAndFiles(el.id)
   }
 
-  function getCoursesAndFiles(id) {
+  const cbGetCoursesAndFiles = useCallback((id) => {
     handleGetCourses(id);
     handleGetFiles(id);
-  }
+  },[])
 
-  // const cbTokenCheck = useCallback(() => {
-  //   setPageLoading(true);
-  //   const token = localStorage.getItem("token");
-  //   if (!token) {
-  //     throw new Error("No token in storage");
-  //   }
 
-  //   getContent(token)
-  //     .then((res) => {
-  //       if (res) {
-  //         setLoggedIn(true);
-  //         history("/home/user-info");
-  //         setCurrentUser({
-  //           id: res.data.id,
-  //           name: res.data.name,
-  //           email: res.data.email,
-  //         });
-  //         setStudents(res.students);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     })
-  //     .finally(() => {
-  //       setPageLoading(false);
-  //     })
-
-  // }, []);
-
-  function tokenCheck() {
+  const cbTokenCheck = useCallback(() => {
     setPageLoading(true);
     const token = localStorage.getItem("token");
     if (token) {
@@ -179,14 +149,14 @@ function App() {
     } else {
       setPageLoading(false);
     }
-  }
+  }, []);
 
   function handleLogin(email, password) {
     setIsLoading(true);
     login(email, password)
       .then((res) => {
         if (res.token) {
-          tokenCheck();
+          cbTokenCheck()
           setLoggedIn(true);
           history("/home/user-info");
         }
@@ -228,7 +198,7 @@ function App() {
   function handleAddStudent(email) {
     addStudent(email, currentUser.id)
       .then((res) => {
-        tokenCheck();
+        cbTokenCheck();
         setAddErr(res.message);
         closeAllPopups();
       })
@@ -243,7 +213,8 @@ function App() {
     setIsLoading(true);
     deleteStudent(studentId, currentUser.id)
       .then((res) => {
-        tokenCheck();
+        // tokenCheck();
+        cbTokenCheck()
         console.log(res.message);
         closeAllPopups();
       })
@@ -260,8 +231,7 @@ function App() {
     updateUser(values.name, values.email, "", token)
       .then((res) => {
         console.log(res.message);
-        // cbTokenCheck();
-        tokenCheck();
+        cbTokenCheck();
         closeAllPopups();
       })
       .catch((err) => {
@@ -276,8 +246,7 @@ function App() {
     updateUser(currentUser.name, currentUser.email, values.password, token)
       .then((res) => {
         console.log(res.message);
-        // cbTokenCheck();
-        tokenCheck();
+        cbTokenCheck();
         closeAllPopups();
       })
       .catch((err) => {
@@ -286,7 +255,7 @@ function App() {
       });
   }
 
-  function handleGetGrades(studentId, courseId) {
+  const handleGetGrades = useCallback((studentId, courseId) => {
     getGrades(studentId, courseId)
       .then((res) => {
         console.log(res);
@@ -295,9 +264,9 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }
+  }, [])
 
-  function handleGetCourseFiles(studentId, courseNum) {
+  const handleGetCourseFiles = useCallback((studentId, courseNum) => {
     getCourseFiles(studentId, courseNum)
       .then((res) => {
         console.log(res);
@@ -306,33 +275,19 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }
+  }, [])
 
   function changeCourse(el) {
     localStorage.setItem("currentCourse", JSON.stringify(el));
-    getGradesAndFiles(el);
+    cbGetGradesAndFiles(el)
   }
 
-  function getGradesAndFiles(el, id) {
+  const cbGetGradesAndFiles = useCallback((el, id) => {
     const studentEl = JSON.parse(localStorage.getItem("currentStudent"));
     console.log(studentEl);
     handleGetGrades(studentEl.id, id);
     handleGetCourseFiles(studentEl.id, el.class_number);
-  }
-
-  // function changeStudent(el) {
-  //   setCurrentStudent(el);
-  //   console.log(el);
-  //   localStorage.setItem("currentStudent", JSON.stringify(el));
-  //   getCoursesAndFiles(el.id);
-  //   // handleGetCourses(el.id);
-  //   // handleGetFiles(el.id);
-  // }
-
-  // function getCoursesAndFiles(id) {
-  //   handleGetCourses(id);
-  //   handleGetFiles(id);
-  // }
+  }, [handleGetGrades, handleGetCourseFiles])
 
   useEffect(() => {
     function closeByEscape(e) {
@@ -350,8 +305,8 @@ function App() {
   }, [isOpen]);
 
   useEffect(() => {
-    tokenCheck();
-  }, []);
+    cbTokenCheck()
+  }, [cbTokenCheck]);
 
   if (pageLoading) {
     return <SpinnerMain />;
@@ -397,7 +352,7 @@ function App() {
                       courses={courses}
                       onChangeCourse={changeCourse}
                       files={files}
-                      onLoading={getCoursesAndFiles}
+                      onLoading={cbGetCoursesAndFiles}
                     />
                   </ProtectedRoute>
                 }
@@ -459,7 +414,7 @@ function App() {
                       getGrades={handleGetGrades}
                       grades={grades}
                       files={courseFiles}
-                      onLoading={getGradesAndFiles}
+                      onLoading={cbGetGradesAndFiles}
                     />
                   </ProtectedRoute>
                 }
