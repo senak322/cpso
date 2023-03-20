@@ -26,7 +26,7 @@ function AddStudentToClass() {
           <p className="register__add-description">
             Ученик, который будет прикреплен к данному классу:
           </p>
-          <h2 className="register__user-name">{studentEl.firstname + " " + studentEl.lastname + " " + studentEl.middlename}</h2>
+          <h2 className="register__user-name">{studentEl.lastname + " " + studentEl.firstname + " " + studentEl.middlename}</h2>
           <p className="register__add-description">
             Выберите школу для прикрепления
           </p>
