@@ -2,8 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import UserHeader from "../components/UserHeader";
 import BackButton from "../components/BackButton";
-import {AiOutlineArrowUp, AiOutlineArrowDown} from "react-icons/ai";
-// import GradeItem from "../components/GradeItem";
+
 import GradeList from "../components/GradeList";
 
 function CourseInfo({ grades, files, onLoading, toggleGrades, showGrades }) {
@@ -36,11 +35,15 @@ function CourseInfo({ grades, files, onLoading, toggleGrades, showGrades }) {
       </div>
       <div className="home__wrapper home__container">
         <BackButton />
-        <ul className="home__description">
+        <ul className="home__description home__description_type_grades">
           {grades.grades ? (
             grades.grades.map((el) => {
               return (
-                <GradeList el={el} toggleGrades={toggleGrades} showGrades={showGrades}/>
+                <GradeList
+                  el={el}
+                  toggleGrades={toggleGrades}
+                  showGrades={showGrades}
+                />
               );
             })
           ) : (
@@ -62,6 +65,7 @@ function CourseInfo({ grades, files, onLoading, toggleGrades, showGrades }) {
                         </a>
                       </li>
                     );
+                  return null;
                 })
               : "Нет доступных справок"}
           </ul>

@@ -39,6 +39,7 @@
 @import url(./blocks/home/__link/_type/home__link_type_class.css);
 @import url(./blocks/home/__description/home__description.css);
 @import url(./blocks/home/__description/_type/home__description_type_files.css);
+@import url(./blocks/home/__description/_type/home__description_type_grades.css);
 @import url(./blocks/home/__lesson/home__lesson.css);
 @import url(./blocks/home/__files-container/home__files-container.css);
 @import url(./blocks/home/__back/home__back.css);

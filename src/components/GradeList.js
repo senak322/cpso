@@ -1,12 +1,18 @@
-import {AiOutlineArrowUp, AiOutlineArrowDown} from "react-icons/ai";
+import { useState, useCallback } from "react";
+import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
 import GradeItem from "./GradeItem";
 
-function GradeList({el, toggleGrades, showGrades}) {
+function GradeList({ el }) {
+  const [showGrades, setShowGrades] = useState(false);
+  const cbToggleGrades = useCallback(() => {
+    setShowGrades(!showGrades);
+  }, [showGrades]);
+
   return (
     <li key={el.id}>
-      <div className="home__grade-name" onClick={toggleGrades}>
+      <div className="home__grade-name" onClick={cbToggleGrades}>
         <h3 style={{ margin: 5 }}>{el.item}</h3>
-        <AiOutlineArrowUp />
+        {showGrades ? <AiOutlineArrowUp />  : <AiOutlineArrowDown />}
       </div>
 
       <ul>
