@@ -1,0 +1,8 @@
+.home__grades-list {
+    display: none;
+    transition: all .3s linear;
+}
+
+.home__grades-list_active {
+    display: block;
+}

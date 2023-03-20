@@ -1,12 +1,14 @@
 import { useParams } from "react-router-dom";
-import {useEffect} from "react";
+import { useEffect } from "react";
 import UserHeader from "../components/UserHeader";
 import BackButton from "../components/BackButton";
+import {AiOutlineArrowUp, AiOutlineArrowDown} from "react-icons/ai";
+// import GradeItem from "../components/GradeItem";
+import GradeList from "../components/GradeList";
 
-function CourseInfo({  grades, files, onLoading }) {
-  
+function CourseInfo({ grades, files, onLoading, toggleGrades, showGrades }) {
   let { classid } = useParams();
-  
+
   const courseEl = JSON.parse(localStorage.getItem("currentCourse"));
 
   function havefiles(type) {
@@ -19,12 +21,12 @@ function CourseInfo({  grades, files, onLoading }) {
       return null;
     } else {
       return files.some(haveNeededType);
-    } 
+    }
   }
 
   useEffect(() => {
-    onLoading(courseEl, classid)
-  }, [])
+    onLoading(courseEl, classid);
+  }, []);
 
   return (
     <section className="home">
@@ -38,21 +40,7 @@ function CourseInfo({  grades, files, onLoading }) {
           {grades.grades ? (
             grades.grades.map((el) => {
               return (
-                <li key={el.id}>
-                  <h3>{el.item}</h3>
-                  <p>{el.module}</p>
-                  <ul>
-                    {el.modules.map((el) => {
-                      return (
-                        <li key={el.id}>
-                          <h4 className="home__lesson mb-3">{el.item_name}</h4>
-                          <p>Оценка по пятибалльной системе: {el.grade}</p>
-                          <p>Оценка в баллах: {el.points}</p>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </li>
+                <GradeList el={el} toggleGrades={toggleGrades} showGrades={showGrades}/>
               );
             })
           ) : (
@@ -64,42 +52,39 @@ function CourseInfo({  grades, files, onLoading }) {
             <h4 className="home__title_type_student">
               Справки о прикреплении к школе:
             </h4>
-            { havefiles("attach")
+            {havefiles("attach")
               ? files.map((el, index) => {
-                if (el.type_id === "attach")
-                  return (
-                    <li key={index}>
-                      <a
-                        className="home__link mb-2"
-
-                        href={el.link}
-                      >
-                        {el.type}
-                      </a>
-                    </li>
-                  );
-              })
+                  if (el.type_id === "attach")
+                    return (
+                      <li key={index}>
+                        <a className="home__link mb-2" href={el.link}>
+                          {el.type}
+                        </a>
+                      </li>
+                    );
+                })
               : "Нет доступных справок"}
           </ul>
           <ul className="home__description home__description_type_files">
             <h4 className="home__title_type_student">Справки об аттестации:</h4>
-            { havefiles("attestation")
+            {havefiles("attestation")
               ? files.map((el, index) => {
-                if (el.type_id === "attestation") {
-                  return (
-                    <li key={index}>
-                      <a
-                        className="home__link mb-2"
-                        target="_blank"
-                        href={el.link}
-                        rel="noreferrer"
-                      >
-                        {el.type}
-                      </a>
-                    </li>
-                  );
-                } return null;
-              })
+                  if (el.type_id === "attestation") {
+                    return (
+                      <li key={index}>
+                        <a
+                          className="home__link mb-2"
+                          target="_blank"
+                          href={el.link}
+                          rel="noreferrer"
+                        >
+                          {el.type}
+                        </a>
+                      </li>
+                    );
+                  }
+                  return null;
+                })
               : "Нет доступных справок"}
           </ul>
         </div>

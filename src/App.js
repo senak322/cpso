@@ -60,6 +60,7 @@ function App() {
   const [grades, setGrades] = useState([]);
   const [files, setFiles] = useState([]);
   const [courseFiles, setCourseFiles] = useState([]);
+  const [showGrades, setShowGrades] = useState(false);
   const history = useNavigate();
 
   const isOpen =
@@ -287,7 +288,11 @@ function App() {
     console.log(studentEl);
     handleGetGrades(studentEl.id, id);
     handleGetCourseFiles(studentEl.id, el.class_number);
-  }, [handleGetGrades, handleGetCourseFiles])
+  }, [handleGetGrades, handleGetCourseFiles]);
+
+  const cbToggleGrades = useCallback(() => {
+    setShowGrades(!showGrades);
+  }, [showGrades]);
 
   useEffect(() => {
     function closeByEscape(e) {
@@ -415,6 +420,8 @@ function App() {
                       grades={grades}
                       files={courseFiles}
                       onLoading={cbGetGradesAndFiles}
+                      toggleGrades={cbToggleGrades}
+                      showGrades={showGrades}
                     />
                   </ProtectedRoute>
                 }

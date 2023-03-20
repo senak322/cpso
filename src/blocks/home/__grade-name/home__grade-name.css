@@ -1,0 +1,7 @@
+.home__grade-name {
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #084298;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

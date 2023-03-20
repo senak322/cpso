@@ -46,6 +46,8 @@
 @import url(./blocks/home/__class/home__class.css);
 @import url(./blocks/home/__status-list/home__status-list.css);
 @import url(./blocks/home/__status/home__status.css);
+@import url(./blocks/home/__grades-list/home__grades-list.css);
+@import url(./blocks/home/__grade-name/home__grade-name.css);
 @import url(./blocks/form/form.css);
 @import url(./blocks/form/__container/form__container.css);
 @import url(./blocks/form/__container/_submit/form__container_submit.css);
