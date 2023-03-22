@@ -12,13 +12,21 @@ function GradeList({ el }) {
     <li key={el.id}>
       <div className="home__grade-name" onClick={cbToggleGrades}>
         <h3 style={{ margin: 5 }}>{el.item}</h3>
-        {showGrades ? <AiOutlineArrowUp />  : <AiOutlineArrowDown />}
+        <AiOutlineArrowDown
+          className={`${showGrades ? "active" : "disabled"}`}
+        />
       </div>
 
-      <ul>
+      <ul className={`home__grade-container ${showGrades ? "home__grade-container_active" : ""}`}>
         {el.modules ? (
           el.modules.map((element) => {
-            return <GradeItem el={element} showGrades={showGrades} />;
+            return (
+              <GradeItem
+                key={element.id}
+                el={element}
+                showGrades={showGrades}
+              />
+            );
           })
         ) : (
           <p>Оценок нет</p>

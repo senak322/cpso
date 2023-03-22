@@ -1,0 +1,9 @@
+.active {
+    transform: rotate(-180deg);
+    transition: all 0.3s linear;
+}
+
+.disabled {
+    transform: rotate(-360deg);
+    transition: all 0.3s linear;
+}
