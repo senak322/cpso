@@ -23,7 +23,7 @@ function ClassStatus() {
           </li>
           <li className="home__status">
             <h6>Шаг 3. Справка о зачислении сформирована</h6>
-            <button type="button" className="btn btn-primary">{classid} Класс</button>
+            <Link to={`/home/student${id}/class${classid}/certificate`}><button type="button" className="btn btn-primary">{classid} Класс</button></Link>
             <p>Войдите в класс, чтобы просмотреть или скачать справку</p>
           </li>
           <li className="home__status">

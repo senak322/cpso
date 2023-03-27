@@ -24,6 +24,7 @@ import RegisterStudentForm from "./pages/RegisterStudentForm";
 import RegisterStudentDocuments from "./pages/RegisterStudentDocuments";
 import AddStudentToClass from "./pages/AddStudentToClass";
 import AddStudentDocs from "./pages/AddStudentDocs";
+import StudentСertificate from "./pages/StudentСertificate";
 import {
   login,
   getContent,
@@ -121,8 +122,7 @@ function App() {
   const cbGetCoursesAndFiles = useCallback((id) => {
     handleGetCourses(id);
     handleGetFiles(id);
-  },[])
-
+  }, []);
 
   const cbTokenCheck = useCallback(() => {
     setPageLoading(true);
@@ -157,7 +157,7 @@ function App() {
     login(email, password)
       .then((res) => {
         if (res.token) {
-          cbTokenCheck()
+          cbTokenCheck();
           setLoggedIn(true);
           history("/home/user-info");
         }
@@ -214,8 +214,7 @@ function App() {
     setIsLoading(true);
     deleteStudent(studentId, currentUser.id)
       .then((res) => {
-        // tokenCheck();
-        cbTokenCheck()
+        cbTokenCheck();
         console.log(res.message);
         closeAllPopups();
       })
@@ -265,7 +264,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, [])
+  }, []);
 
   const handleGetCourseFiles = useCallback((studentId, courseNum) => {
     getCourseFiles(studentId, courseNum)
@@ -276,23 +275,24 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, [])
+  }, []);
 
   function changeCourse(el) {
     localStorage.setItem("currentCourse", JSON.stringify(el));
-    cbGetGradesAndFiles(el)
+    cbGetGradesAndFiles(el);
   }
 
-  const cbGetGradesAndFiles = useCallback((el, id) => {
-    const studentEl = JSON.parse(localStorage.getItem("currentStudent"));
-    console.log(studentEl);
-    handleGetGrades(studentEl.id, id);
-    handleGetCourseFiles(studentEl.id, el.class_number);
-  }, [handleGetGrades, handleGetCourseFiles]);
+  const cbGetGradesAndFiles = useCallback(
+    (el, id) => {
+      const studentEl = JSON.parse(localStorage.getItem("currentStudent"));
+      console.log(studentEl);
+      handleGetGrades(studentEl.id, id);
+      handleGetCourseFiles(studentEl.id, el.class_number);
+    },
+    [handleGetGrades, handleGetCourseFiles]
+  );
 
-  // const cbToggleGrades = useCallback(() => {
-  //   setShowGrades(!showGrades);
-  // }, [showGrades]);
+  
 
   useEffect(() => {
     function closeByEscape(e) {
@@ -310,7 +310,7 @@ function App() {
   }, [isOpen]);
 
   useEffect(() => {
-    cbTokenCheck()
+    cbTokenCheck();
   }, [cbTokenCheck]);
 
   if (pageLoading) {
@@ -382,7 +382,15 @@ function App() {
                 path="student:id/class:classid/addstudentdocs"
                 element={
                   <ProtectedRoute loggedIn={loggedIn}>
-                    <AddStudentDocs  />
+                    <AddStudentDocs />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="student:id/class:classid/certificate"
+                element={
+                  <ProtectedRoute loggedIn={loggedIn}>
+                    <StudentСertificate />
                   </ProtectedRoute>
                 }
               />

@@ -1,7 +1,10 @@
 import React from "react";
 import { FaBars } from "react-icons/fa";
 import { AiFillHome, AiFillSetting } from "react-icons/ai";
+import { RiArrowGoBackFill } from "react-icons/ri";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 function SideBar() {
   const [isActiveBar, setIsActiveBar] = React.useState(false);
@@ -11,6 +14,12 @@ function SideBar() {
   function handleToggle() {
     setIsActiveBar(!isActiveBar);
   }
+
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1);
+  };
 
   return (
     <nav className={`side-bar ${isActiveBar ? "side-bar_active" : ""}`}>
@@ -32,6 +41,9 @@ function SideBar() {
             <AiFillSetting className="side-bar__icon" />
             {/* <p className="side-bar__name">Настройки</p> */}
           </NavLink>
+        </li>
+        <li className="side-bar__container link" style={{cursor: "pointer"}} onClick={goBack}>
+          <RiArrowGoBackFill className="side-bar__icon"/>
         </li>
       </ul>
     </nav>
