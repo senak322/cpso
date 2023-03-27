@@ -21,7 +21,7 @@ function StudentСertificate() {
         </a>
         <p className="register__certificate-discription">
         Аттестация за выбранный класс доступна.
-Войдите на платформу
+Войдите на платформу.
         </p>
         <a href="#" target="_blank" className="register__certificate-link">
             Справка с оценками

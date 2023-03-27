@@ -4,4 +4,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
+}
+
+.home__grade-name:hover {
+    color: #084298;
 }
