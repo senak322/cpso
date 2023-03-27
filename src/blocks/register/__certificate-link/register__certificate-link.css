@@ -1,0 +1,18 @@
+.register__certificate-link {
+    color: white;
+    text-decoration: none;
+    padding: 20px;
+    background-color: #00b2da;
+    border-radius: 10px;
+    font-weight: 400;
+    font-size: 1.2rem;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.register__certificate-link:hover {
+    color: white;
+    background-color: #005bda;
+    
+}
