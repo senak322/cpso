@@ -1,13 +1,14 @@
-import { useState, useCallback } from "react";
-import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
+import { useState, useCallback,  } from "react";
+import { AiOutlineArrowDown } from "react-icons/ai";
 import GradeItem from "./GradeItem";
+
 
 function GradeList({ el }) {
   const [showGrades, setShowGrades] = useState(false);
   const cbToggleGrades = useCallback(() => {
     setShowGrades(!showGrades);
   }, [showGrades]);
-
+  
   return (
     <li key={el.id}>
       <div className="home__grade-name" onClick={cbToggleGrades}>
@@ -16,7 +17,7 @@ function GradeList({ el }) {
           className={`${showGrades ? "active" : "disabled"}`}
         />
       </div>
-
+      
       <ul className={`home__grade-container ${showGrades ? "home__grade-container_active" : ""}`}>
         {el.modules ? (
           el.modules.map((element) => {

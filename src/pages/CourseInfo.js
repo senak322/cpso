@@ -37,7 +37,7 @@ function CourseInfo({ grades, files, onLoading, toggleGrades, showGrades }) {
         <BackButton />
         <ul className="home__description home__description_type_grades">
           {grades.grades ? (
-            grades.grades.map((el, index) => {
+            grades.grades.map((el) => {
               return (
                 <GradeList
                   el={el}

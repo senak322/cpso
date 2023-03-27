@@ -4,33 +4,23 @@
   } */
 
   .home__grade-container {
-    /* transition: all 0.3s ease-in-out; */
+    height: 0;
     list-style-type: none;
-    /* display: none; */
-  }
-  
-  .home__grade-container-enter {
+    visibility: hidden;
+    opacity: 0;
+    /* transform: translateY(-100%); */
     /* transition: all 0.3s ease-in-out; */
-    /* display: none; */
-    opacity: 0;
-    transform: scale(0.9);
   }
   
-  .home__grade-container-active {
+  .home__grade-container_active {
+    height: fit-content;
+    display: block;
     opacity: 1;
-    transform: translateX(0);
-    transition: opacity 300ms, transform 300ms;
-  
-    /* transform: translateY(-150%);
-      animation: ani 1s forwards; */
+    visibility: visible;
+    /* transform: translateY(0); */
+    transition: all 0.3s ease-in-out;
   }
+
   
-  .home__grade-container-exit {
-    opacity: 1;
-  }
+
   
-  .home__grade-container-active {
-    opacity: 0;
-    transform: scale(0.9);
-    transition: opacity 300ms, transform 300ms;
-  }
