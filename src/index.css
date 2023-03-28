@@ -92,6 +92,7 @@
 @import url(./blocks/register/__user-name/register__user-name.css);
 @import url(./blocks/register/__certificate-link/register__certificate-link.css);
 @import url(./blocks/register/__certificate-discription/register__certificate-discription.css);
+@import url(./blocks/register/__wrapper/register__wrapper.css);
 @import url(./blocks/footer/footer.css);
 @import url(./blocks/footer/__container/footer__container.css);
 @import url(./blocks/footer/__nav/footer__nav.css);

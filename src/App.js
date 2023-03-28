@@ -25,6 +25,7 @@ import RegisterStudentDocuments from "./pages/RegisterStudentDocuments";
 import AddStudentToClass from "./pages/AddStudentToClass";
 import AddStudentDocs from "./pages/AddStudentDocs";
 import StudentСertificate from "./pages/StudentСertificate";
+import StudentСertificateOriginal from "./pages/StudentСertificateOriginal";
 import {
   login,
   getContent,
@@ -292,8 +293,6 @@ function App() {
     [handleGetGrades, handleGetCourseFiles]
   );
 
-  
-
   useEffect(() => {
     function closeByEscape(e) {
       if (e.key === "Escape") {
@@ -393,7 +392,16 @@ function App() {
                     <StudentСertificate />
                   </ProtectedRoute>
                 }
-              />
+              >
+                <Route
+                  path="original"
+                  element={
+                    <ProtectedRoute loggedIn={loggedIn}>
+                      <StudentСertificateOriginal />
+                    </ProtectedRoute>
+                  }
+                />
+              </Route>
               <Route
                 path="registerstudent"
                 element={
