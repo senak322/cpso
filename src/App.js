@@ -26,6 +26,7 @@ import AddStudentToClass from "./pages/AddStudentToClass";
 import AddStudentDocs from "./pages/AddStudentDocs";
 import StudentСertificate from "./pages/StudentСertificate";
 import StudentСertificateOriginal from "./pages/StudentСertificateOriginal";
+import StudentGrades from "./pages/StudentGrades";
 import {
   login,
   getContent,
@@ -62,7 +63,6 @@ function App() {
   const [grades, setGrades] = useState([]);
   const [files, setFiles] = useState([]);
   const [courseFiles, setCourseFiles] = useState([]);
-  // const [showGrades, setShowGrades] = useState(false);
   const history = useNavigate();
 
   const isOpen =
@@ -99,31 +99,30 @@ function App() {
     setIsEditPasswordPopupOpen(true);
   }
 
-  function handleGetCourses(studentId) {
+  const handleGetCourses = useCallback((studentId) => {
     getCourses(studentId).then((res) => {
       console.log(res);
       setCourses(res);
-    });
-  }
+    })
+  },[])
 
-  function handleGetFiles(id) {
+  const handleGetFiles = useCallback((id) => {
     getFiles(id).then((res) => {
       console.log(res);
       setFiles(res.files);
     });
-  }
+  }, []);
 
   function changeStudent(el) {
     setCurrentStudent(el);
     console.log(el);
     localStorage.setItem("currentStudent", JSON.stringify(el));
-    // cbGetCoursesAndFiles(el.id)
   }
 
   const cbGetCoursesAndFiles = useCallback((id) => {
     handleGetCourses(id);
     handleGetFiles(id);
-  }, []);
+  }, [handleGetCourses, handleGetFiles]);
 
   const cbTokenCheck = useCallback(() => {
     setPageLoading(true);
@@ -402,6 +401,14 @@ function App() {
                   }
                 />
               </Route>
+              <Route
+                path="student:id/class:classid/grades"
+                element={
+                  <ProtectedRoute loggedIn={loggedIn}>
+                    <StudentGrades />
+                  </ProtectedRoute>
+                }
+              />
               <Route
                 path="registerstudent"
                 element={
