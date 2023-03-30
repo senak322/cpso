@@ -402,10 +402,10 @@ function App() {
                 />
               </Route>
               <Route
-                path="student:id/class:classid/grades"
+                path="student:id/class:classid/courses"
                 element={
                   <ProtectedRoute loggedIn={loggedIn}>
-                    <StudentGrades getGrades={handleGetGrades} />
+                    <StudentGrades getCourses={handleGetCourses} courses={courses} onChangeCourse={changeCourse} />
                   </ProtectedRoute>
                 }
               />

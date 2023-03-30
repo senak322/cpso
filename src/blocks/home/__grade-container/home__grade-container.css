@@ -16,7 +16,7 @@
   
   .home__grade-container_active {
     
-    max-height: 50rem;
+    max-height: 100rem;
     display: block;
     opacity: 1;
     visibility: visible;

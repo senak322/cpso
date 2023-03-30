@@ -28,7 +28,7 @@ function ClassStatus() {
           </li>
           <li className="home__status">
             <h6>Шаг 4. Ознакомиться со статусом по Аттестации</h6>
-            <Link to={`/home/student${id}/class${classid}/grades`}><button type="button" className="btn btn-primary">{classid} Класс</button></Link>
+            <Link to={`/home/student${id}/class${classid}/courses`}><button type="button" className="btn btn-primary">{classid} Класс</button></Link>
             <p>
               Аттестацию можно пройти на платформе. Для сдачи пройдите ВХОД НА
               ПЛАТФОРМУ с логином ученика
@@ -36,7 +36,7 @@ function ClassStatus() {
           </li>
           <li className="home__status">
             <h6>Шаг 5. Аттестация завершена</h6>
-            <button type="button" className="btn btn-primary">{classid} Класс</button>
+            <Link to={`/home/student${id}/class${classid}/certificate`}><button type="button" className="btn btn-primary">{classid} Класс</button></Link>
             <p>Мы начали формировать справку с оценками</p>
           </li>
           <li className="home__status">

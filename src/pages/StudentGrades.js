@@ -1,13 +1,15 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useEffect } from "react";
+import CourseName from "../components/CourseName";
+import BackButton from "../components/BackButton";
 
-function StudentGrades({getGrades}) {
-  let { classid, id } = useParams();
+function StudentGrades({getCourses, courses, changeCourse}) {
+  let { id } = useParams();
 
   useEffect(()=> {
-    getGrades(id, classid)
+    getCourses(id)
     
-  }, []);
+  }, [getCourses, id]);
 
   return (
     <section className="register">
@@ -16,6 +18,23 @@ function StudentGrades({getGrades}) {
         <h2 className="register__user-name">
             Статус аттестации ученика
           </h2>
+          <ul className="home__description">
+          Доступные оценки:{" "}
+          {courses.courses
+            ? courses.courses.map((el) => {
+                return (
+                  <Link
+                    className="home__link"
+                    to={`/home/course${el.id}`}
+                    key={el.id}
+                  >
+                    <CourseName el={el} changeCourse={changeCourse} />
+                  </Link>
+                );
+              })
+            : "Нет доступных курсов"}
+        </ul>
+        <BackButton />
       </div>
     </section>
   );
