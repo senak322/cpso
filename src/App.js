@@ -405,7 +405,7 @@ function App() {
                 path="student:id/class:classid/grades"
                 element={
                   <ProtectedRoute loggedIn={loggedIn}>
-                    <StudentGrades />
+                    <StudentGrades getGrades={handleGetGrades} />
                   </ProtectedRoute>
                 }
               />
