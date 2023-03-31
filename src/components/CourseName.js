@@ -10,6 +10,7 @@ function CourseName({ el, onChangeCourse }) {
       className="home__student home__student_type_class"
       onClick={handleChangeCourse}
       key={el.id}
+      style={{margin: 0}}
     >
       {el.name}
     </li>

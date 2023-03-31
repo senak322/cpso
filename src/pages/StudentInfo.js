@@ -46,8 +46,9 @@ function StudentInfo({ courses, onChangeCourse, files, onLoading }) {
         <p className="home__description">
           Текущий класс: {studentEl.current_class}
         </p>
+        <p className="home__description">Доступные оценки:</p>
         <ul className="home__description">
-          Доступные оценки:{" "}
+          
           {courses.courses
             ? courses.courses.map((el) => {
                 return (

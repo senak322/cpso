@@ -15,11 +15,11 @@ function StudentGrades({getCourses, courses, changeCourse}) {
     <section className="register">
       <div className="register__container">
         
-        <h2 className="register__user-name">
+        <h2 className="register__user-name mt-3">
             Статус аттестации ученика
           </h2>
+          <p className="home__description">Доступные оценки:</p>
           <ul className="home__description">
-          Доступные оценки:{" "}
           {courses.courses
             ? courses.courses.map((el) => {
                 return (
