@@ -100,17 +100,25 @@ function App() {
   }
 
   const handleGetCourses = useCallback((studentId) => {
-    getCourses(studentId).then((res) => {
-      console.log(res);
-      setCourses(res);
-    })
-  },[])
+    getCourses(studentId)
+      .then((res) => {
+        console.log(res);
+        setCourses(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }, []);
 
   const handleGetFiles = useCallback((id) => {
-    getFiles(id).then((res) => {
-      console.log(res);
-      setFiles(res.files);
-    });
+    getFiles(id)
+      .then((res) => {
+        console.log(res);
+        setFiles(res.files);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }, []);
 
   function changeStudent(el) {
@@ -119,10 +127,13 @@ function App() {
     localStorage.setItem("currentStudent", JSON.stringify(el));
   }
 
-  const cbGetCoursesAndFiles = useCallback((id) => {
-    handleGetCourses(id);
-    handleGetFiles(id);
-  }, [handleGetCourses, handleGetFiles]);
+  const cbGetCoursesAndFiles = useCallback(
+    (id) => {
+      handleGetCourses(id);
+      handleGetFiles(id);
+    },
+    [handleGetCourses, handleGetFiles]
+  );
 
   const cbTokenCheck = useCallback(() => {
     setPageLoading(true);
@@ -405,7 +416,11 @@ function App() {
                 path="student:id/class:classid/courses"
                 element={
                   <ProtectedRoute loggedIn={loggedIn}>
-                    <StudentGrades getCourses={handleGetCourses} courses={courses} onChangeCourse={changeCourse} />
+                    <StudentGrades
+                      getCourses={handleGetCourses}
+                      courses={courses}
+                      onChangeCourse={changeCourse}
+                    />
                   </ProtectedRoute>
                 }
               />

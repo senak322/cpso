@@ -1,27 +1,24 @@
-/* @keyframes ani {
-    0% {transform: translateY(-100%); }
-    100% {transform: translateY(0); }
-  } */
 
   .home__grade-container {
-    
     max-height: 0;
     list-style-type: none;
     visibility: hidden;
     opacity: 0;
     overflow: hidden;
-    /* transform: translateY(-100%); */
     transition: all 0.3s ease-in-out;
   }
   
   .home__grade-container_active {
-    
-    max-height: 100rem;
-    display: block;
+    max-height: 100rem; 
     opacity: 1;
     visibility: visible;
-    /* transform: translateY(0); */
     transition: all 0.3s ease-in-out;
+  }
+
+  @media screen and (max-width: 767px) {
+    .home__grade-container{
+        padding: 0;
+    }
   }
 
   
