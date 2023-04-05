@@ -1,14 +1,25 @@
 .register__add-btn {
-    height: 3rem;
-    transition: all 0.1s linear;
-    font-family: 'Inter', Arial, Helvetica, sans-serif;
-    background-color: #00adff;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 0.5rem;
+  height: 3rem;
+  transition: all 0.1s linear;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  background-color: rgb(53, 39, 252);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
 }
 
 .register__add-btn:hover {
-    background-color: rgb(4 80 255);
+  color: white;
+  background-color: rgb(4 80 255);
+}
+
+@media screen and (max-width: 767px) {
+  .register__add-btn {
+    height: 2.5rem;
+    margin: 10px;
+  }
 }

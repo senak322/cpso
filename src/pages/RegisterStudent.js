@@ -22,8 +22,8 @@ function RegisterStudent() {
             >
               Скачать Перечень документов, которые необходимо представить в
               школу
-              <AiOutlineDoubleRight className="register__double-arrow" /></a>
-            
+              <AiOutlineDoubleRight className="register__double-arrow" />
+            </a>
           </li>
           <li className="register__doc-link">
             <a
@@ -33,8 +33,8 @@ function RegisterStudent() {
               href="https://hssc-exam.ru/reg_form_23/blanks/1505/Заявление%20на%20прикрепление%20СО%201505.pdf"
             >
               Скачать Заявление в школу (шаблон)
-              <AiOutlineDoubleRight className="register__double-arrow" /></a>
-            
+              <AiOutlineDoubleRight className="register__double-arrow" />
+            </a>
           </li>
           <li className="register__doc-link">
             <a
@@ -44,8 +44,8 @@ function RegisterStudent() {
               href="https://hssc-exam.ru/reg_form_23/blanks/1505/Согласие%20на%20обработку%20ПД%201505.pdf"
             >
               Скачать Согласие на обработку персональных данных (шаблон)
-              <AiOutlineDoubleRight className="register__double-arrow" /></a>
-            
+              <AiOutlineDoubleRight className="register__double-arrow" />
+            </a>
           </li>
           <li className="register__doc-link">
             <a
@@ -55,18 +55,20 @@ function RegisterStudent() {
               href="https://hssc-exam.ru/reg_form_23/blanks/Доверенность.pdf"
             >
               Скачать Доверенность на подачу документов (шаблон)
-              <AiOutlineDoubleRight className="register__double-arrow" /></a>
-            
+              <AiOutlineDoubleRight className="register__double-arrow" />
+            </a>
           </li>
         </ul>
-        <Link
-          className="register__description register__description_type_blue"
-          to="/home/form"
-        >
-          Далее
-          <HiArrowNarrowRight />
-        </Link>
-        <BackButton />
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <BackButton />
+          <Link
+            className="register__add-btn"
+            to="/home/form"
+          >
+            Далее
+            <HiArrowNarrowRight />
+          </Link>
+        </div>
       </div>
     </div>
   );

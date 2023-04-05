@@ -17,18 +17,19 @@ function StudentСertificate() {
             " " +
             studentEl.middlename}
         </h2>
-        <a href="#" target="_blank" className="register__certificate-link">
-          Справка о зачислении в школу
-        </a>
         <p className="register__certificate-discription">
           Аттестация за выбранный класс доступна. Войдите на платформу.
         </p>
+        <a href="#" target="_blank" className="register__certificate-link mb-3">
+          Справка о зачислении в школу
+        </a>
+        
         <a href="#" target="_blank" className="register__certificate-link">
           Справка с оценками
         </a>
         <div className="mt-5" style={{ display: "flex", alignItems: "center" }}>
           <BackButton />
-          <Link to="original">
+          <Link to="original" style={{textDecoration: "none"}}>
             <button className="register__add-btn">Запросить оригинал</button>
           </Link>
         </div>

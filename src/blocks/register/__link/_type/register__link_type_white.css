@@ -10,7 +10,8 @@
 }
 
 .register__link_type_white:hover {
-    background-color: rgb(12 70 138 / 50%);
+    color: black;
+    background-color: #f1faff;
 }
 
 @media screen and (max-width: 767px) {
