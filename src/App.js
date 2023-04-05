@@ -551,6 +551,7 @@ function App() {
             message={isAuthOk ? "" : errMesaage}
           />
         </CurrentUserContext.Provider>
+       
       </main>
       <Footer />
     </>

@@ -9,6 +9,6 @@
 
 @media screen and (max-width: 485px) {
     .home__add-student_type_delete {
-        margin-right: 0;
+        margin-right: .3rem;
     }
   }
