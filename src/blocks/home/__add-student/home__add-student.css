@@ -1,20 +1,22 @@
 .home__add-student {
-    border: 2px solid;
-    border-radius: 5px;
-    background-color: white;
-    color: #455a64;
-    font-weight: 600;
-    font-size: 18px;
-    transition: all 0.1s linear;
+  margin-top: 1rem;
+  border: 2px solid;
+  border-radius: 5px;
+  background-color: white;
+  color: #455a64;
+  font-weight: 500;
+  font-size: 18px;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  transition: all 0.1s linear;
 }
 
 .home__add-student:hover {
-    background-color: #455a64;
-    color: white;
+  background-color: #455a64;
+  color: white;
 }
 
 @media screen and (max-width: 767px) {
-    .home__add-student {
-      font-size: 15px;
-    }
+  .home__add-student {
+    font-size: 15px;
   }
+}

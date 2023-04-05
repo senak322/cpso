@@ -10,5 +10,6 @@
 @media screen and (max-width: 767px) {
     .home__wrapper {
         width: 100%;
+        padding: 15px;
     }
   }

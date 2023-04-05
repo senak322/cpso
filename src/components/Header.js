@@ -11,6 +11,7 @@ function Header(props) {
       <Navbar className="p-0">
         <Container fluid>
           <a href="https://hssc-exam.ru">
+            {/* <div className="header__logo"></div> */}
             <img
               src={logoHeader}
               className="header__logo"

@@ -1,6 +1,7 @@
 .home__title {
     margin: 0;
     color: #455a64;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
 }
 
 @media screen and (max-width: 767px) {

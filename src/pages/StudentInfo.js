@@ -34,12 +34,13 @@ function StudentInfo({ courses, onChangeCourse, files, onLoading }) {
 
       <div className="home__wrapper home__container">
         <BackButton />
-        <Link className="home__add-student home__link home__regiser" to={`/home/registerstudent`}>
-          Зарегистрировать ученика в учебной программе
-        </Link>
+        
         <h2 className="home__title home__title_type_student">
           Информация об ученике:
         </h2>
+        <Link className="home__add-student home__link home__regiser" to={`/home/registerstudent`}>
+          Зарегистрировать ученика в учебной программе
+        </Link>
         <p className="home__description">Школа: {studentEl.institution}</p>
         <p className="home__description">E-mail: {studentEl.username}</p>
         <p className="home__description">Классы: {studentEl.department}</p>
@@ -65,9 +66,9 @@ function StudentInfo({ courses, onChangeCourse, files, onLoading }) {
         </ul>
       </div>
       <div className="home__wrapper home__container">
-        <h2 className="home__title">Мои классы:</h2>
+        <h2 className="home__title mb-3">Мои классы:</h2>
+        {/* <p className="home__description">Вы приобрели</p> */}
         <ul className="home__students home__students_type_class">
-          Вы приобрели
           <Link className="home__link home__link_type_class" to={`/home/student${id}/class6`}>
             <Class num="6" />
           </Link>
