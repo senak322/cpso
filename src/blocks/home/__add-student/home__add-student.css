@@ -1,9 +1,10 @@
 .home__add-student {
+  padding: 5px;
   margin-top: 1rem;
   border: 2px solid;
   border-radius: 5px;
   background-color: white;
-  color: #455a64;
+  color: #0071a6;
   font-weight: 500;
   font-size: 18px;
   font-family: "Inter", Arial, Helvetica, sans-serif;
@@ -11,7 +12,7 @@
 }
 
 .home__add-student:hover {
-  background-color: #455a64;
+  background-color: #035d88;
   color: white;
 }
 

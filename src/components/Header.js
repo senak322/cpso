@@ -10,8 +10,8 @@ function Header(props) {
     <header className="header">
       <Navbar className="p-0">
         <Container fluid>
-          <a href="https://hssc-exam.ru">
-            {/* <div className="header__logo"></div> */}
+          
+            <a href="https://hssc-exam.ru" target="_blank" rel="noreferrer">
             <img
               src={logoHeader}
               className="header__logo"

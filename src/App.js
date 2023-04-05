@@ -2,7 +2,8 @@ import { useState, useEffect, useCallback } from "react";
 import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SpinnerMain from "./components/SpinnerMain.js";
-import books from "./images/books.jpg";
+// import books from "./images/books.jpg";
+import back from "./images/back.jpg";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Settings from "./pages/Settings.js";
@@ -332,7 +333,7 @@ function App() {
 
       <main
         className={`main ${loggedIn ? "main__loggined" : ""}`}
-        style={{ backgroundImage: `url(${books})` }}
+        style={{ backgroundImage: `url(${back})` }}
       >
         <CurrentUserContext.Provider value={currentUser}>
           <Routes>

@@ -26,20 +26,21 @@ function Settings({onOpenEditName, onOpenEditPassword}) {
         <button
           type="button"
           className="home__add-student"
+          style={{margin: 0}}
           onClick={handleEditName}
         >
           Изменить ФИО/E-mail
         </button>
-      </div>
-      <div className="home__wrapper home__container">
         <button
           type="button"
           className="home__add-student"
+          style={{marginTop: "1rem"}}
           onClick={handleEditPassword}
         >
           Изменить пароль
         </button>
       </div>
+      
     </section>
   );
 }
