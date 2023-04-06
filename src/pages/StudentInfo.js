@@ -94,7 +94,7 @@ function StudentInfo({ courses, onChangeCourse, files, onLoading }) {
                   if (el.type_id === "attach") {
                     return (
                       <li key={index}>
-                        <a className="home__link mb-2" href={el.link}>
+                        <a className="home__link home__link_type_docs mb-2" href={el.link}>
                           {el.type}
                         </a>
                       </li>
@@ -112,7 +112,7 @@ function StudentInfo({ courses, onChangeCourse, files, onLoading }) {
                   if (el.type_id === "attestation") {
                     return (
                       <li key={index}>
-                        <a className="home__link mb-2" style={{color: "blue"}} href={el.link}>
+                        <a className="home__link home__link_type_docs mb-2" href={el.link}>
                           {el.type}
                         </a>
                       </li>

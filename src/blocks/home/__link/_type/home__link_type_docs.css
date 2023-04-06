@@ -1,0 +1,8 @@
+.home__link_type_docs {
+    color: #13b0e1;
+    transition: all .2s ease-in-out;
+}
+
+.home__link_type_docs:hover {
+    color: #097ca0;
+}

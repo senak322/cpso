@@ -37,6 +37,7 @@
 @import url(./blocks/home/__student-name/home__student-name.css);
 @import url(./blocks/home/__link/home__link.css);
 @import url(./blocks/home/__link/_type/home__link_type_class.css);
+@import url(./blocks/home/__link/_type/home__link_type_docs.css);
 @import url(./blocks/home/__description/home__description.css);
 @import url(./blocks/home/__description/_type/home__description_type_files.css);
 @import url(./blocks/home/__description/_type/home__description_type_grades.css);
