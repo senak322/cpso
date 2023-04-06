@@ -44,7 +44,7 @@ function ClassStatus() {
           </li>
         </ul>
         
-        <button type="button" className="btn btn-danger mb-3 mx-3">Купить следующий класс</button>
+        <button type="button" className="btn btn-success mb-3 mx-3">Купить следующий класс</button>
         <button type="button" className="btn btn-secondary mb-3 mx-3">Открепиться из школы</button>
         <BackButton />
       </div>

@@ -25,7 +25,7 @@ function UserInfo({
       </div>
 
       <div className="home__wrapper home__container">
-        <h2 className="home__title mb-3">Мои ученики:</h2>
+        <h2 className="home__title mb-3" style={{margin: 0}}>Мои ученики:</h2>
         <button
           type="button"
           className="home__add-student"

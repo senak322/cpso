@@ -34,13 +34,13 @@ function StudentInfo({ courses, onChangeCourse, files, onLoading }) {
 
       <div className="home__wrapper home__container">
         <BackButton />
-        
-        <h2 className="home__title home__title_type_student">
-          Информация об ученике:
-        </h2>
         <Link className="home__add-student home__link home__regiser" to={`/home/registerstudent`}>
           Зарегистрировать ученика в учебной программе
         </Link>
+        <h2 className="home__title home__title_type_student">
+          Информация об ученике:
+        </h2>
+        
         <p className="home__description">Школа: {studentEl.institution}</p>
         <p className="home__description">E-mail: {studentEl.username}</p>
         <p className="home__description">Классы: {studentEl.department}</p>
@@ -82,11 +82,11 @@ function StudentInfo({ courses, onChangeCourse, files, onLoading }) {
       </div>
       <div className="home__wrapper home__container">
         <h2 className="home__title home__title_type_student">
-          Доступные справки
+          Доступные справки:
         </h2>
         <div className="home__files-container">
           <ul className="home__description home__description_type_files">
-            <h4 className="home__title_type_student">
+            <h4 style={{margin: 0}}>
               Справки о прикреплении к школе:
             </h4>
             {havefiles("attach")
@@ -106,13 +106,13 @@ function StudentInfo({ courses, onChangeCourse, files, onLoading }) {
               : "Нет доступных справок"}
           </ul>
           <ul className="home__description home__description_type_files">
-            <h4 className="home__title_type_student">Справки об аттестации:</h4>
+            <h4 style={{margin: 0}}>Справки об аттестации:</h4>
             {havefiles("attestation")
               ? files.map((el, index) => {
                   if (el.type_id === "attestation") {
                     return (
                       <li key={index}>
-                        <a className="home__link mb-2" href={el.link}>
+                        <a className="home__link mb-2" style={{color: "blue"}} href={el.link}>
                           {el.type}
                         </a>
                       </li>
