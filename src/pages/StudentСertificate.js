@@ -2,7 +2,7 @@ import { useParams, Outlet, Link } from "react-router-dom";
 import BackButton from "../components/BackButton";
 
 function StudentСertificate() {
-  let { classid, id } = useParams();
+  let { classid } = useParams();
   const studentEl = JSON.parse(localStorage.getItem("currentStudent"));
   return (
     
@@ -20,11 +20,11 @@ function StudentСertificate() {
         <p className="register__certificate-discription">
           Аттестация за выбранный класс доступна. Войдите на платформу.
         </p>
-        <a href="#" target="_blank" className="register__certificate-link mb-3">
+        <a href="https://hssc-exam.ru/login/index.php" target="_blank" rel="noreferrer" className="register__certificate-link mb-3">
           Справка о зачислении в школу
         </a>
         
-        <a href="#" target="_blank" className="register__certificate-link">
+        <a href="https://hssc-exam.ru/login/index.php" target="_blank" rel="noreferrer" className="register__certificate-link">
           Справка с оценками
         </a>
         <div className="mt-5" style={{ display: "flex", alignItems: "center" }}>

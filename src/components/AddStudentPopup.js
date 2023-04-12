@@ -1,24 +1,34 @@
-import React from "react";
+import { useEffect, useCallback } from "react";
 import useFormAndValidation from "../utils/useFormAndValidation.js";
 import close from "../images/close.svg";
 
 function AddStudentPopup({ isOpen, onClose, onSubmit, isAddOk, addErr }) {
-  
-  const formValues = {
-    email: "",
-  };
+  const {
+    values,
+    handleChange,
+    setValues,
+    errors,
+    isValid,
+    handleBlur,
+    resetForm,
+  } = useFormAndValidation();
 
-  const { values, handleChange, setValues, errors, isValid, handleBlur } =
-    useFormAndValidation();
+  const cbSetValues = useCallback(() => {
+    const formValues = {};
+    setValues(formValues);
+  }, [setValues]);
 
   function handleSubmit(e) {
     e.preventDefault();
     onSubmit(values.email);
   }
 
-  React.useEffect(() => {
-    setValues(formValues);
-  }, [isOpen]);
+  useEffect(() => {
+    cbSetValues();
+    if (!isOpen) {
+      resetForm();
+    }
+  }, [cbSetValues, resetForm, isOpen]);
 
   return (
     <div className={`popup ${isOpen ? "popup_is-open" : ""} popup_type_info `}>

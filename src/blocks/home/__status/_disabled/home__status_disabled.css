@@ -1,0 +1,11 @@
+/* .home__status_disabled {
+    background: rgb(40, 43, 46);
+} */
+
+.home__status_disabled::after {
+    background: rgb(142 159 175);
+}
+
+.home__status_disabled::before {
+    background: rgb(142 159 175);
+}
