@@ -8,14 +8,14 @@ function AddStudentToClass() {
 
   const studentEl = JSON.parse(localStorage.getItem("currentStudent"));
 
-  const formValues = {};
-
-  const { values, setValues, handleChangeSelect, handleSubmitForm } =
+  const { values, setValues, handleChangeSelect, handleSubmitForm, resetForm } =
     useFormAndValidation();
 
   React.useEffect(() => {
+    const formValues = {};
     setValues(formValues);
-  }, []);
+    resetForm()
+  }, [resetForm, setValues]);
 
 
   return (

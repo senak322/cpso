@@ -6,14 +6,14 @@ import useFormAndValidation from "../utils/useFormAndValidation.js";
 function AddStudentDocs() {
   let { classid } = useParams();
 
-  const formValues = {};
-
-  const { values, setValues, handleSubmitForm, hadleChangeFiles } =
+  const { values, setValues, handleSubmitForm, hadleChangeFiles, resetForm } =
     useFormAndValidation();
 
   React.useEffect(() => {
+    const formValues = {};
     setValues(formValues);
-  }, []);
+    resetForm()
+  }, [resetForm, setValues]);
 
   console.log(values);
   return (

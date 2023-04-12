@@ -162,7 +162,7 @@ export const getFiles = (studentId) => {
   })
   .then(getResponseData)
   .then((data) => data);
-}
+};
 
 export const getCourseFiles = (studentId, classNum) => {
   return fetch(`${BASE_URL}/get_files.php`, {

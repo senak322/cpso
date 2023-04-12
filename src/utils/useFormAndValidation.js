@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 
-function useFormAndValidation(obj) {
+function useFormAndValidation() {
   const [values, setValues] = useState({});
   const [isValid, setIsValid] = useState(false);
   const [isInputValid, setIsInputValid] = useState(true);
@@ -43,10 +43,11 @@ function useFormAndValidation(obj) {
   };
 
   const resetForm = useCallback(
-    (newValues = {}, newErrors = {}, newIsValid = false) => {
+    (newValues = {}, newErrors = {}, newSelectedFiles = {}, newIsValid = false) => {
       setValues(newValues);
       setErrors(newErrors);
       setIsValid(newIsValid);
+      setSelectedFiles(newSelectedFiles);
     },
     [setValues, setErrors, setIsValid]
   );
