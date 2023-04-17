@@ -5,11 +5,10 @@ import { RiArrowGoBackFill } from "react-icons/ri";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-
 function SideBar() {
   const [isActiveBar, setIsActiveBar] = React.useState(false);
 
-  const setActive = ({ isActive }) => isActive ? "link_active" : "link";
+  const setActive = ({ isActive }) => (isActive ? "link_active" : "link");
 
   function handleToggle() {
     setIsActiveBar(!isActiveBar);
@@ -42,8 +41,12 @@ function SideBar() {
             {/* <p className="side-bar__name">Настройки</p> */}
           </NavLink>
         </li>
-        <li className="side-bar__container link" style={{cursor: "pointer"}} onClick={goBack}>
-          <RiArrowGoBackFill className="side-bar__icon"/>
+        <li
+          className="side-bar__container link"
+          style={{ cursor: "pointer" }}
+          onClick={goBack}
+        >
+          <RiArrowGoBackFill className="side-bar__icon" />
         </li>
       </ul>
     </nav>

@@ -1,23 +1,29 @@
-import React from "react";
+import { useEffect } from "react";
 import useFormAndValidation from "../utils/useFormAndValidation.js";
 import close from "../images/close.svg";
 
 function EditPasswordPopup({ isOpen, onClose, onSubmit, isAddOk, addErr }) {
-  const formValues = {
-    password: "",
-  };
 
-  const { values, handleChange, setValues, errors, isValid, handleBlur } =
-    useFormAndValidation();
+  const {
+    values,
+    handleChange,
+    setValues,
+    errors,
+    isValid,
+    handleBlur,
+    resetForm,
+  } = useFormAndValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
     onSubmit(values);
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
+    const formValues = {};
     setValues(formValues);
-  }, [isOpen]);
+    resetForm();
+  }, [resetForm, setValues]);
 
   return (
     <div className={`popup ${isOpen ? "popup_is-open" : ""} popup_type_info `}>

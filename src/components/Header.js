@@ -10,8 +10,7 @@ function Header(props) {
     <header className="header">
       <Navbar className="p-0">
         <Container fluid>
-          
-            <a href="https://hssc-exam.ru" target="_blank" rel="noreferrer">
+          <a href="https://hssc-exam.ru" target="_blank" rel="noreferrer">
             <img
               src={logoHeader}
               className="header__logo"
@@ -26,7 +25,12 @@ function Header(props) {
                 className="header__logout"
                 onClick={props.onLogout}
               >
-                <img className="header__logout_img" alt="Выйти" src={logout}></img>Выйти
+                <img
+                  className="header__logout_img"
+                  alt="Выйти"
+                  src={logout}
+                ></img>
+                Выйти
               </button>
             </div>
           ) : (

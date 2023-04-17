@@ -6,12 +6,6 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 function EditNamePopup({ isOpen, onClose, onSubmit, isAddOk, addErr }) {
   const userContext = React.useContext(CurrentUserContext);
 
-  const formValues = {
-    name: userContext.name,
-    email: userContext.email,
-    password: "",
-  };
-
   const { values, handleChange, setValues, errors, isValid, handleBlur } =
     useFormAndValidation();
 
@@ -21,8 +15,13 @@ function EditNamePopup({ isOpen, onClose, onSubmit, isAddOk, addErr }) {
   }
 
   React.useEffect(() => {
+    const formValues = {
+      name: userContext.name,
+      email: userContext.email,
+      password: "",
+    };
     setValues(formValues);
-  }, [isOpen]);
+  }, [setValues, userContext.name, userContext.email, isOpen]);
 
   return (
     <div className={`popup ${isOpen ? "popup_is-open" : ""} popup_type_info `}>

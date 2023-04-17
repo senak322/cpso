@@ -3,7 +3,6 @@ import close from "../images/close.svg";
 
 function DeleteStudentPopup({ isOpen, onClose, onSubmit, isLoading }) {
   
-
   function handleSubmit(e) {
     e.preventDefault();
     onSubmit();

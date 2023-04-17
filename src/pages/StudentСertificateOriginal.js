@@ -1,5 +1,5 @@
 import useFormAndValidation from "../utils/useFormAndValidation.js";
-import React from "react";
+import { useEffect } from "react";
 
 function StudentСertificateOriginal() {
   const {
@@ -12,13 +12,14 @@ function StudentСertificateOriginal() {
     isInputValid,
     handleChangeSelect,
     handleSubmitForm,
+    resetForm,
   } = useFormAndValidation();
 
-  const formValues = {};
-
-  React.useEffect(() => {
+  useEffect(() => {
+    const formValues = {};
     setValues(formValues);
-  }, []);
+    resetForm();
+  }, [resetForm, setValues]);
 
   return (
     <div className="register__wrapper">
@@ -51,7 +52,6 @@ function StudentСertificateOriginal() {
               onChange={handleChange}
               onBlur={handleBlur}
               type="text"
-              
               required
             ></input>
             <span

@@ -21,7 +21,6 @@ function Notifications() {
           onClick={handleClick}
           variant="light"
           className="header__notification p-1"
-          
         >
           <IoMdNotificationsOutline className="header__notification_button" />
           <span className="header__notification_counter">0</span>

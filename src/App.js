@@ -107,7 +107,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-      })
+      });
   }, []);
 
   const handleGetFiles = useCallback((id) => {
@@ -118,7 +118,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-      })
+      });
   }, []);
 
   function changeStudent(el) {
@@ -550,7 +550,6 @@ function App() {
             message={isAuthOk ? "" : errMesaage}
           />
         </CurrentUserContext.Provider>
-       
       </main>
       <Footer />
     </>
