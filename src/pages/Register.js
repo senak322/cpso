@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
@@ -7,22 +7,26 @@ import useFormAndValidation from "../utils/useFormAndValidation.js";
 import { Link } from "react-router-dom";
 
 function Register(props) {
-  const formValues = {
-    name: "",
-    email: "",
-  };
-
-  const { values, handleChange, setValues, errors, isValid, handleBlur } =
-    useFormAndValidation();
+  const {
+    values,
+    handleChange,
+    setValues,
+    errors,
+    isValid,
+    handleBlur,
+    resetForm,
+  } = useFormAndValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
     props.handleRegister(values.name, values.email);
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
+    const formValues = {};
     setValues(formValues);
-  }, []);
+    resetForm();
+  }, [resetForm, setValues]);
 
   return (
     <div className="form__container">

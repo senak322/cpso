@@ -290,7 +290,7 @@ function App() {
 
   function changeCourse(el) {
     localStorage.setItem("currentCourse", JSON.stringify(el));
-    cbGetGradesAndFiles(el);
+    // cbGetGradesAndFiles(el);
   }
 
   const cbGetGradesAndFiles = useCallback(

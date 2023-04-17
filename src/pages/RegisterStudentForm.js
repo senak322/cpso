@@ -1,11 +1,9 @@
-import React from "react";
+import { useEffect } from "react";
 import BackButton from "../components/BackButton";
 import useFormAndValidation from "../utils/useFormAndValidation.js";
 import { countries, regions } from "../vendor/countries";
 
 function RegisterStudentForm() {
-  const formValues = {};
-
   const {
     values,
     handleChange,
@@ -17,11 +15,14 @@ function RegisterStudentForm() {
     handleChangeSelect,
     hadleChangeFiles,
     handleSubmitForm,
+    resetForm,
   } = useFormAndValidation();
 
-  React.useEffect(() => {
+  useEffect(() => {
+    const formValues = {};
     setValues(formValues);
-  }, []);
+    resetForm();
+  }, [resetForm, setValues]);
 
   return (
     <div className="register">

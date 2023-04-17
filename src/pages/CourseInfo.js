@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import { useEffect, useMemo } from "react";
 import UserHeader from "../components/UserHeader";
 import BackButton from "../components/BackButton";
-
 import GradeList from "../components/GradeList";
 
 function CourseInfo({ grades, files, onLoading, toggleGrades, showGrades }) {
@@ -55,9 +54,7 @@ function CourseInfo({ grades, files, onLoading, toggleGrades, showGrades }) {
         </ul>
         <div className="home__files-container">
           <ul className="home__description home__description_type_files">
-            <h4>
-              Справки о прикреплении к школе:
-            </h4>
+            <h4>Справки о прикреплении к школе:</h4>
             {havefiles("attach")
               ? files.map((el, index) => {
                   if (el.type_id === "attach")

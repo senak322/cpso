@@ -2,15 +2,15 @@ import React from "react";
 import personImg from "../images/person2.png";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
-function Settings({onOpenEditName, onOpenEditPassword}) {
+function Settings({ onOpenEditName, onOpenEditPassword }) {
   const userContext = React.useContext(CurrentUserContext);
 
   function handleEditName() {
-    onOpenEditName()
+    onOpenEditName();
   }
 
   function handleEditPassword() {
-    onOpenEditPassword()
+    onOpenEditPassword();
   }
 
   return (
@@ -26,7 +26,7 @@ function Settings({onOpenEditName, onOpenEditPassword}) {
         <button
           type="button"
           className="home__add-student"
-          style={{margin: 0}}
+          style={{ margin: 0 }}
           onClick={handleEditName}
         >
           Изменить ФИО/E-mail
@@ -34,13 +34,12 @@ function Settings({onOpenEditName, onOpenEditPassword}) {
         <button
           type="button"
           className="home__add-student"
-          style={{marginTop: "1rem"}}
+          style={{ marginTop: "1rem" }}
           onClick={handleEditPassword}
         >
           Изменить пароль
         </button>
       </div>
-      
     </section>
   );
 }

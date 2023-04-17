@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import BackButton from "../components/BackButton";
 import { useParams } from "react-router-dom";
 import useFormAndValidation from "../utils/useFormAndValidation.js";
@@ -9,10 +9,10 @@ function AddStudentDocs() {
   const { values, setValues, handleSubmitForm, hadleChangeFiles, resetForm } =
     useFormAndValidation();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const formValues = {};
     setValues(formValues);
-    resetForm()
+    resetForm();
   }, [resetForm, setValues]);
 
   console.log(values);

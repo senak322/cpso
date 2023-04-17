@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
@@ -7,12 +7,8 @@ import useFormAndValidation from "../utils/useFormAndValidation.js";
 import { Link, Navigate } from "react-router-dom";
 
 function SignIn(props) {
-  const formValues = {
-    email: "",
-    password: "",
-  };
 
-  const { values, handleChange, setValues, errors, isValid, handleBlur } =
+  const { values, handleChange, setValues, errors, isValid, handleBlur, resetForm } =
     useFormAndValidation();
 
   function handleSubmit(e) {
@@ -20,9 +16,11 @@ function SignIn(props) {
     props.handleLogin(values.email, values.password);
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
+    const formValues = {};
     setValues(formValues);
-  }, []);
+    resetForm();
+  }, [resetForm, setValues]);
 
   if (props.loggedIn) {
     return (

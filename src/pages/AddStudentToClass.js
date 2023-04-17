@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import BackButton from "../components/BackButton";
 import { useParams } from "react-router-dom";
 import useFormAndValidation from "../utils/useFormAndValidation.js";
@@ -11,7 +11,7 @@ function AddStudentToClass() {
   const { values, setValues, handleChangeSelect, handleSubmitForm, resetForm } =
     useFormAndValidation();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const formValues = {};
     setValues(formValues);
     resetForm()

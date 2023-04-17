@@ -49,7 +49,7 @@ function useFormAndValidation() {
       setIsValid(newIsValid);
       setSelectedFiles(newSelectedFiles);
     },
-    [setValues, setErrors, setIsValid]
+    [setValues, setErrors, setIsValid, setSelectedFiles]
   );
 
   return {
